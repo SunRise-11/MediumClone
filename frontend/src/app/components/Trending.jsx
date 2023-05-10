@@ -47,7 +47,7 @@ const Trending = () => {
                         <p className="text-sm">Schauf Bammer</p>
                       </div>
                     </Link>
-                    <div className="post-name w-full line-clamp-2 overflow-hidden text-trend ont-Helvetica font-Helvetica font-semibold">
+                    <div className="post-name w-full whitespace-pre-line break-words font-semibold">
                       {postName}
                     </div>
                     <span className="space-y-2 text-brefing text-xs font-normal">

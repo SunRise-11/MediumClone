@@ -3,27 +3,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Logo from '../../../public/images/medium.png';
 import Link from 'next/link';
-const links = [
-  {
-    id: 1,
-    name: 'Our story',
-    href: '/',
-    accentedButton: false,
-  },
-  {
-    id: 3,
-    name: 'Write',
-    href: '/',
-    accentedButton: false,
-  },
-  {
-    id: 4,
-    name: 'Membership',
-    href: '/',
-    accentedButton: false,
-  },
-];
-
+import { links } from '../store/index';
 const Navbar = () => {
   const [nav, setNav] = useState(false);
 
@@ -41,10 +21,12 @@ const Navbar = () => {
     };
   }, []);
 
-  let color = !nav ? ' bg-[#FCC017]' : 'bg-white';
+  let background = !nav ? 'bg-[#FCC017]' : 'bg-white';
 
   return (
-    <div className={`wrapper min-w-lg w-full ${color} sticky top-0 left-0`}>
+    <div
+      className={`wrapper min-w-lg w-full transition-all duration-500 ${background} sticky top-0 left-0`}
+    >
       <div className="content mx-auto w-[80%] flex justify-between items-center h-[75px] py-[25px]">
         <div className="logo">
           <Link href={'/'}>
@@ -56,9 +38,8 @@ const Navbar = () => {
               alt="image logo"
             />
           </Link>
-        </div>{' '}
+        </div>
         <ul className="links flex items-center md:space-x-3">
-          {' '}
           {links.map((link) => (
             <li
               className={
@@ -66,16 +47,14 @@ const Navbar = () => {
               }
               key={link.id}
             >
-              {' '}
-              {link.name}{' '}
+              {link.name}
             </li>
-          ))}{' '}
+          ))}
           <Link href={'/login'}>
             <li className="font-Helvetica sm:flex md:px-1 px-4 hidden text-base cursor-pointer">
-              {' '}
-              Sign In{' '}
+              Sign In
             </li>
-          </Link>{' '}
+          </Link>
           <li
             className={
               !nav
@@ -83,11 +62,10 @@ const Navbar = () => {
                 : 'font-Helvetica  transition-colors duration-100 text-sm h-[37px] cursor-pointer  bg-[#1A8917] text-white px-[1rem] pt-[7px] pb-[9px] inline-block  text-center rounded-full'
             }
           >
-            {' '}
-            Get started{' '}
-          </li>{' '}
-        </ul>{' '}
-      </div>{' '}
+            Get started
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

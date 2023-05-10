@@ -39,3 +39,24 @@ export const trendUsers = [
     time: 'Mar 9· 4 min read',
   },
 ];
+
+export const links = [
+  {
+    id: 1,
+    name: 'Our story',
+    href: '/',
+    accentedButton: false,
+  },
+  {
+    id: 3,
+    name: 'Write',
+    href: '/',
+    accentedButton: false,
+  },
+  {
+    id: 4,
+    name: 'Membership',
+    href: '/',
+    accentedButton: false,
+  },
+];
