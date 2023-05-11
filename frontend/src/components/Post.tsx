@@ -22,7 +22,6 @@ const Post = ({ post, handleDeletePost }: Props) => {
     const url = usePathname();
 
 
-
     const isValidPath = (url: string): boolean => {
         const pattern = /^\/users\/([^/]+)$/;
         const isSamePath = url.match(pattern);
@@ -30,15 +29,16 @@ const Post = ({ post, handleDeletePost }: Props) => {
     };
 
     useEffect(() => {
-        //test amaclı useSession ile çözulücek static bir şey
-        const result = CookieUtil.hasCookie("user", { path: "/" });
         const isSamePath = isValidPath(url);
-        if (result && isSamePath) {
-            let userFromCookie = CookieUtil.getCookie("user", { path: "/" })
-            if (userFromCookie === post.user.email)
-                setShowMenu(true)
+        if (!isSamePath) return;
+
+        const userCookie = CookieUtil.getCookie("user", { path: "/" });
+        const hasUserCookie = CookieUtil.hasCookie("user", { path: "/" });
+
+        if (hasUserCookie && userCookie === post.user.email) {
+            setShowMenu(true);
         }
-    }, [url]);
+    }, [url, post.user.email]);
 
 
 
