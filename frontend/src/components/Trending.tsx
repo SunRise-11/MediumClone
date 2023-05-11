@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { trendingIcon } from '../../../public/icons/icons';
+import { trendingIcon } from '../../public/icons/icons';
 import { trendUsers } from '../store/index';
 
 type User = {

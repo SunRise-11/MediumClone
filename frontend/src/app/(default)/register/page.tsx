@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import Input from '../../components/Input';
+import Input from '../../../components/Input';
 import Link from 'next/link';
 
 type FormValues = {

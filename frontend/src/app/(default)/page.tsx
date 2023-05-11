@@ -1,12 +1,9 @@
-import Hero from "../components/Hero"
-import ProfileCard from "../components/ProfileCard"
-import Trending from "../components/Trending"
-export default function Home() {
+import HomeFeed from "../../components/HomeFeed"
+export default function Home(): JSX.Element {
 
   return (
     <div>
-      <Hero />
-      <Trending />
+      <HomeFeed />
     </div >
   )
 }

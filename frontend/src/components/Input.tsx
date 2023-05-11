@@ -1,7 +1,7 @@
+"use client"
 import { Box } from '@mui/material';
 import { TextField } from '@mui/material';
-import { type } from 'os';
-import { ChangeEvent, ReactNode } from 'react';
+import { ChangeEvent } from 'react';
 
 type Props = {
   error?: boolean;

@@ -1,8 +1,8 @@
 "use client"
 import { Box, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import ProfileImage from "../components/ProfileImage";
-import Input from "../components/Input";
+import ProfileImage from "./ProfileImage";
+import Input from "./Input";
 import Button from '@mui/material/Button';
 import React, { ChangeEvent, FC, useState } from "react";
 import IconButton from '@mui/material/IconButton';

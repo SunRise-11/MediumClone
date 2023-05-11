@@ -1,8 +1,9 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import Input from '../../components/Input';
+import Input from '../../../components/Input';
 import { Checkbox } from '@mui/material';
 import Link from 'next/link';
+import CookieUtil from '@/libs/cookie/CookieUtil';
 
 type FormState = {
   email: string;
@@ -15,6 +16,8 @@ type ValidationErrors = {
 }
 
 const Login = (): JSX.Element => {
+
+
   const [form, setForm] = useState<FormState>({
     email: '',
     password: '',
@@ -38,6 +41,9 @@ const Login = (): JSX.Element => {
 
   const handleSumbit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    const { email } = form;
+    //burası test amaçlı next auth ile çozulecek 
+    CookieUtil.setCookie("user", email, { path: "/", maxAge: 60 * 6 * 24 })
     setForm({
       email: '',
       password: '',

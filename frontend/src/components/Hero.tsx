@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import Logo from '../../../public/images/banner.png';
+import Logo from '../../public/images/banner.png';
 
 const Hero: React.FC = () => {
   return (

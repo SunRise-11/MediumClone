@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import Logo from '../../../public/images/medium.png';
+import Logo from '../../public/images/medium.png';
 import Link from 'next/link';
 import { links } from '../store/index';
 
@@ -23,11 +23,12 @@ const UnAuthNavbar = (): JSX.Element => {
     };
   }, []);
 
-  let background = !nav ? 'bg-[#FCC017]' : 'bg-white';
+  let backgroundForNavbar = !nav ? 'bg-[#FCC017]' : 'bg-white';
+  let backgroundForButton = !nav ? " bg-black" : "bg-[#1A8917]"
 
   return (
     <div
-      className={`wrapper min-w-lg w-full transition-all duration-500 ${background} sticky top-0 left-0`}
+      className={`wrapper min-w-lg w-full z-50 transition-all duration-500 ${backgroundForNavbar} sticky top-0 left-0`}
     >
       <div className="content mx-auto w-[80%] flex justify-between items-center h-[75px] py-[25px]">
         <div className="logo">
@@ -45,7 +46,7 @@ const UnAuthNavbar = (): JSX.Element => {
           {links.map((link) => (
             <li
               className={
-                'font-Helvetica md:flex hidden text-base cursor-pointer'
+                'font-Helvetica md:flex hidden text-sm md:text-base cursor-pointer'
               }
               key={link.id}
             >
@@ -59,9 +60,7 @@ const UnAuthNavbar = (): JSX.Element => {
           </Link>
           <li
             className={
-              !nav
-                ? 'font-Helvetica transition-colors duration-100 text-sm h-[37px] cursor-pointer  bg-black text-white px-[1rem] pt-[7px] pb-[9px] inline-block  text-center rounded-full'
-                : 'font-Helvetica  transition-colors duration-100 text-sm h-[37px] cursor-pointer  bg-[#1A8917] text-white px-[1rem] pt-[7px] pb-[9px] inline-block  text-center rounded-full'
+              `transition-colors duration-100 text-sm h-[37px] cursor-pointer ${backgroundForButton} text-white px-[1rem] pt-[7px] pb-[9px] inline-block text-center rounded-full`
             }
           >
             Get started
