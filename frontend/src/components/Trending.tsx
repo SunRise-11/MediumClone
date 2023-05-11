@@ -53,7 +53,7 @@ const Trending = (): JSX.Element => {
                       <p className="text-sm">{username}</p>
                     </div>
                   </Link>
-                  <div className="post-name w-full whitespace-pre-line break-words font-semibold">
+                  <div className="post-name w-full text-sm md:text-base  whitespace-pre-line break-words font-semibold 3xl:!line-clamp-2">
                     {postName}
                   </div>
                   <span className="space-y-2 text-brefing text-xs font-normal">

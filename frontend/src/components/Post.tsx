@@ -31,7 +31,7 @@ const Post = ({ post, handleDeletePost }: Props) => {
     useEffect(() => {
         const isSamePath = isValidPath(url);
         if (!isSamePath) return;
-
+        //burası useSession ile cozulecek test amaclı
         const userCookie = CookieUtil.getCookie("user", { path: "/" });
         const hasUserCookie = CookieUtil.hasCookie("user", { path: "/" });
 

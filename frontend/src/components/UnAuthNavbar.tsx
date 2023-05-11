@@ -46,7 +46,7 @@ const UnAuthNavbar = (): JSX.Element => {
           {links.map((link) => (
             <li
               className={
-                'font-Helvetica md:flex hidden text-sm md:text-base cursor-pointer'
+                'font-Helvetica  md:flex hidden text-xs md:text-sm cursor-pointer'
               }
               key={link.id}
             >

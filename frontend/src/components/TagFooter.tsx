@@ -3,7 +3,7 @@ const TagFooter: React.FC = () => {
     let links = ["Help", "Status", "Writers", "Blog", "Careers", "Privacy", "Terms", "About", "Text to speech"];
 
     return (
-        <div className="hidden md:block h-full md:w-[400px]">
+        <div className="hidden lg:block h-full md:w-[400px]">
             <div className="content mt-4">
                 <ul className="texts flex text-zinc-400 items-center flex-wrap">
                     {links.map((link, index) => {
