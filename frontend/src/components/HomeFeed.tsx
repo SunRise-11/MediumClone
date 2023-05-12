@@ -8,7 +8,6 @@ const HomeFeed = (): JSX.Element => {
     return (
         <>
             <Hero />
-
             <Center>
                 <Trending />
                 <div className="relative flex flex-col lg:flex-row px-9 lg:px-20 lg:gap-x-[187px] my-16">
