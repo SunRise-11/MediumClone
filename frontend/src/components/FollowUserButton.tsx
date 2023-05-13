@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 type Props = {
     user: {
-        userId: string;
+        userId: number;
     };
 };
 
