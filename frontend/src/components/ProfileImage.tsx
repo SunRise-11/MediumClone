@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import React, { useState } from "react";
-import defaultImage from "../../../public/images/profile.png";
+import defaultImage from "../../public/images/profile.png";
 
 const ProfileImage: React.FC = () => {
     const [newImage, setNewImage] = useState<string | undefined>();

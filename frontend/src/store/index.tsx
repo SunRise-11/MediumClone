@@ -3,6 +3,7 @@ import PostDTO from "@/types/Post/Post";
 
 export const trendUsers = [
   {
+
     username: 'Sarvar55',
     image: null,
     postName:
@@ -42,6 +43,68 @@ export const trendUsers = [
     time: 'Mar 9· 4 min read',
   },
 ];
+
+export const followers = [
+  {
+    userId: 8,
+    username: "BobL",
+    email: "example@gmailcom",
+    image: "",
+    bio: "denee jkfkjsn"
+
+  },
+  {
+    userId: 1,
+    username: "Sarvar55",
+    email: "example1@gmail.com",
+    image: "",
+    bio: "I'm an avid gamer and love to code!"
+  },
+  {
+    userId: 2,
+    username: "JaneDoe",
+    email: "example2@gmail.com",
+    image: "",
+    bio: "I enjoy hiking and taking photos."
+  },
+  {
+    userId: 3,
+    username: "BobL",
+    email: "example3@gmail.com",
+    image: "",
+    bio: "I'm a musician and love playing the guitar."
+  },
+  {
+    userId: 4,
+    username: "AnnaSmith",
+    email: "example4@gmail.com",
+    image: "",
+    bio: "I'm a foodie and love trying new restaurants."
+  },
+  {
+    userId: 5,
+    username: "JackBlack",
+    email: "example5@gmail.com",
+    image: "",
+    bio: "I'm a movie buff and enjoy watching comedies."
+  },
+  {
+    userId: 6,
+    username: "JohnDoe",
+    email: "example6@gmail.com",
+    image: "",
+    bio: "I'm a photographer and love taking portraits."
+  },
+  {
+    userId: 13,
+    username: "JohnDoe",
+    email: "example6@gmail.com",
+    image: "",
+    bio: "I'm a photographer and love taking portraits."
+  },
+]
+
+
 
 export const links = [
   {
@@ -148,38 +211,6 @@ export const tags = [
   { id: 10, name: "Politics" }
 ]
 
-/**
- * 
- * private Long postId;
-
-    private String title;
-
-    private String content;
-
-    private String image;
-
-    private Integer readingTime;
-
-    private boolean pinned;
-
-    private Date createdAt;
-
-    private UserDTO user;
-
-    private Set<PostLikeDTO> likes;
-
-    //private Set<CommentDTO> comments;
-    // post icinde bu kadar buyuk bir veriye gerek yok neden cunku biz bu koiitleri
-    // bir sidebar gibi acicagiz yani post acilifdigi anda gelimiyecek onu da sidebar tetiklendigi zaman
-    // o anki postun id si ile ceke biliriz
-
-    private Set<TagDTO> tags = new HashSet<>();
- */
-/*private Long userId;
-private String username;
-private String email;
-private String bio;
-private String image;*/
 
 export const posts: PostDTO[] = [
   {
