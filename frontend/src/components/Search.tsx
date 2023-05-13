@@ -28,7 +28,7 @@ const Search: React.FC<Props> = () => {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search Medium"
-                    className="bg-gray-100 py-2 px-2 focus:outline-none"
+                    className="bg-gray-100 py-2 px-2 hidden md:flex focus:outline-none"
                 >
                 </input>
             </div>
