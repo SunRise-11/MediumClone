@@ -95,12 +95,17 @@ const ProfileCard: FC<Props> = ({ visibilityEditModal, handleCloseModal }) => {
                 </div>
 
                 <div className="flex justify-end w-full gap-4">
-                    <Button className="lg:w-[120px] w-[90px] hidden md:block text-sm" onClick={handleCloseModal} variant="outlined" color="error">
-                        Delete Account
-                    </Button>
-                    <IconButton onClick={handleCloseModal} aria-label="delete" className="sm:block md:hidden">
-                        <DeleteIcon />
-                    </IconButton>
+                    <div className="hidden md:block">
+                        <Button className="lg:w-[120px] w-[90px] text-sm" onClick={handleCloseModal} variant="outlined" color="error">
+                            Delete Account
+                        </Button>
+                    </div>
+
+                    <div className="block md:hidden">
+                        <IconButton onClick={handleCloseModal} aria-label="delete" >
+                            <DeleteIcon />
+                        </IconButton>
+                    </div>
                     <Button onClick={handleCloseModal} variant="outlined" color="success">
                         Cancel
                     </Button>
