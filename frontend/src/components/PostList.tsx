@@ -6,31 +6,20 @@ import PostDTO from '@/types/Post/Post'
 
 type Props = {}
 
-export default function PostList({ }: Props) {
+export default function PostList() {
     const [posts, setPosts] = useState<PostDTO[]>([])
-
-    useEffect(() => {
-        fetchAllPosts()
-    }, [])
-
-
 
     const fetchAllPosts = () => {
         setPosts(storePosts);
     }
 
-    const handleDeletePost = (e: any, postId: number) => {
-        e.preventDefault();
-        //ToDo: some code here
-    }
-
     return (
-        <div>
+        <>
             {
-                posts.map((post: PostDTO) => (
-                    <Post key={post.postId} post={post} handleDeletePost={handleDeletePost} />
+                storePosts.map((post: PostDTO) => (
+                    <Post key={post.postId} post={post} handleDeletePost={() => { }} />
                 ))
             }
-        </div>
+        </>
     )
 }
