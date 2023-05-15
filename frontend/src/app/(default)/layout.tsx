@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import AuthNavbar from "../../components/AuthNavbar"
+import UnAuthNavbar from '@/components/UnAuthNavbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,10 +15,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
   return (
     <html lang="en" className='antialiased'>
       <body className={inter.className}>
-        <AuthNavbar />
         {children}
       </body>
     </html>
