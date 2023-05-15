@@ -29,11 +29,11 @@ const Avatar: React.FC<AvatarProps> = ({ username, image, isLarge, hasBorder, is
         if (isLarge && !isMedium) {
             return { w: 90, h: 90 }
         } else if (isMedium && !isLarge) {
-            return { w: 50, h: 50 }
+            return { w: 40, h: 40 }
         } else if (isSmall) {
-            return { w: 15, h: 15 }
+            return { w: 25, h: 25 }
         }
-        return { w: 40, h: 40 }
+        return { w: 30, h: 30 }
     }
 
     return (

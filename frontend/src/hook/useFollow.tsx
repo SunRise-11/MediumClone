@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
 const useFollow = (userId: number) => {
-    const currentUserId = null;
+    const currentUserId = 1;
     const { push } = useRouter()
     const isFollowing = useMemo(() => {
         //ToDO: some code here

@@ -1,11 +1,12 @@
 
+"use client"
 import User from '@/types/user/User'
 import React from 'react'
-import Image from "next/image"
-import defaultImage from "../../public/images/profile.png"
 import Link from "next/link"
 import Button from './Button'
 import useFollow from '@/hook/useFollow'
+import Avatar from './Avatar'
+import defaultImage from "../../public/images/abbas-profile.jpg"
 
 type Props = {
     user: User
@@ -17,22 +18,14 @@ const UserSummaryCard = (props: Props) => {
     const { isFollowing, toggleFollow } = useFollow(userId);
 
     return (
-        <div className='w-full flex justify-between items-center my-4'>
-            <div className="left h-full  flex  justify-between w-[60%]">
-                <div className="w-[15%] h-full">
-                    <Image
-                        src={defaultImage ?? image}
-                        width={50}
-                        height={50}
-                        alt='resim'
-                        className='flex-shrink-0 rounded-full'
-                    />
-                </div>
+        <div className='flex items-center my-4'>
+            <div className="left h-full  flex items-center space-x-5 w-[60%]">
+                <Avatar username={username} image={defaultImage.src} isMedium />
                 <div className="detail flex flex-col w-[80%] ">
                     <Link href={`users/${username}`}>
-                        <p className='text-[#292929] text-base'>{username}</p>
+                        <p className='text-[#292929] text-sm'>{username}</p>
                     </Link>
-                    <p className='text-[#757575] text-sm '>{bio}</p>
+                    <p className='text-[#757575] text-xs'>{bio}</p>
                 </div>
             </div>
             <div className="right">
