@@ -94,7 +94,7 @@ export const followers = [
   },
   {
     userId: 13,
-    username: 'JohnDoe',
+    username: 'sfjksfksnfksndfkjn',
     email: 'example6@gmail.com',
     image: '',
     bio: "I'm a photographer and love taking portraits.",
