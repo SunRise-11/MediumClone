@@ -7,12 +7,11 @@ import PostMenu from "./PostMenu";
 import { useEffect, useState } from "react";
 import { formatDate } from "../util/DateFormat";
 import PostDTO from "@/types/Post/Post";
-import CookieUtil from "@/libs/cookie/CookieUtil";
 
 
 type Props = {
     post: PostDTO,
-    handleDeletePost: (e: React.FormEvent<HTMLButtonElement>, postId: number) => void
+    handleDeletePost: (e: any, postId: number) => void
 };
 
 
@@ -27,20 +26,6 @@ const Post = ({ post, handleDeletePost }: Props) => {
         const isSamePath = url.match(pattern);
         return isSamePath != null;
     };
-
-    useEffect(() => {
-        const isSamePath = isValidPath(url);
-        if (!isSamePath) return;
-        //burası useSession ile cozulecek test amaclı
-        const userCookie = CookieUtil.getCookie("user", { path: "/" });
-        const hasUserCookie = CookieUtil.hasCookie("user", { path: "/" });
-
-        if (hasUserCookie && userCookie === post.user.email) {
-            setShowMenu(true);
-        }
-    }, [url, post.user.email]);
-
-
 
 
     const { title, content, postId, image: postImage, readingTime, pinned, createdAt, user, tags } = post;

@@ -1,9 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import Input from '../../../components/Input';
+import Input from '@/components/Input';
 import { Checkbox } from '@mui/material';
 import Link from 'next/link';
-import CookieUtil from '@/libs/cookie/CookieUtil';
 
 type FormState = {
   email: string;
@@ -43,7 +42,6 @@ const Login = (): JSX.Element => {
     e.preventDefault();
     const { email } = form;
     //burası test amaçlı next auth ile çozulecek 
-    CookieUtil.setCookie("user", email, { path: "/", maxAge: 60 * 6 * 24 })
     setForm({
       email: '',
       password: '',
@@ -102,7 +100,7 @@ const Login = (): JSX.Element => {
           <div className="flex justify-center">
             <p className="xl:text-base  text-sm font-normal text-gray-600">
               Don`t have an account?
-              <Link href="/register">
+              <Link href="/auth/register">
                 <span className="xl:text-base  text-sm cursor-pointer text-blue-500 hover:underline transition ease-in duration-150">
                   Sign Up
                 </span>

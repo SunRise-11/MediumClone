@@ -8,6 +8,7 @@ import { carrotIcon, writeSmallIcon, profileIcon, librabryIcon } from "../../pub
 import defaultImage from "../../public/images/profile.png"
 import Image from "next/image";
 import User from "@/types/user/User";
+import Avatar from "./Avatar";
 
 
 export default function AvatarMenu() {
@@ -95,15 +96,8 @@ function AuthMenu({
         setAnchorEl(null);
     };
     return (
-        <div className="avatar flex flex-row items-center gap-3">
-            <Image
-                onClick={handleClick}
-                className="rounded-full border border-gray-300 cursor-pointer"
-                src={avatar ?? defaultImage}
-                alt="resim"
-                width={40}
-                height={40}
-            />
+        <div className="avatar flex flex-row items-center">
+            <Avatar username={username} image={avatar} />
             <span
                 onClick={handleClick}
                 className="text-gray-500 cursor-pointer"
@@ -187,13 +181,13 @@ export function GetStarted({
                 Get started on Medium
             </p>
             <Link
-                href="/login"
+                href="/auth/login"
                 className="bg-green-600 text-white rounded-lg py-2 px-3 text-sm w-44 text-center"
             >
                 Sign up
             </Link>
             <Link
-                href="/register"
+                href="/auth/register"
                 className="border-gray-300 border rounded-lg py-2 px-3 text-gray-500 text-sm w-44 text-center"
             >
                 Sign In

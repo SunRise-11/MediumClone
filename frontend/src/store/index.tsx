@@ -453,4 +453,4 @@ export const posts: PostDTO[] = [
       },
     ],
   },
-];
+]

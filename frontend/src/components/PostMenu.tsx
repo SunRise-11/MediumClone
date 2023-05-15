@@ -1,6 +1,6 @@
 "use client"
 import { Button, Popover, Space } from "antd";
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import { moreIcon } from "../../public/icons/icons";
 import Link from "next/link";
 
@@ -9,7 +9,7 @@ type Props = {
     pinned: boolean,
     username: string,
     postId: number,
-    handleDeletePost: (e: React.FormEvent<HTMLButtonElement>, postId: number) => void
+    handleDeletePost: (e: any, postId: number) => void
 }
 
 const PostMenu: React.FC<Props> = ({ pinned, username, postId, handleDeletePost }) => {
@@ -25,7 +25,7 @@ const PostMenu: React.FC<Props> = ({ pinned, username, postId, handleDeletePost 
                 </Button>
             </Link>
             <Button
-                onClick={(e: React.FormEvent<HTMLButtonElement>) => handleDeletePost(e, postId)}
+                onClick={(e: any) => handleDeletePost(e, postId)}
                 type="text"
                 className="!text-red-500 hover:!text-red-600"
             >

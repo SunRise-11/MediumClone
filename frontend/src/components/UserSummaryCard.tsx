@@ -3,15 +3,18 @@ import User from '@/types/user/User'
 import React from 'react'
 import Image from "next/image"
 import defaultImage from "../../public/images/profile.png"
-import FollowUserButton from './FollowUserButton'
 import Link from "next/link"
+import Button from './Button'
+import useFollow from '@/hook/useFollow'
 
 type Props = {
     user: User
 }
 
-const FollowerProfileCard = (props: Props) => {
+const UserSummaryCard = (props: Props) => {
     const { user: { bio, email, image, username, userId } } = props;
+
+    const { isFollowing, toggleFollow } = useFollow(userId);
 
     return (
         <div className='w-full flex justify-between items-center my-4'>
@@ -33,10 +36,11 @@ const FollowerProfileCard = (props: Props) => {
                 </div>
             </div>
             <div className="right">
-                <FollowUserButton user={{ userId }} />
+                <Button label={isFollowing ? "Following" : "Follow"} onClick={toggleFollow} secondary={!isFollowing}
+                />
             </div>
         </div>
     )
 }
 
-export default FollowerProfileCard
+export default UserSummaryCard

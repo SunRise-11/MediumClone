@@ -19,7 +19,7 @@ export default function PostList({ }: Props) {
         setPosts(storePosts);
     }
 
-    const handleDeletePost = (e: React.FormEvent<HTMLButtonElement>, postId: number) => {
+    const handleDeletePost = (e: any, postId: number) => {
         e.preventDefault();
         //ToDo: some code here
     }

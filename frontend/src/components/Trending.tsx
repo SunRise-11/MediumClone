@@ -1,4 +1,3 @@
-'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { trendingIcon } from '../../public/icons/icons';
@@ -17,20 +16,20 @@ const Trending = (): JSX.Element => {
       <div className="content w-[80%] mx-auto">
         <div
           className={
-            'font-Helvetica flex h-[1.9rem] leading-4 items-center mb-[1rem] flex-row'
+            'flex h-[1.9rem] leading-4 items-center mb-[1rem] flex-row'
           }
         >
           <p className="flex space-x-3 items-center">
-            <div className='h-5'>
+            <span className='h-5'>
               {trendingIcon}
-            </div>
-            <span className="text-trend font-Helvetica font-semibold">
+            </span>
+            <span className="font-semibold">
               Trending on Medium
             </span>
           </p>
         </div>
         <div className="posts grid w-full lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
-          {trendUsers.map((user: User, index: number): JSX.Element => {
+          {trendUsers.map((user: User, index: number) => {
             const { postName, time, username } = user;
             let i = index < 10 ? '0' + (index + 1) : index;
             return (

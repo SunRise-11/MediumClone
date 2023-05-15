@@ -3,10 +3,12 @@ import Hero from './Hero';
 import PostList from './PostList';
 import Tags from './Tags';
 import Trending from './Trending';
+import UnAuthNavbar from './UnAuthNavbar';
 
 const HomeFeed = (): JSX.Element => {
     return (
         <>
+            <UnAuthNavbar />
             <Hero />
             <Center>
                 <Trending />
