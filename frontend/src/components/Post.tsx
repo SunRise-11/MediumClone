@@ -8,10 +8,9 @@ import { useEffect, useState } from "react";
 import { formatDate } from "../util/DateFormat";
 import PostDTO from "@/types/Post/Post";
 
-
 type Props = {
     post: PostDTO,
-    handleDeletePost: (e: any, postId: number) => void
+    handleDeletePost: (e: React.FormEvent<HTMLButtonElement>, postId: number) => void
 };
 
 
@@ -26,7 +25,6 @@ const Post = ({ post, handleDeletePost }: Props) => {
         const isSamePath = url.match(pattern);
         return isSamePath != null;
     };
-
 
     const { title, content, postId, image: postImage, readingTime, pinned, createdAt, user, tags } = post;
     const { username, image: userImage } = user;
@@ -46,7 +44,7 @@ const Post = ({ post, handleDeletePost }: Props) => {
                     <h1 className="text-sm font-semibold">{username}</h1>
                 </div>
                 <Link href="/posts/how-to-get-started-with-learning-turkish">
-                    <p className="leading-[20px] md:leading-[28px] text-[16px] md:text-[22px] font-bold text-slate-800 space-y-[2px] cursor-pointer !line-clamp-2">
+                    <p className="leading-[20px] md:leading-[28px] text-[16px] md:text-[22px] font-bold text-slate-800 space-y-[2px] cursor-pointer">
                         {title}
                     </p>
                 </Link>

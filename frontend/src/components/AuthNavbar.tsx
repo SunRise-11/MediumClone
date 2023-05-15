@@ -8,7 +8,7 @@ type Props = {}
 
 export default function Navbar({ }: Props) {
     return (
-        <nav className="h-14 border-b border-solid border-gray-200 flex flex-row items-center justify-between">
+        <div className="h-14 border-b border-solid border-gray-200 flex flex-row items-center justify-between">
             <div className="left flex flex-row items-center gap-4 ml-4">
                 <Search />
             </div>
@@ -19,6 +19,6 @@ export default function Navbar({ }: Props) {
                 </Link>
                 <AvatarMenu />
             </div>
-        </nav>
+        </div>
     )
 }

@@ -1,11 +1,9 @@
-
 "use client"
-import Button from '@/components/Button';
 import PostList from '@/components/PostList';
+import Tags from '@/components/Tags';
+import UserSummaryCard from '@/components/UserSummaryCard';
 import React from 'react';
-import { tags } from '@/store'
-import { Chip } from '@mui/material';
-import Tag from '@/types/Tag/Tag';
+
 
 type Params = {
     params: {
@@ -16,29 +14,22 @@ type Params = {
 const SearchResultPage = ({ params: { query } }: Params) => {
 
     return (
-        <div className="w-[75%] mx-auto mt-7 md:divide-x-[1px]">
-            <div className="header">
-                <h1 className="md:text-3xl text-4xl lg:text-5xl">
-                    Results for <span className="text-gray-600">{query}</span>
-                </h1>
-            </div>
-            <div className="flex justify-between items-start gap-9">
-                <div className="left w-[60%]">
+        <div className='flex space-x-16 lg:divide-x-[1px] px-5 sm:px-10 md:px-15 lg:px-20 my-8'>
+            <div className='w-full lg:w-[65%] px-2 '>
+                <div className='flex flex-col space-y-7'>
+                    <h1 className="md:text-2xl text-4xl space-y-5 lg:text-5xl mb-3">
+                        Results for <span className="text-gray-600">{query}</span>
+                    </h1>
                     <PostList />
                 </div>
-                <div className="flex flex-col sticky top-2 w-[30%]">
-                    <div className="wrapper flex flex-col">
-                        <h1 className='text-lg text-[#191919] font-semibold'>Topics matching air</h1>
-                        <div className="topics flex flex-wrap gap-2 mt-4">
-                            {
-                                tags.map((tag: Tag) => (
-                                    <Chip className='mt-1' key={tag.id} label={tag.name} clickable />
-                                ))
-                            }
-                        </div>
-                    </div>
+            </div>
+            <div className='hidden lg:flex lg:w-[30%] px-2'>
+                <div className="flex flex-col sticky">
+                    <Tags title={`Topics matching ${query}`} />
                     <hr className="mt-4" />
-                    {/* <TopWriters /> */}
+                </div>
+                <div>
+
                 </div>
             </div>
         </div>
