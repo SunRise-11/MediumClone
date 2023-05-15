@@ -61,7 +61,7 @@ const Post = ({ post, handleDeletePost }: Props) => {
                     <h1 className="text-sm font-semibold">{username}</h1>
                 </div>
                 <Link href="/posts/how-to-get-started-with-learning-turkish">
-                    <p className="leading-[20px] md:leading-[28px] text-[16px] md:text-[22px] font-bold text-slate-800 space-y-[2px] cursor-pointer">
+                    <p className="leading-[20px] md:leading-[28px] text-[16px] md:text-[22px] font-bold text-slate-800 space-y-[2px] cursor-pointer !line-clamp-2">
                         {title}
                     </p>
                 </Link>
