@@ -7,7 +7,8 @@ type Props = {}
 
 type Tag = {
     id: number,
-    name: string
+    name: string, 
+    url: string
 }
 
 export default function Tags({ }: Props) {
@@ -33,10 +34,10 @@ export default function Tags({ }: Props) {
             <div className="flex flex-wrap gap-2 border-slate-300 pb-10">
                 {
                     tags.map((tag: Tag) => {
-                        const { name, id } = tag;
+                        const { name, id, url } = tag;
 
                         return (
-                            <Link key={id} href={`tags/${name}`}>
+                            <Link key={id} href={url}>
                                 <p className="px-4 py-[6px] border border-slate-300 rounded-xl text-slate-500 text-sm cursor-pointer">
                                     {name}
                                 </p>
