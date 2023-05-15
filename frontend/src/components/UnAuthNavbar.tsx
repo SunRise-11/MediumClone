@@ -53,7 +53,7 @@ const UnAuthNavbar = (): JSX.Element => {
               {link.name}
             </li>
           ))}
-          <Link href={'/login'}>
+          <Link href={'/auth/login'}>
             <li className="font-Helvetica sm:flex md:px-1 px-4 hidden text-base cursor-pointer">
               Sign In
             </li>
