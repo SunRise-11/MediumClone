@@ -4,9 +4,9 @@ import Image from 'next/image'
 import ProfileCard from '@/components/ProfileCard'
 import { usePathname } from 'next/navigation';
 import UserInfoBox from './UserInfoBox'
-import Link from 'next/link'
 import User from '@/types/user/User'
 import { followers as users } from '@/store'
+import Link from "next/link"
 
 type Props = {
 
@@ -44,14 +44,16 @@ const UserProfile = (props: Props) => {
     return (
         <div className="w-full hidden md:flex md:w-[35%] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
             <div className="profile flex flex-col space-y-3 ml-8">
-                <Image
-                    src={`/images/${"profile"}.png`} // Route of the image file
-                    height="88"
-                    width={88}
-                    alt="Profile Picture"
-                    className="rounded-full"
-                />
-                <h1 className="text-[16px] font-semibold">{username}</h1>
+                <Link href={`/users/${username}`}>
+                    <Image
+                        src={`/images/${"profile"}.png`} // Route of the image file
+                        height="88"
+                        width={88}
+                        alt="Profile Picture"
+                        className="rounded-full"
+                    />
+                    <h1 className="text-[16px] font-semibold">{username}</h1>
+                </Link>
                 <p className="text-[14px] text-slate-500 text-light">2 followers</p>
                 <p className="text-[14px] text-slate-500 text-light text-clip w-[70%]">
                     Süleyman Demirel University Computer Engineering student jsfkjsdkfj ksjdfnjksdnk

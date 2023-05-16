@@ -7,6 +7,7 @@ import PostMenu from "./PostMenu";
 import { useEffect, useState } from "react";
 import { formatDate } from "../util/DateFormat";
 import PostDTO from "@/types/Post/Post";
+import Avatar from "./Avatar";
 
 type Props = {
     post: PostDTO,
@@ -34,13 +35,7 @@ const Post = ({ post, handleDeletePost }: Props) => {
         <div className="flex gap-[34px] w-[100%] my-16 ">
             <div className="flex flex-col gap-2 w-[70%]">
                 <div className="flex items-center gap-2">
-                    <Image
-                        src={`/images/${userImage}`}
-                        className="rounded-full"
-                        width={24}
-                        height={36}
-                        alt="profile pic"
-                    />
+                    <Avatar image={`/images/${userImage}`} width={24} height={36} username={username} />
                     <h1 className="text-sm font-semibold">{username}</h1>
                 </div>
                 <Link href="/posts/how-to-get-started-with-learning-turkish">
