@@ -12,18 +12,9 @@ type Props = {
 
 export default function Tags({ title, footer }: Props) {
 
-    const [tags, setTags] = useState<Tag[]>([]);
+    
 
-    const fetchAllTag = () => {
-        //burası gereksiz :) sadece simule amaçlı 
-        setTags(topics);
-        //ToDo: some code here 
-    };
-
-    useEffect(() => {
-        fetchAllTag()
-    }, [])
-
+   
 
     return (
         <>
@@ -32,11 +23,11 @@ export default function Tags({ title, footer }: Props) {
             </h1>
             <div className="flex flex-wrap gap-2 border-slate-300 pb-10">
                 {
-                    tags.map((tag: Tag) => {
-                        const { name, id } = tag;
+                    topics.map((tag: Tag) => {
+                        const { name, id, url } = tag;
                         return (
-                            <Link key={id} href={`tags/${name}`}>
-                                <Chip key={tag.id} label={tag.name} clickable />
+                            <Link key={id} href={url}>
+                                <Chip key={tag.id} label={tag.name} clickable size='medium' />
                             </Link>
                         );
                     })}
