@@ -31,5 +31,7 @@ module.exports = {
       '3xl': '1860px',
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
