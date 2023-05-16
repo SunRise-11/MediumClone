@@ -210,9 +210,33 @@ export const posts: PostDTO[] = [
   {
     postId: 1,
     title: '5 Javascript Clean Coding Patterns To Enhance your Code',
-    content:
-      'Writing good reusable code can be difficult sometimes. Sometimes we may learn to code in different languages and stick to some limitations or patterns that make sense in that context.' +
-      'Although there is no right or wrong in coding without context, there are some simple ways of writing code that are more generic and can be applied to a lot of contexts, and create more readable, maintainable, and predictable code. Here are some of them:',
+    content: `
+    ## Introduction
+
+    Clean code is essential for writing maintainable and efficient JavaScript applications. It improves readability, reduces bugs, and makes collaboration easier. By following clean coding patterns, developers can produce code that is easier to understand, maintain, and extend. In this article, we will explore five JavaScript clean coding patterns that can enhance your code and contribute to a better development experience.
+    
+    ### 1. Consistent Naming Conventions
+    
+     
+    One of the fundamental aspects of clean coding is using consistent and meaningful names for variables, functions, and classes. Descriptive and self-explanatory names can significantly improve code readability. By following naming conventions, such as camel case for variables and functions, and Pascal case for classes, you can make your code more intuitive. Avoid using ambiguous or cryptic names that might confuse other developers working on the codebase. Consistent naming conventions help create code that is easier to understand and maintain.
+    
+    ### 2. Modularization and Single Responsibility Principle
+    
+    Breaking down your code into small, modular units is crucial for clean coding. Applying the Single Responsibility Principle (SRP) ensures that each module, function, or class has a single, well-defined purpose. This promotes code reusability and makes testing and debugging more manageable. By organizing your code into smaller, focused modules, you improve readability, maintainability, and flexibility. Aim for smaller functions or methods that perform specific tasks, rather than having large monolithic blocks of code.
+    
+    ### 3. Avoiding Magic Numbers and Hardcoded Values
+    
+    Magic numbers and hardcoded values are non-descriptive and arbitrary values scattered throughout the codebase. They make the code difficult to understand and modify. Instead, it is recommended to use named constants or configuration variables. By assigning meaningful names to these values, their purpose becomes clear, and any changes can be made in a single place, improving maintainability. For example, instead of using to improve code clarity and maintainability.
+    
+    ### 4. Error Handling and Graceful Degradation
+    
+    Error handling is a crucial aspect of clean coding. Properly handling errors and exceptions can prevent crashes and unexpected behavior in your application. Use try-catch blocks to catch and handle exceptions, providing meaningful error messages to users or logging them for debugging purposes. Additionally, consider implementing graceful degradation by anticipating potential errors and providing fallback mechanisms. Graceful degradation ensures that even if a certain feature or functionality fails, the application can still continue running without breaking the user experience.
+    
+    ### 5. Commenting and Documentation
+    
+    Well-documented code is essential for clean coding practices. Comments help explain the intent, purpose, and functionality of code blocks. Use comments to clarify complex algorithms, provide insights into decision-making processes, or document any assumptions or limitations. However, it's important to strike a balance with comments. Avoid excessive or redundant comments that merely restate the code. Focus on adding value by providing context and explaining the reasoning behind the implementation choices.
+    `,
+    
     image: null,
     readingTime: 2,
     pinned: false,
@@ -238,8 +262,8 @@ export const posts: PostDTO[] = [
     ],
   },
   {
-    postId: 1,
-    title: 'Wikpedia',
+    postId: 2,
+    title: 'Wikipedia',
     content:
       'The big lie we’re told, in school and again in early-career settings, is that being “good” at programming is about solving harder and harder problems in a more elegant way. The truth is much more mundane — being good at programming is about efficiently solving a large set of mostly trivial problems, quickly and cleanly. What IS true, however, is how valuable “flow state” is to doing this. Being able to remain immersed in the work allows you to quickly shift between domains, tracking the flow of state from user to business logic through to data store, and back again.',
     image: null,
@@ -267,9 +291,9 @@ export const posts: PostDTO[] = [
     ],
   },
   {
-    postId: 2,
+    postId: 3,
     title:
-      'A biotech startup has managed to reverse aging and a new market has emerged — the blood of the youth',
+      'A Biotech Startup Reverses Aging',
     content:
       'This company is promising to extend the human lifespan by 50 years. The catch? It costs $1 million. The company is called Libella Gene Therapeutics and it’s run by Jeff Mathis, a former TV executive. The company is currently running a clinical trial in Colombia where it is giving 14 participants over the age of 40 a cocktail of drugs that it claims will reverse the aging process. The trial is being overseen by Dr. George Shapiro, a former associate professor at Harvard Medical School. The company is also planning to run a trial in the US, but it’s not clear when that will happen. The company is also planning to run a trial in the US, but it’s not clear when that will happen. The company is also planning to run a trial in the US, but it’s not clear when that will happen. The company is also planning to run a trial in the US, but it’s not clear when that will happen. The company is also planning to run a trial in the US, but it’s not clear when that will happen. The company is also planning to run a trial in the US, but it’s not clear when that will happen. The company is also planning to run a trial in the US, but it’s not clear when that will happen. The company is also planning to run a trial in the US, but it’s not clear when that will happen.',
     image: null,
@@ -301,8 +325,8 @@ export const posts: PostDTO[] = [
     ],
   },
   {
-    postId: 3,
-    title: 'Good programmers are lazy',
+    postId: 4,
+    title: 'Good Programmers Are Lazy',
     content:
       '“Good” programmers love to denigrate PHP and javascript for being “bad” languages; yet both of them are notable for supporting simple “Single-file” patterns. Javascript does this through JSX; PHP simply allows every php script to contain arbitrary HTML as well. I’ve decided to recreate the joy of Single-File development, but for Python. This will hopefully bridge the obvious gaps between the “Notebook” python data science communities, the “Boot Camp” software developer communities, and the front lines of web application development.',
     image: null,
@@ -330,8 +354,8 @@ export const posts: PostDTO[] = [
     ],
   },
   {
-    postId: 4,
-    title: 'Bio hacking is the new frontier of science',
+    postId: 5,
+    title: 'Bio Hacking Is The New Frontier Of Science',
     content:
       'Biohacking is the new frontier of science. It’s a movement that aims to use technology to enhance human capabilities. The idea is that we can use technology to make ourselves smarter, stronger, and healthier. Biohackers are using technology.  ',
     image: null,
@@ -363,8 +387,8 @@ export const posts: PostDTO[] = [
     ],
   },
   {
-    postId: 5,
-    title: 'The art of design',
+    postId: 6,
+    title: 'The Art Of Design',
     content:
       'Design is a process of creating something new. It’s a way to solve problems and make things better. Design is a way of thinking about the world. It’s a way of looking at the world and seeing how it can be improved. Design is a way of thinking about the world. It’s a way of looking at the world and seeing how it can be improved. Design is a way of thinking about the world. It’s a way of looking at the world and seeing how it can be improved. Design is a way of thinking about the world. It’s a way of looking at the world and seeing how it can be improved. Design is a way of thinking about the world. It’s a way of looking at the world and seeing how it can be improved. Design is a way of thinking about the world. It’s a way of looking at the world and seeing how it can be improved.',
     image: null,
@@ -396,8 +420,8 @@ export const posts: PostDTO[] = [
     ],
   },
   {
-    postId: 6,
-    title: 'The best movies of 2021',
+    postId: 7,
+    title: 'The Best Movies Of 2021',
     content:
       'The best movies of 2021 are the ones that make you feel something. They’re the ones that make you laugh, cry, and think. They’re the best movies of 2021 because they’re the ones that make you feel something. They’re the ones that make you laugh, cry, and think. They’re the best movies of 2021 because they’re the ones that make you feel something. They’re the ones that make you laugh, cry, and think. They’re the best movies of 2021 because they’re the ones that make you feel something. They’re the ones that make you laugh, cry, and think. They’re the best movies of 2021 because they’re the ones that make you feel something. They’re the ones that make you laugh, cry, and think. They’re the best movies of 2021 because they’re the ones that make you feel something. They’re the ones that make you laugh, cry, and think.',
     image: null,
@@ -425,10 +449,9 @@ export const posts: PostDTO[] = [
     ],
   },
   {
-    postId: 7,
-    title: 'The best TV shows of 2021',
-    content:
-      'The best TV shows of 2021 are the ones that make you feel something. They’re the ones that make you laugh, cry, and think. They’re the best TV shows of 2021 because they’re the ones that make you feel something. They’re the ones that make you laugh, cry, and think. They’re the best TV shows of 2021 because they’re the ones that make you feel something. They’re the ones that make you laugh, cry, and think. They’re the best TV shows of 2021 because they’re the ones that make you feel something. They’re the ones that make you laugh, cry, and think. They’re the best TV shows of 2021 because they’re the ones that make you feel something. They’re the ones that make you laugh, cry, and think.',
+    postId: 8,
+    title: 'The Best TV Shows Of 2022',
+    content: '',
     image: null,
     readingTime: 8,
     pinned: false,
