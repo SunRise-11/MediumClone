@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { tags as topics } from '../store';
 import Link from 'next/link';
-import TagFooter from './TagFooter';
 import Tag from '@/types/Tag/Tag';
-import { title } from 'process';
 import { Chip } from '@mui/material';
 
 type Props = {

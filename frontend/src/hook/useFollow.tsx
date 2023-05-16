@@ -26,8 +26,6 @@ const useFollow = (userId: number) => {
 
             await request();
 
-
-
         } catch (error) {
 
         }

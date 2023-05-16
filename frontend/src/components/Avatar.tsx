@@ -51,6 +51,7 @@ const Avatar: React.FC<AvatarProps> = ({ username, image, isLarge, hasBorder, is
       `}
         >
             <Image
+                onError={() => defaultImage.src}
                 className="rounded-full"
                 width={handleImageSize().w}
                 height={handleImageSize().h}
