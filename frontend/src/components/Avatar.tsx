@@ -1,20 +1,23 @@
+"use client"
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import defaultImage from "../../../frontend/public/images/profile.png"
 
 interface AvatarProps {
     username: string;
-    image?: string
+    image?: string | null;
     isLarge?: boolean;
     isMedium?: boolean;
-    isSmall?: boolean
+    isSmall?: boolean;
     hasBorder?: boolean;
-
+    width?: number,
+    height?: number
 }
 
-const Avatar: React.FC<AvatarProps> = ({ username, image, isLarge, hasBorder, isMedium, isSmall }) => {
+const Avatar: React.FC<AvatarProps> = ({ username, image, isLarge, hasBorder, isMedium, isSmall, width, height }) => {
     const router = useRouter();
+    const [hasImageError, setHasImageError] = useState<boolean>(false)
 
     const onClick = useCallback((event: any) => {
         event.stopPropagation();
@@ -26,9 +29,9 @@ const Avatar: React.FC<AvatarProps> = ({ username, image, isLarge, hasBorder, is
 
 
     const handleImageSize = () => {
-        if (isLarge && !isMedium) {
+        if (isLarge) {
             return { w: 90, h: 90 }
-        } else if (isMedium && !isLarge) {
+        } else if (isMedium) {
             return { w: 40, h: 40 }
         } else if (isSmall) {
             return { w: 25, h: 25 }
@@ -41,7 +44,7 @@ const Avatar: React.FC<AvatarProps> = ({ username, image, isLarge, hasBorder, is
             className={`
         ${hasBorder ? 'border-2 border-black' : ''}
         ${isLarge ? 'h-28' : 'h-12'}
-        ${!isLarge && isMedium ? 'h-20' : 'h-12'}
+        ${isMedium ? 'h-20' : 'h-12'}
         ${isLarge ? 'w-28' : 'w-12'}
         ${isSmall ? "w-20" : "h-5"}
         hover:opacity-90 
@@ -51,13 +54,14 @@ const Avatar: React.FC<AvatarProps> = ({ username, image, isLarge, hasBorder, is
       `}
         >
             <Image
-                onError={() => defaultImage.src}
+
                 className="rounded-full"
-                width={handleImageSize().w}
-                height={handleImageSize().h}
+                width={width ? width : handleImageSize().w}
+                height={height ? height : handleImageSize().h}
                 alt="Avatar"
                 onClick={onClick}
-                src={image || defaultImage.src}
+                src={hasImageError ? defaultImage.src : image || defaultImage.src}
+                onError={() => setHasImageError(true)}
             />
         </div>
     );
