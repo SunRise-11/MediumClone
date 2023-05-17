@@ -10,7 +10,7 @@ export const trendUsers = [
   },
   {
     username: 'Abbas Abdelila',
-    image: "/images/abbas-profile.jpg",
+    image: "/images/Abbas-Abdelila.jpg",
     postName:
       'A step-by-step guide to building a chatbot based on your own documents with GPT',
     time: 'Mar 9· 4 min read',
@@ -36,7 +36,7 @@ export const trendUsers = [
   },
   {
     username: 'Jon Doe',
-    image: '/images/abbas-profile.jpg',
+    image: '/images/John-Doe.jpg',
     postName: 'Demotivating a (Skilled) Programmer',
     time: 'Mar 9· 4 min read',
   },
@@ -125,7 +125,7 @@ export const links = [
 export const avatars = [
   {
     alt: 'Sarvar',
-    src: '/images/abbas-profile.jpg',
+    src: '/images/Abbas-Abdelila.jpg',
   },
   {
     alt: 'image',
