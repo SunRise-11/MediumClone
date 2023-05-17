@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { formatDate } from "../util/DateFormat";
 import PostDTO from "@/types/Post/Post";
 import Avatar from "./Avatar";
+import { titleToUrl } from "@/util/titleToUrl";
 
 type Props = {
     post: PostDTO,
@@ -29,7 +30,7 @@ const Post = ({ post, handleDeletePost }: Props) => {
 
     const { title, content, postId, image: postImage, readingTime, pinned, createdAt, user, tags } = post;
     const { username, image: userImage } = user;
-
+    const postUrl = titleToUrl(title);
 
     return (
         <div className="flex gap-[34px] w-[100%] my-16 ">
@@ -38,7 +39,7 @@ const Post = ({ post, handleDeletePost }: Props) => {
                     <Avatar image={`/images/${userImage}`} width={24} height={36} username={username} />
                     <h1 className="text-sm font-semibold">{username}</h1>
                 </div>
-                <Link href="/posts/how-to-get-started-with-learning-turkish">
+                <Link href={`/posts/${postUrl}`}>
                     <p className="leading-[20px] md:leading-[28px] md:text-[22px] font-bold text-slate-800 space-y-[2px] cursor-pointer">
                         {title}
                     </p>
