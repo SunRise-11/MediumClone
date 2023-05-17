@@ -39,12 +39,13 @@ const Trending = (): JSX.Element => {
                   <span className="text-4xl text-slate-300">{i}</span>
                 </div>
                 <div className="right flex w-full flex-col mt-3 gap-2">
-                  <Link href={`/users/${username}`}>
-                    <div className="flex items-center">
-                      <Avatar image={`${image}`} username={username} width={25} height={30} />
+                  <div className="flex items-center">
+                    <Avatar image={`${image}`} username={username} width={25} height={30} />
+                    <Link href={`/users/${username}`}>
                       <p className="text-sm">{username}</p>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
+
                   <div className="post-name w-full text-sm md:text-base  whitespace-pre-line break-words font-semibold 3xl:!line-clamp-2">
                     {postName}
                   </div>
@@ -58,7 +59,7 @@ const Trending = (): JSX.Element => {
         </div>
       </div>
       <hr />
-    </div>
+    </div >
   );
 };
 
