@@ -5,11 +5,9 @@ import Link from 'next/link';
 import { followers } from '@/store';
 import UserFollowers from '../../UserFollowers';
 
-
 type Params = { params: { username: string } };
 
 const Page = ({ params: { username } }: Params) => {
-    console.log(username);
 
     const [isActive, setIsActive] = useState<boolean>(false);
 
