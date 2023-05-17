@@ -43,7 +43,7 @@ const Trending = (): JSX.Element => {
                 <div className="right flex w-full flex-col mt-3 gap-2">
                   <Link href={`/users/${username}`}>
                     <div className="flex gap-3 items-center">
-                      <Avatar image={`/images/${image}`} username={username} width={25} height={30} />
+                      <Avatar image={`${image}`} username={username} width={25} height={30} />
                       <p className="text-sm">{username}</p>
                     </div>
                   </Link>
