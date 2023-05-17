@@ -7,7 +7,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import Image from "next/image";
 
-const ProfileHeader = ({username, userimage} : { username: string | undefined, userimage: string | null | undefined}) => {
+const ProfileHeader = ({ username, userimage }: { username: string | undefined, userimage: string | null | undefined }) => {
   return (
     <>
       <div className="px-2 flex justify-between items-center mb-16">

@@ -12,6 +12,7 @@ type User = {
 }
 
 const Trending = (): JSX.Element => {
+
   return (
     <div className={'w-full h-auto pt-[2.5rem] pb-[1rem]'}>
       <div className="content w-[80%] mx-auto">
@@ -42,7 +43,7 @@ const Trending = (): JSX.Element => {
                 </div>
                 <div className="right flex w-full flex-col mt-3 gap-2">
                   <Link href={`/users/${username}`}>
-                    <div className="flex gap-3 items-center">
+                    <div className="flex items-center">
                       <Avatar image={`${image}`} username={username} width={25} height={30} />
                       <p className="text-sm">{username}</p>
                     </div>

@@ -2,8 +2,8 @@ import PostDTO from '@/types/Post/Post';
 
 export const trendUsers = [
   {
-    username: 'Sarvar55',
-    image: '/images/abbas-profile.jpg',
+    username: 'Sarvar Musazade',
+    image: '/images/Schauf-Bammer.jpg',
     postName:
       'A step-by-step guide to building a chatbot based on your own documents with GPT',
     time: 'Mar 9· 4 min read',
@@ -35,7 +35,7 @@ export const trendUsers = [
     time: 'Mar 9· 4 min read',
   },
   {
-    username: 'Sarvar55',
+    username: 'Jon Doe',
     image: '/images/abbas-profile.jpg',
     postName: 'Demotivating a (Skilled) Programmer',
     time: 'Mar 9· 4 min read',

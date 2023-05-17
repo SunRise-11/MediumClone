@@ -22,14 +22,14 @@ const Post = ({ post, handleDeletePost }: Props) => {
     const url = usePathname();
 
     useEffect(() => {
-        const regex = /^\/users\/\w+$/; 
+        const regex = /^\/users\/\w+$/;
         if (url.match(regex)) {
             setShowMenu(true);
         }
     }, [url])
 
 
-    
+
     const { title, content, postId, image: postImage, readingTime, pinned, createdAt, user, tags } = post;
     const { username, image: userImage } = user;
     const postUrl = titleToUrl(title);
@@ -39,6 +39,7 @@ const Post = ({ post, handleDeletePost }: Props) => {
             <div className="flex flex-col gap-2 w-[70%]">
                 <div className="flex items-center gap-2">
                     <Avatar image={`/images/${userImage}`} width={24} height={36} username={username} />
+
                     <h1 className="text-sm font-semibold">{username}</h1>
                 </div>
                 <Link href={`/posts/${postUrl}`}>

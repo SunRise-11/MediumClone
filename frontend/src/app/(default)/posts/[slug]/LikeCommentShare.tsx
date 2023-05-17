@@ -51,7 +51,7 @@ const LikeCommentShare = () => {
           </div>
           <div>
             <button className="px-4 py-2 bg-green-500 text-white rounded-3xl">
-                Post
+              Post
             </button>
           </div>
           <div>

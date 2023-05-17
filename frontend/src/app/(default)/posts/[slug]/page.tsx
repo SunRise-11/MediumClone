@@ -44,13 +44,6 @@ const PostPage = ({ params: { slug } }: Params): JSX.Element => {
 
         <div className="hidden lg:w-[35%] lg:fixed right-0 lg:flex flex-col px-8">
           <div className="profile flex flex-col space-y-3">
-            {/* <Image
-              src={`/images/${userimage}`}
-              height={88}
-              width={88}
-              alt="Profile Picture"
-              className="rounded-full"
-            /> */}
             <Avatar image={`/images/${userimage}`} username={username} height={88} width={88} />
             <h1 className="text-[16px] mt-3 font-semibold">{username}</h1>
             <p className="text-[16px] text-slate-500 text-light">

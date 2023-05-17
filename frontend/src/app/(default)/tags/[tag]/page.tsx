@@ -8,6 +8,7 @@ import Post from '@/components/Post';
 import Tags from '@/components/Tags';
 import Link from 'next/link';
 import Button from "@mui/material/Button"
+import FollowUserButton from '@/components/FollowUserButton';
 
 type Params = {
   params: {
@@ -34,9 +35,7 @@ const TagsPage = ({ params }: Params) => {
           <div className="flex-col">
             <TagHeader tag={capitalize(params.tag)} />
             <div className="flex items-center space-x-4 my-4">
-              <button className="border bg-green-500 text-white py-1 px-3 rounded-2xl">
-                Follow
-              </button>
+              <FollowUserButton />
               <Link href={"/posts/write"}>
                 <Button variant="outlined" className='rounded-full' color="success">
                   Start Writing

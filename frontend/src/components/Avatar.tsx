@@ -50,7 +50,8 @@ const Avatar: React.FC<AvatarProps> = ({ username, image, isLarge, hasBorder, is
         hover:opacity-90 
         transition 
         cursor-pointer
-        flex justify-center items-center
+        flex
+        items-center
       `}
         >
             <Image
