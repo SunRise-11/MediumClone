@@ -7,6 +7,8 @@ import UserInfoBox from './UserInfoBox'
 import User from '@/types/user/User'
 import { followers as users } from '@/store'
 import Link from "next/link"
+import { titleToUrl } from '@/util/titleToUrl';
+import { urlToTitle } from '@/util/urlToTitle';
 
 type Props = {
 
@@ -18,6 +20,7 @@ const UserProfile = (props: Props) => {
     const [visibilityEditModal, setVisilityEditModal] = useState<boolean>(false)
 
     const username = splitDataFromUrl(usePathname())
+    const name = urlToTitle(splitDataFromUrl(usePathname()))
 
 
     function splitDataFromUrl(url: string): any {
@@ -52,7 +55,7 @@ const UserProfile = (props: Props) => {
                         alt="Profile Picture"
                         className="rounded-full"
                     />
-                    <h1 className="text-[16px] font-semibold">{username}</h1>
+                    <h1 className="text-[16px] font-semibold">{name}</h1>
                 </Link>
                 <p className="text-[14px] text-slate-500 text-light">2 followers</p>
                 <p className="text-[14px] text-slate-500 text-light text-clip w-[70%]">
