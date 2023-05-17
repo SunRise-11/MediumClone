@@ -27,7 +27,6 @@ const Avatar: React.FC<AvatarProps> = ({
   width,
   height,
 }) => {
-  const router = useRouter();
   const [hasImageError, setHasImageError] = useState<boolean>(false);
   const name = titleToUrl(username);
 

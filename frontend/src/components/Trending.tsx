@@ -13,7 +13,6 @@ type User = {
 };
 
 const Trending = (): JSX.Element => {
-
   return (
     <div className={'w-full h-auto pt-[2.5rem] pb-[1rem]'}>
       <div className="content w-[80%] mx-auto">
