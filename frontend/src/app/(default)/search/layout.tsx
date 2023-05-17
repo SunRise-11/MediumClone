@@ -1,5 +1,6 @@
 import '../globals.css';
 import AuthNavbar from '../../../components/AuthNavbar';
+import Center from '@/components/Center';
 
 export const metadata = {
     title: 'Create Next App',
@@ -13,8 +14,10 @@ export default function RootLayout({
 }) {
     return (
         <>
-            <AuthNavbar />
-            {children}
+            <Center>
+                <AuthNavbar />
+                {children}
+            </Center>
         </>
     );
 }
