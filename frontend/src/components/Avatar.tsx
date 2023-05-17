@@ -27,7 +27,6 @@ const Avatar: React.FC<AvatarProps> = ({
   width,
   height,
 }) => {
-  const router = useRouter();
   const [hasImageError, setHasImageError] = useState<boolean>(false);
   const name = titleToUrl(username);
 
@@ -48,8 +47,8 @@ const Avatar: React.FC<AvatarProps> = ({
         ${hasBorder ? 'border-2 border-black' : ''}
         ${isLarge ? 'h-28' : 'h-12'}
         ${isMedium ? 'h-20' : 'h-12'}
-        ${isLarge ? 'w-28' : 'w-12'}
-        ${isSmall ? 'w-20' : 'h-5'}
+        ${isLarge ? 'w-28' : 'w-fit'}
+        ${isSmall ? 'w-10' : 'h-5'}
         hover:opacity-90 
         transition 
         cursor-pointer

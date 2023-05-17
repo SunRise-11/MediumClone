@@ -9,6 +9,7 @@ import { followers as users } from '@/store'
 import Link from "next/link"
 import { titleToUrl } from '@/util/titleToUrl';
 import { urlToTitle } from '@/util/urlToTitle';
+import { usernameToImage } from '@/util/usernameToImage';
 
 type Props = {
 
@@ -21,6 +22,7 @@ const UserProfile = (props: Props) => {
 
     const username = splitDataFromUrl(usePathname())
     const name = urlToTitle(splitDataFromUrl(usePathname()))
+    const userImage = usernameToImage(name);
 
 
     function splitDataFromUrl(url: string): any {
@@ -49,8 +51,8 @@ const UserProfile = (props: Props) => {
             <div className="profile flex flex-col space-y-3 ml-8">
                 <Link href={`/users/${username}`}>
                     <Image
-                        src={`/images/${"profile"}.png`} // Route of the image file
-                        height="88"
+                        src={`/images/${userImage}.jpg`} // Route of the image file
+                        height={88}
                         width={88}
                         alt="Profile Picture"
                         className="rounded-full"
