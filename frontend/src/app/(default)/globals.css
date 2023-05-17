@@ -11,3 +11,11 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.carousel-container {
+  transition: scrollLeft 0.3s ease-in-out;
+}
+
+.carousel-item {
+  transition: margin-right 0.3s ease-in-out;
+}
