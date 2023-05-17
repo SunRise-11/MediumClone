@@ -9,7 +9,7 @@ type User = {
   image: string | null;
   postName: string;
   time: string;
-}
+};
 
 const Trending = (): JSX.Element => {
 
@@ -22,12 +22,8 @@ const Trending = (): JSX.Element => {
           }
         >
           <p className="flex space-x-3 items-center">
-            <span className='h-5'>
-              {trendingIcon}
-            </span>
-            <span className="font-semibold">
-              Trending on Medium
-            </span>
+            <span className="h-5">{trendingIcon}</span>
+            <span className="font-semibold">Trending on Medium</span>
           </p>
         </div>
         <div className="posts grid w-full lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3">
@@ -35,11 +31,12 @@ const Trending = (): JSX.Element => {
             const { postName, time, username, image } = user;
             let i = index < 10 ? '0' + (index + 1) : index;
             return (
-              <div key={index} className="trending-post leading-relaxed h-auto w-full mb-[1rem] space-x-2 flex content-start">
+              <div
+                key={index}
+                className="trending-post leading-relaxed h-auto w-full mb-[1rem] space-x-2 flex content-start"
+              >
                 <div className="left h-full">
-                  <span className="text-4xl text-slate-300">
-                    {i}
-                  </span>
+                  <span className="text-4xl text-slate-300">{i}</span>
                 </div>
                 <div className="right flex w-full flex-col mt-3 gap-2">
                   <Link href={`/users/${username}`}>

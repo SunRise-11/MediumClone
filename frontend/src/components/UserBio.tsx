@@ -5,6 +5,7 @@ import Link from "next/link"
 import useFollow from '@/hook/useFollow'
 import Avatar from '../components/Avatar'
 import FollowUserButton from './FollowUserButton'
+import { titleToUrl } from '@/util/titleToUrl'
 
 type Props = {
     user: User
@@ -12,13 +13,14 @@ type Props = {
 
 const FollowerProfileCard = (props: Props) => {
     const { user: { bio, email, image, username, userId } } = props;
+    const usernameUrl = titleToUrl(username)
 
     return (
         <div className='w-full flex justify-between items-center my-4'>
             <div className="left h-full  flex  justify-between w-[60%]">
-                <Avatar username={username} image={image} width={30} height={30} />
+                <Avatar username={usernameUrl} image={image} width={30} height={30} />
                 <div className="detail flex flex-col w-[80%] ">
-                    <Link href={`users/${username}`}>
+                    <Link href={`/users/${usernameUrl}`}>
                         <p className='text-[#292929] text-sm'>{username}</p>
                     </Link>
                     <p className='text-[#757575] text-xs '>{bio}</p>
