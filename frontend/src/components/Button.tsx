@@ -3,6 +3,7 @@
 interface ButtonProps {
   label: string;
   secondary?: boolean;
+  primary?: boolean;
   fullWidth?: boolean;
   large?: boolean;
   onClick: () => void;
@@ -27,14 +28,13 @@ const Button: React.FC<ButtonProps> = ({
         disabled:opacity-70
         disabled:cursor-not-allowed
         rounded-full
-        font-semibold
         border-2
         hidden 
         sm:flex
         text-sm
         justify-center 
+        font-normal
         items-center
-        sm:text-sm 
         duration-150 
         transition-all
         ${fullWidth ? 'w-full' : 'w-fit'}
