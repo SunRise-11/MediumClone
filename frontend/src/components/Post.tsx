@@ -21,13 +21,15 @@ const Post = ({ post, handleDeletePost }: Props) => {
     const [showMenu, setShowMenu] = useState<boolean>(false)
     const url = usePathname();
 
+    useEffect(() => {
+        const regex = /^\/users\/\w+$/; 
+        if (url.match(regex)) {
+            setShowMenu(true);
+        }
+    }, [url])
 
-    const isValidPath = (url: string): boolean => {
-        const pattern = /^\/users\/([^/]+)$/;
-        const isSamePath = url.match(pattern);
-        return isSamePath != null;
-    };
 
+    
     const { title, content, postId, image: postImage, readingTime, pinned, createdAt, user, tags } = post;
     const { username, image: userImage } = user;
     const postUrl = titleToUrl(title);

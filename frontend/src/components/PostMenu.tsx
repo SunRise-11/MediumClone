@@ -3,6 +3,7 @@ import { Button, Popover, Space } from "antd";
 import React, { MouseEventHandler } from "react";
 import { moreIcon } from "../../public/icons/icons";
 import Link from "next/link";
+import { getPostById } from "@/util/getPostById";
 
 
 type Props = {
@@ -13,10 +14,11 @@ type Props = {
 }
 
 const PostMenu: React.FC<Props> = ({ pinned, username, postId, handleDeletePost }) => {
+    
 
     const content = (
         <div className="flex flex-col items-center justify-center">
-            <Link href={`/users/${username}/update-post/${postId}`}>
+            <Link href={`/posts/update/${postId}`}>
                 <Button
                     type="text"
                     className="!text-blue-600"
