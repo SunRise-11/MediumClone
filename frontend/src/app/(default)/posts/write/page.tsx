@@ -3,19 +3,13 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useState } from "react";
 import { EditorState, convertToRaw } from "draft-js";
-import { draftToMarkdown } from "markdown-draft-js";
+// import { draftToMarkdown } from "markdown-draft-js";
 
 
 const CreatePost = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
-  const handleCreatePost = () => {
-    const contentState = editorState.getCurrentContent();
-    const rawObject = convertToRaw(contentState);
-    const markdownString = draftToMarkdown(rawObject);
-    console.log(markdownString);
-  };
-
+  
   return (
     <>
     <div className="w-full lg:w-[65%] flex flex-col justify-start">
@@ -81,7 +75,6 @@ const CreatePost = () => {
               className="w-[80%] mx-auto flex justify-center
                          items-center rounded-lg bg-green-500 hover:bg-green-600 transition-transform
                           ease-in-out duration-150 delay-75  text-white font-semibold py-2 mt-5 mb-16"
-              onClick={handleCreatePost}
             >
               Create Post
             </button>
