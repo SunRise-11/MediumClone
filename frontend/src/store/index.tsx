@@ -211,28 +211,28 @@ export const posts: PostDTO[] = [
     postId: 1,
     title: '5 Javascript Clean Coding Patterns To Enhance Your Code',
     content: `
-    ## Introduction
+    Introduction
 
     Clean code is essential for writing maintainable and efficient JavaScript applications. It improves readability, reduces bugs, and makes collaboration easier. By following clean coding patterns, developers can produce code that is easier to understand, maintain, and extend. In this article, we will explore five JavaScript clean coding patterns that can enhance your code and contribute to a better development experience.
     
-    ### 1. Consistent Naming Conventions
+    1. Consistent Naming Conventions
     
      
     One of the fundamental aspects of clean coding is using consistent and meaningful names for variables, functions, and classes. Descriptive and self-explanatory names can significantly improve code readability. By following naming conventions, such as camel case for variables and functions, and Pascal case for classes, you can make your code more intuitive. Avoid using ambiguous or cryptic names that might confuse other developers working on the codebase. Consistent naming conventions help create code that is easier to understand and maintain.
     
-    ### 2. Modularization and Single Responsibility Principle
+    2. Modularization and Single Responsibility Principle
     
     Breaking down your code into small, modular units is crucial for clean coding. Applying the Single Responsibility Principle (SRP) ensures that each module, function, or class has a single, well-defined purpose. This promotes code reusability and makes testing and debugging more manageable. By organizing your code into smaller, focused modules, you improve readability, maintainability, and flexibility. Aim for smaller functions or methods that perform specific tasks, rather than having large monolithic blocks of code.
     
-    ### 3. Avoiding Magic Numbers and Hardcoded Values
+    3. Avoiding Magic Numbers and Hardcoded Values
     
     Magic numbers and hardcoded values are non-descriptive and arbitrary values scattered throughout the codebase. They make the code difficult to understand and modify. Instead, it is recommended to use named constants or configuration variables. By assigning meaningful names to these values, their purpose becomes clear, and any changes can be made in a single place, improving maintainability. For example, instead of using to improve code clarity and maintainability.
     
-    ### 4. Error Handling and Graceful Degradation
+    4. Error Handling and Graceful Degradation
     
     Error handling is a crucial aspect of clean coding. Properly handling errors and exceptions can prevent crashes and unexpected behavior in your application. Use try-catch blocks to catch and handle exceptions, providing meaningful error messages to users or logging them for debugging purposes. Additionally, consider implementing graceful degradation by anticipating potential errors and providing fallback mechanisms. Graceful degradation ensures that even if a certain feature or functionality fails, the application can still continue running without breaking the user experience.
     
-    ### 5. Commenting and Documentation
+    5. Commenting and Documentation
     
     Well-documented code is essential for clean coding practices. Comments help explain the intent, purpose, and functionality of code blocks. Use comments to clarify complex algorithms, provide insights into decision-making processes, or document any assumptions or limitations. However, it's important to strike a balance with comments. Avoid excessive or redundant comments that merely restate the code. Focus on adding value by providing context and explaining the reasoning behind the implementation choices.
     `,
@@ -246,7 +246,7 @@ export const posts: PostDTO[] = [
       username: 'Abbas Abdelila',
       email: 'email.com1',
       bio: 'SDU',
-      image: 'abbas-profile.jpg',
+      image: 'Abbas-Abdelila.jpg',
     },
     likes: [
       {
