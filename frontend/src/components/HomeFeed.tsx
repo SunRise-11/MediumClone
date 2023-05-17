@@ -13,11 +13,11 @@ const HomeFeed = (): JSX.Element => {
             <Hero />
             <Center>
                 <Trending />
-                <div className="relative flex flex-col lg:flex-row w-[80%] mx-auto  lg:gap-x-[187px] my-16">
-                    <div className="w-full lg:w-[65%] lg:max-w-[710px]">
+                <div className="relative flex flex-col lg:flex-row w-[80%] mx-auto lg:gap-x-[120px] my-16">
+                    <div className="w-full lg:w-[70%] lg:max-w-[710px]">
                         <PostList />
                     </div>
-                    <div className="flex flex-col w-full lg:w-[35%] order-first lg:order-last mt-12">
+                    <div className="flex flex-col w-full lg:w-[30%] order-first lg:order-last mt-12">
                         <div className="sticky top-20">
                             <Tags title='Discover more of what matters to you' footer={<TagFooter />} />
                         </div>
