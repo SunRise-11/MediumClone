@@ -12,15 +12,11 @@ type Props = {
 
 export default function Tags({ title, footer }: Props) {
 
-    
-
-   
-
     return (
         <>
-            <h1 className="font-semibold text-[16px] mb-5 py-4">
+            <p className='font-semibold text-[16px] mb-5 py-4' >
                 {title}
-            </h1>
+            </p>
             <div className="flex flex-wrap gap-2 border-slate-300 pb-10">
                 {
                     topics.map((tag: Tag) => {
