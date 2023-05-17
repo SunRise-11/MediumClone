@@ -48,8 +48,8 @@ const Avatar: React.FC<AvatarProps> = ({
         ${hasBorder ? 'border-2 border-black' : ''}
         ${isLarge ? 'h-28' : 'h-12'}
         ${isMedium ? 'h-20' : 'h-12'}
-        ${isLarge ? 'w-28' : 'w-12'}
-        ${isSmall ? 'w-20' : 'h-5'}
+        ${isLarge ? 'w-28' : 'w-fit'}
+        ${isSmall ? 'w-8' : 'h-8'}
         hover:opacity-90 
         transition 
         cursor-pointer

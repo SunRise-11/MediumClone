@@ -10,11 +10,12 @@ type Props = {
     pinned: boolean,
     username: string,
     postId: number,
+    hanldePin: () => void
     handleDeletePost: (e: any, postId: number) => void
 }
 
-const PostMenu: React.FC<Props> = ({ pinned, username, postId, handleDeletePost }) => {
-    
+const PostMenu: React.FC<Props> = ({ pinned, username, postId, handleDeletePost, hanldePin }) => {
+
 
     const content = (
         <div className="flex flex-col items-center justify-center">
@@ -34,10 +35,11 @@ const PostMenu: React.FC<Props> = ({ pinned, username, postId, handleDeletePost 
                 Delete
             </Button>
             <Button
+                onClick={hanldePin}
                 type="text"
                 className="text-black"
             >
-                {pinned ? "Pin Story" : "Un pin Story"}
+                {pinned ? "Un Pin Story" : "Pin Story"}
             </Button>
         </div>
     );

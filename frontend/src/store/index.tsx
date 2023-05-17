@@ -239,7 +239,7 @@ export const posts: PostDTO[] = [
 
     image: null,
     readingTime: 2,
-    pinned: false,
+    pinned: true,
     createdAt: '2023-08-20T13:20:10.633Z',
     user: {
       userId: 2,

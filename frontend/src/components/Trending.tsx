@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { trendingIcon } from '../../public/icons/icons';
 import { trendUsers } from '../store/index';
 import Avatar from './Avatar';
+import { titleToUrl } from '@/util/titleToUrl';
 
 type User = {
   username: string;
@@ -39,14 +40,14 @@ const Trending = (): JSX.Element => {
                   <span className="text-4xl text-slate-300">{i}</span>
                 </div>
                 <div className="right flex w-full flex-col mt-3 gap-2">
-                  <div className="flex items-center">
+                  <div className="flex items-center space-x-2">
                     <Avatar image={`${image}`} username={username} width={25} height={30} />
-                    <Link href={`/users/${username}`}>
+                    <Link href={`/users/${titleToUrl(username)}`}>
                       <p className="text-sm">{username}</p>
                     </Link>
                   </div>
 
-                  <div className="post-name w-full text-sm md:text-base  whitespace-pre-line break-words font-semibold 3xl:!line-clamp-2">
+                  <div className="post-name w-full text-sm md:text-base  whitespace-pre-line break-words font-semibold line-clamp-2">
                     {postName}
                   </div>
                   <span className="space-y-2 text-brefing text-xs font-normal">
