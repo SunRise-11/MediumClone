@@ -1,6 +1,9 @@
+"use client"
 import Image from "next/image";
+import { useState } from "react"
 
 const UserProfile = () => {
+  const [isFollowed, setIsFollowed] = useState<boolean>(false)
   return (
     <div className="hidden lg:flex space-x-4 items-center">
       <div className="hidden profile-picture lg:flex">
@@ -19,8 +22,13 @@ const UserProfile = () => {
         </p>
       </div>
       <div>
-        <button className="hidden lg:flex border bg-green-500 text-white py-1 px-3 rounded-2xl">
-          Follow
+        <button
+          onClick={() => setIsFollowed(!isFollowed)}
+          className={`${isFollowed ? "bg-black text-white" : "bg-transparent text-black"
+            } outline-transparent border ${isFollowed ? "border-black" : "border-gray"
+            } rounded-full px-3 py-1 cursor-pointer ml-auto`}
+        >
+          {isFollowed ? "Following" : "Follow"}
         </button>
       </div>
     </div>
