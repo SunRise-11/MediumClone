@@ -16,7 +16,7 @@ const SearchResultPage = ({ params: { query } }: Params) => {
         <div className='flex space-x-16 lg:divide-x-[1px] px-5 sm:px-10 md:px-15 lg:!px-32 my-20'>
             <div className='w-full lg:w-[60%]'>
                 <div className='flex flex-col space-y-7 text-sm'>
-                    <h1 className="md:text-xl flex space-y-5 lg:text-5xl mb-3 text-gray-500 truncate">
+                    <h1 className="flex space-y-5 lg:text-5xl text-3xl mb-3 text-gray-500 truncate">
                         Results for <p className="text-gray-800 mx-2">{query}</p>
                     </h1>
                     <div className='text-sm'>
@@ -30,6 +30,7 @@ const SearchResultPage = ({ params: { query } }: Params) => {
                         <Tags title='Discover more of what matters to you' />
                     </div>
                     <div className='flex flex-col'>
+                        <h1 className='text-base font-medium leading-5'>Who To Follow</h1>
                         <UserFollowers />
                     </div>
                 </div>

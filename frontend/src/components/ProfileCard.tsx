@@ -3,7 +3,7 @@ import { Box, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ProfileImage from "./ProfileImage";
 import Input from "./Input";
-import Button from '@mui/material/Button';
+import Button from '@/components/Button';
 import React, { ChangeEvent, FC, useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -96,22 +96,15 @@ const ProfileCard: FC<Props> = ({ visibilityEditModal, handleCloseModal }) => {
 
                 <div className="flex justify-end w-full gap-4">
                     <div className="hidden md:block">
-                        <Button className="lg:w-[120px] w-[90px] text-sm" onClick={handleCloseModal} variant="outlined" color="error">
-                            Delete Account
-                        </Button>
+                        <Button buttonType="delete" label="Delete account" onClick={handleCloseModal} />
                     </div>
-
                     <div className="block md:hidden">
                         <IconButton onClick={handleCloseModal} aria-label="delete" >
                             <DeleteIcon />
                         </IconButton>
                     </div>
-                    <Button onClick={handleCloseModal} variant="outlined" color="success">
-                        Cancel
-                    </Button>
-                    <Button onClick={onClickSubmit} variant="outlined" color="success">
-                        Submit
-                    </Button>
+                    <Button label="Cancel" onClick={handleCloseModal} buttonType="cancel" />
+                    <Button label="Submit" onClick={handleCloseModal} buttonType="submit" />
                 </div>
             </Box>
         </Modal>

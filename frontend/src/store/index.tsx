@@ -9,34 +9,34 @@ export const trendUsers = [
     time: 'Mar 9· 4 min read',
   },
   {
-    username: 'Sarvar55',
-    image: null,
+    username: 'Abbas Abdelila',
+    image: "/images/abbas-profile.jpg",
     postName:
       'A step-by-step guide to building a chatbot based on your own documents with GPT',
     time: 'Mar 9· 4 min read',
   },
   {
-    username: 'Sarvar55',
-    image: null,
+    username: 'Ali Kalantari',
+    image: "/images/Ashley-Bretford.jpg",
     postName: 'Demotivating a (Skilled) Programmer',
     time: 'Mar 9· 4 min read',
   },
   {
-    username: 'Sarvar55',
-    image: null,
+    username: 'Rza Maharramov',
+    image: "/images/Au-Chang.jpg",
     postName: 'Demotivating a (Skilled) Programmer',
     time: 'Mar 9· 4 min read',
   },
   {
-    username: 'Sarvar55',
-    image: null,
+    username: 'Mazahir',
+    image: "/images/fake-person-6.jpg",
     postName:
       'A step-by-step guide to building a chatbot based on your own documents with GPT',
     time: 'Mar 9· 4 min read',
   },
   {
-    username: 'Sarvar55',
-    image: null,
+    username: 'Jon Doe',
+    image: "/images/Mike-Greenwood.jpg",
     postName: 'Demotivating a (Skilled) Programmer',
     time: 'Mar 9· 4 min read',
   },
@@ -236,7 +236,7 @@ export const posts: PostDTO[] = [
     
     Well-documented code is essential for clean coding practices. Comments help explain the intent, purpose, and functionality of code blocks. Use comments to clarify complex algorithms, provide insights into decision-making processes, or document any assumptions or limitations. However, it's important to strike a balance with comments. Avoid excessive or redundant comments that merely restate the code. Focus on adding value by providing context and explaining the reasoning behind the implementation choices.
     `,
-    
+
     image: null,
     readingTime: 2,
     pinned: false,

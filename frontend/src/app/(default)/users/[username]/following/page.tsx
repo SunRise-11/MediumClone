@@ -3,7 +3,8 @@ import React, { useState } from 'react'
 import { carrotIcon } from '../../../../../../public/icons/icons';
 import Link from 'next/link';
 import { followers } from '@/store';
-import FollowingList from '../../FollowingList';
+import UserFollowers from '../../UserFollowers';
+
 
 type Params = { params: { username: string } };
 
@@ -35,7 +36,7 @@ const Page = ({ params: { username } }: Params) => {
                     </p>
                     <p onClick={() => setIsActive(true)} className={`py-4 px-2 cursor-pointer ${isActive && "border-b"} border-gray-950`}>About</p>
                 </div>
-                <FollowingList username={username} />
+                <UserFollowers username={username} />
             </div>
         </div>
     )

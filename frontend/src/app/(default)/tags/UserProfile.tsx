@@ -1,4 +1,5 @@
 "use client"
+import FollowUserButton from "@/components/FollowUserButton";
 import Image from "next/image";
 import { useState } from "react"
 
@@ -22,14 +23,7 @@ const UserProfile = () => {
         </p>
       </div>
       <div>
-        <button
-          onClick={() => setIsFollowed(!isFollowed)}
-          className={`${isFollowed ? "bg-black text-white" : "bg-transparent text-black"
-            } outline-transparent border ${isFollowed ? "border-black" : "border-gray"
-            } rounded-full px-3 py-1 cursor-pointer ml-auto`}
-        >
-          {isFollowed ? "Following" : "Follow"}
-        </button>
+        <FollowUserButton />
       </div>
     </div>
   );

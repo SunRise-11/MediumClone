@@ -7,6 +7,7 @@ import Button from './Button'
 import useFollow from '@/hook/useFollow'
 import Avatar from './Avatar'
 import defaultImage from "../../public/images/abbas-profile.jpg"
+import FollowUserButton from './FollowUserButton'
 
 type Props = {
     user: User
@@ -29,8 +30,7 @@ const UserSummaryCard = (props: Props) => {
                 </div>
             </div>
             <div className="right">
-                <Button label={isFollowing ? "Following" : "Follow"} onClick={toggleFollow} secondary={!isFollowing}
-                />
+                <FollowUserButton />
             </div>
         </div>
     )

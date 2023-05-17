@@ -13,7 +13,7 @@ export default function Navbar({ }: Props) {
                 <Search />
             </div>
             <div className="right flex flex-row items-center gap-8 h-full mr-6">
-                <Link href="/write" className="writeBtn hidden md:flex  flex-row items-center gap-2 text-gray-500 no-underline">
+                <Link href="/posts/write" className="writeBtn hidden md:flex  flex-row items-center gap-2 text-gray-500 no-underline">
                     <span className="text-gray-500">{writeBlogIcon}</span>
                     <p className="text-sm">Write</p>
                 </Link>

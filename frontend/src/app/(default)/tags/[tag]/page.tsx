@@ -6,6 +6,8 @@ import { posts as storePosts } from '../../../../store/index';
 import PostList from '@/components/PostList';
 import Post from '@/components/Post';
 import Tags from '@/components/Tags';
+import Link from 'next/link';
+import Button from "@mui/material/Button"
 
 type Params = {
   params: {
@@ -35,9 +37,11 @@ const TagsPage = ({ params }: Params) => {
               <button className="border bg-green-500 text-white py-1 px-3 rounded-2xl">
                 Follow
               </button>
-              <button className="border border-green-500  py-1 px-3 rounded-2xl">
-                Start Writing
-              </button>
+              <Link href={"/posts/write"}>
+                <Button variant="outlined" className='rounded-full' color="success">
+                  Start Writing
+                </Button>
+              </Link>
             </div>
             <SortPosts />
           </div>

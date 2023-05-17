@@ -1,10 +1,11 @@
 import ProfileHeader from "./ProfileHeader";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import LikeCommentShare from "./LikeCommentShare";
 import { urlToTitle } from "@/util/urlToTitle";
 import { posts } from "@/store/index"
+import Avatar from "@/components/Avatar";
+import FollowUserButton from "@/components/FollowUserButton";
 
 type Params = {
   params: {
@@ -43,14 +44,15 @@ const PostPage = ({ params: { slug } }: Params): JSX.Element => {
 
         <div className="hidden lg:w-[35%] lg:fixed right-0 lg:flex flex-col px-8">
           <div className="profile flex flex-col space-y-3">
-            <Image
+            {/* <Image
               src={`/images/${userimage}`}
               height={88}
               width={88}
               alt="Profile Picture"
               className="rounded-full"
-            />
-            <h1 className="text-[16px] font-semibold">{username}</h1>
+            /> */}
+            <Avatar image={`/images/${userimage}`} username={username} height={88} width={88} />
+            <h1 className="text-[16px] mt-3 font-semibold">{username}</h1>
             <p className="text-[16px] text-slate-500 text-light">
               2.2k followers
             </p>
@@ -58,9 +60,8 @@ const PostPage = ({ params: { slug } }: Params): JSX.Element => {
               Entrepreneur
             </p>
             <div className="flex space-x-5">
-              <button className="px-4 py-2 bg-green-500 text-white rounded-3xl">
-                Follow
-              </button>
+
+              <FollowUserButton />
               <button className="px-4 py-2 bg-green-500 text-white rounded-3xl">
                 M
               </button>

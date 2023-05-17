@@ -51,8 +51,6 @@ export default function Carousel({ width, height, data, sizeType }: Props) {
     };
 
 
-
-
     const type = useCallback(() => {
         let type = sizeType;
         if (!sizeType)
@@ -68,10 +66,11 @@ export default function Carousel({ width, height, data, sizeType }: Props) {
         w-[100%]
         `}>
 
-            <span onClick={(e) => handleLeftScroll()} className={
-                `text-4xl cursor-pointer 
-                ${leftEnd ? 'text-gray-400' : 'text-[#292929]'}`
-            }><KeyboardArrowLeftIcon /></span>
+            <span
+                onClick={(e) => handleLeftScroll()}
+                className={`text-4xl cursor-pointer ${leftEnd ? 'text-gray-400' : 'text-[#292929]'}`}>
+                <KeyboardArrowLeftIcon />
+            </span>
 
             <div
                 ref={carouselRef}
@@ -83,11 +82,13 @@ export default function Carousel({ width, height, data, sizeType }: Props) {
         flex 
         mx-2
         items-center
-        carousel-container
-        `}>
+        carousel-container`}>
                 {
-                    tags.map((tag: Tag) => (
-                        <p key={tag.id} onClick={() => setActiveTags([tag.id])} className={`py-4 px-2 ${activeTags.includes(tag.id) && "border-b text-[#080808]"} 
+                    data.map((tag: Tag) => (
+                        <p
+                            key={tag.id}
+                            onClick={() => setActiveTags([tag.id])}
+                            className={`py-4 px-2 ${activeTags.includes(tag.id) && "border-b text-[#080808]"} s
                         carousel-item border-gray-950 cursor-pointer
                         hover:text-[#080808]
                         text-gray-500
@@ -99,10 +100,11 @@ export default function Carousel({ width, height, data, sizeType }: Props) {
                 }
 
             </div>
-            <span onClick={(e) => handleRightScroll()} className={
-                `text-4xl cursor-pointer 
-                ${rightEnd ? 'text-gray-400' : 'text-[#292929]'}`
-            }><KeyboardArrowRightIcon /></span>
+            <span
+                onClick={(e) => handleRightScroll()}
+                className={`text-4xl cursor-pointer ${rightEnd ? 'text-gray-400' : 'text-[#292929]'}`}>
+                <KeyboardArrowRightIcon />
+            </span>
         </div>
     )
 }

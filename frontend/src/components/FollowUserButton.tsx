@@ -1,28 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 type Props = {
-    user: {
-        userId: number;
-    };
+
 };
 
-const FollowUserButton: React.FC<Props> = ({ user }) => {
-    const { userId } = user;
+const FollowUserButton: React.FC<Props> = () => {
     const [isFollow, setIsFollow] = useState<boolean>(false);
-
-    const onClickFollow = () => {
-        //ToDo: some code here
-    };
-
-    const onClickUnFollow = () => {
-        //ToDo: some code here
-    };
-
-    useEffect(() => {
-        if (!isFollow) onClickUnFollow();
-        else onClickFollow();
-    }, [isFollow]);
 
     let followButtonClass = isFollow
         ? "bg-[#292929] text-white"
@@ -32,7 +16,18 @@ const FollowUserButton: React.FC<Props> = ({ user }) => {
         <>
             <button
                 onClick={() => setIsFollow(!isFollow)}
-                className={`${followButtonClass} rounded-full w-[80px] h-[33px] hidden sm:flex justify-center items-center sm:text-sm duration-150 transition-all pt-[4px] px-[12px] pb-[6px]`}
+                className={`${followButtonClass} 
+                  rounded-full
+                  w-[80px] h-[33px]
+                  hidden sm:flex 
+                  justify-center 
+                  items-center 
+                  sm:text-sm 
+                  duration-150
+                  transition-all
+                  pt-[4px]
+                  px-[12px] 
+                  pb-[6px]`}
             >
                 {isFollow ? "Following" : "Follow"}
             </button >

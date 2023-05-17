@@ -5,7 +5,7 @@ import { useCallback, useState } from "react";
 import defaultImage from "../../../frontend/public/images/profile.png"
 
 interface AvatarProps {
-    username: string;
+    username?: string;
     image?: string | null;
     isLarge?: boolean;
     isMedium?: boolean;

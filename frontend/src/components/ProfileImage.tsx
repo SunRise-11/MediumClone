@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import defaultImage from "../../public/images/profile.png";
 
 const ProfileImage: React.FC = () => {
@@ -10,6 +10,8 @@ const ProfileImage: React.FC = () => {
     const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         const fileReader = new FileReader();
+        console.log(file);
+
 
         fileReader.onloadend = () => {
             setNewImage(fileReader.result?.toString());
@@ -40,9 +42,8 @@ const ProfileImage: React.FC = () => {
                 />
                 <input
                     type="file"
+                    key={newImage}
                     onChange={(e) => onChangeFile(e)}
-                    name=""
-                    id=""
                     hidden
                 />
             </div>

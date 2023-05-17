@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import Link from "next/link"
 import useFollow from '@/hook/useFollow'
 import Avatar from '../components/Avatar'
+import FollowUserButton from './FollowUserButton'
 
 type Props = {
     user: User
@@ -11,8 +12,6 @@ type Props = {
 
 const FollowerProfileCard = (props: Props) => {
     const { user: { bio, email, image, username, userId } } = props;
-    const [isFollowed, setIsFollowed] = useState<boolean>(false)
-    const { isFollowing, toggleFollow } = useFollow(userId);
 
     return (
         <div className='w-full flex justify-between items-center my-4'>
@@ -26,14 +25,7 @@ const FollowerProfileCard = (props: Props) => {
                 </div>
             </div>
             <div className="right">
-                <button
-                    onClick={() => setIsFollowed(!isFollowed)}
-                    className={`${isFollowed ? "bg-black text-white" : "bg-transparent text-black"
-                        } outline-transparent border ${isFollowed ? "border-black" : "border-gray"
-                        } rounded-full px-3 py-1 cursor-pointer ml-auto`}
-                >
-                    {isFollowed ? "Following" : "Follow"}
-                </button>
+                <FollowUserButton />
             </div>
         </div>
     )

@@ -2,25 +2,47 @@
 "use client"
 interface ButtonProps {
   label: string;
-  secondary?: boolean;
-  primary?: boolean;
   fullWidth?: boolean;
   large?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   disabled?: boolean;
-  outline?: boolean;
+  buttonType: 'update' | 'delete' | 'success' | 'warning' | 'danger' | 'cancel' | 'submit';
 }
 
 const Button: React.FC<ButtonProps> = ({
   label,
-  secondary,
   fullWidth,
   onClick,
   large,
   disabled,
-  outline
+  buttonType,
 }) => {
+
+  const getButtonStyles = (): string => {
+    switch (buttonType) {
+      case 'update':
+        return 'bg-blue-600 text-white';
+      case 'delete':
+        return 'bg-red-600 text-white';
+      case 'success':
+        return 'bg-green-600 text-white';
+      case 'warning':
+        return 'bg-yellow-500 text-black';
+      case 'danger':
+        return 'bg-black text-white';
+      case 'cancel':
+        return 'bg-gray-900 text-white';
+      case 'submit':
+        return 'bg-green-600 text-white';
+      default:
+        return 'bg-gray-400 text-black';
+    }
+  };
+
+
+
   return (
+
     <button
       disabled={disabled}
       onClick={onClick}
@@ -28,8 +50,7 @@ const Button: React.FC<ButtonProps> = ({
         disabled:opacity-70
         disabled:cursor-not-allowed
         rounded-full
-        border-2
-        hidden 
+        border-1 
         sm:flex
         text-sm
         justify-center 
@@ -37,16 +58,13 @@ const Button: React.FC<ButtonProps> = ({
         items-center
         duration-150 
         transition-all
+        px-3
+        py-2
+        ${getButtonStyles()}
         ${fullWidth ? 'w-full' : 'w-fit'}
-        ${secondary ? 'bg-white' : 'bg-[#292929]'}
-        ${secondary ? 'text-black' : 'text-white'}
-        ${secondary ? 'border-black' : 'border-[#292929]'}
         ${large ? 'text-xl' : 'text-xs'}
         ${large ? 'px-5' : 'px-2'}
         ${large ? 'py-3' : 'py-1'}
-        ${outline ? 'bg-transparent' : ''}
-        ${outline ? 'border-white' : ''}
-        ${outline ? 'text-white' : ''}
       `}
     >
       {label}
