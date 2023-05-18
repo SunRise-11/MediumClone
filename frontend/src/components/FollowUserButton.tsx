@@ -18,7 +18,7 @@ const FollowUserButton: React.FC<Props> = () => {
                 onClick={() => setIsFollow(!isFollow)}
                 className={`${followButtonClass} 
                   rounded-full
-                  w-[80px] h-[30px]
+                  w-[90px] h-[30px]
                   sm:flex 
                   justify-center 
                   items-center 
