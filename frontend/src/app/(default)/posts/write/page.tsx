@@ -20,7 +20,7 @@ const CreatePost = () => {
   
   return (
     <>
-    <div className="w-full lg:w-[65%] flex flex-col justify-start">
+    <div className="w-full lg:w-[65%] flex flex-col justify-center">
       <h1 className="text-center text-3xl font-semibold text-slate-800 mt-16">
         Create a new Post
       </h1>
