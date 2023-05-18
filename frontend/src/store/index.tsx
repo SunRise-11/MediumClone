@@ -186,7 +186,10 @@ export const avatars = [
   },
 ];
 
+
+
 export const tags = [
+
   {
     id: 1,
     name: 'Programming',
@@ -202,6 +205,26 @@ export const tags = [
   { id: 9, name: 'Education', url: 'tags/education' },
   { id: 10, name: 'Politics', url: 'tags/politics' },
 ];
+export const topics = [
+  {
+    id: 0,
+    name: 'Following',
+  },
+  {
+    id: 1,
+    name: 'Programming',
+    url: 'tags/programming',
+  },
+  { id: 2, name: 'Science', url: 'tags/science' },
+  { id: 3, name: 'Technology', url: 'tags/technology' },
+  { id: 4, name: 'Art', url: 'tags/art' },
+  { id: 5, name: 'Business', url: 'tags/business' },
+  { id: 6, name: 'Sports', url: 'tags/sports' },
+  { id: 7, name: 'Entertainment', url: 'tags/entertainment' },
+  { id: 8, name: 'Health', url: 'tags/health' },
+  { id: 9, name: 'Education', url: 'tags/education' },
+  { id: 10, name: 'Politics', url: 'tags/politics' },
+]
 
 export const posts: PostDTO[] = [
   {
@@ -1967,7 +1990,7 @@ export const posts: PostDTO[] = [
   {
     postId: 17,
     title: 'Learn Git',
-   content:`
+    content: `
    Learn Git
    Learn the Basics of Git in Under 10 Minutes
    https://miro.medium.com/v2/resize:fit:1975/1*4kDk9CZEEJBllqd3Fx549A.png

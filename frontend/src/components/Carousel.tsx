@@ -5,7 +5,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 type Props = {
-    data: Array<Tag>
+    data: Array<any>
     width?: number,
     height?: number,
     sizeType?: "px" | "rem" | "%"
