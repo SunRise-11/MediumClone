@@ -10,17 +10,16 @@ import Image from "next/image";
 import Link from "next/link";
 const ProfileHeader = ({ username, userimage }: { username: string | undefined, userimage: string | null | undefined }) => {
   return (
-
     <>
       <div className="px-2 flex justify-between items-center mb-16">
-        <div className="profile date flex space-x-5">
+        <div className="profile date flex justify-start space-x-3 sm:space-x-5">
           <Link href={`/users/${titleToUrl(username)}`}>
             <Image
               src={`/images/${userimage}`}
               height={48}
               width={48}
               alt="Socials"
-              className="rounded-full hidden sm:flex"
+              className="rounded-full sm:flex"
             />
           </Link>
           <div className="flex flex-col gap-1">
@@ -35,7 +34,7 @@ const ProfileHeader = ({ username, userimage }: { username: string | undefined, 
             </div>
           </div>
         </div>
-        <div className="socials flex space-x-10">
+        <div className="socials hidden sm:flex space-x-12">
           <div className="icons flex space-x-4">
             <TwitterIcon
               fontSize="small"
