@@ -24,7 +24,7 @@
   border-radius: 50px !important;
 }
 
-body::-webkit-scrollbar {
+/* body::-webkit-scrollbar {
   width: 1em;
 }
 
@@ -37,4 +37,4 @@ body::-webkit-scrollbar-thumb {
   background-color: #9999;
   outline: none;
   border-radius: 10px;
-}
+} */
