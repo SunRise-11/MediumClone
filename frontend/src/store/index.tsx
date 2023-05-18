@@ -850,50 +850,7 @@ export const posts: PostDTO[] = [
   },
 
 
-  {
-    postId: 15,
-    title: 'We Are What We Remember',
-    content: `
-    Introduction
-    As the golden age of television continues to flourish, the year 2022 brought forth a remarkable lineup of television shows that captivated audiences with their storytelling prowess and unforgettable characters. From gripping dramas to innovative comedies and thought-provoking sci-fi series, the small screen showcased a diverse range of narratives that left viewers eagerly anticipating each new episode. In this article, we explore the best TV shows of 2022, celebrating their creativity, depth, and the impact they had on television landscape.
-    
-    Compelling Storytelling and Memorable Characters:
-    The best TV shows of 2022 delivered powerful storytelling and introduced audiences to an array of captivating characters. From the suspenseful crime drama "Mare of Easttown" starring Kate Winslet to the enigmatic and mind-bending series "Loki" featuring Tom Hiddleston, viewers were treated to compelling narratives that kept them on the edge of their seats. Shows like "Succession" and "Ted Lasso" showcased complex characters and exceptional writing, exploring themes of power, family dynamics, and redemption. The year also witnessed the return of beloved series such as "Stranger Things" and "The Crown," continuing to enthrall fans with their rich storytelling and brilliant ensemble casts. Whether it was exploring contemporary social issues or diving into the depths of fantasy and science fiction, the best TV shows of 2022 were a testament to the power of storytelling and the ability of television to captivate audiences with multidimensional characters and intricate plotlines.
-    
-    Innovation and Genre Diversity
-    2022 also witnessed innovation and genre diversity in television. Shows like "Squid Game" introduced audiences to the world of South Korean dramas, blending social commentary with intense survival themes. The animated series "Arcane: League of Legends" demonstrated that animation could tackle complex narratives and resonate with both fans and newcomers alike. Additionally, "The White Lotus" pushed the boundaries of dark comedy and satire, offering a fresh and unconventional take on a luxury resort vacation. From thrilling mysteries and suspenseful thrillers to heartwarming comedies and thought-provoking sci-fi, the best TV shows of 2022 showcased the vast spectrum of storytelling possibilities, proving that television remains a powerful medium for creative expression.
-    
-    Conclusion
-    The year 2022 brought a wealth of outstanding television shows that left a lasting impact on audiences. From compelling storytelling to memorable characters and innovative approaches, these shows exemplified the artistry and depth of storytelling on the small screen. As the television landscape continues to evolve, we eagerly anticipate the next wave of captivating narratives and groundbreaking series. The best TV shows of 2022 remind us of the immense power of television to entertain, engage, and challenge our perspectives, further solidifying its position as a premier medium for storytelling and artistic expression.
-    
-    
-    
-    `,
-    image: null,
-    readingTime: 8,
-    pinned: false,
-    createdAt: '2023-08-20T13:20:10.633Z',
-    user: {
-      userId: 14,
-      username: 'Shane Parrish',
-      email: 'shane@example.com',
-      bio: "Shane's bio",
-      image: 'Shane-Parrish.jpg',
-    },
-    likes: [
-      {
-        userId: 9,
-        postId: 15,
-      },
-    ],
-    tags: [
-      {
-        tagId: 12,
-        name: 'Education',
-      },
-    ],
-  },
-
+  
   {
     postId: 16,
     title: 'How To Get Started With Learning Turkish',
@@ -937,6 +894,52 @@ export const posts: PostDTO[] = [
       },
     ],
   },
+
+
+  {
+    postId: 17,
+    title: 'Learn Git',
+    content: `
+    Introduction
+    As the golden age of television continues to flourish, the year 2022 brought forth a remarkable lineup of television shows that captivated audiences with their storytelling prowess and unforgettable characters. From gripping dramas to innovative comedies and thought-provoking sci-fi series, the small screen showcased a diverse range of narratives that left viewers eagerly anticipating each new episode. In this article, we explore the best TV shows of 2022, celebrating their creativity, depth, and the impact they had on television landscape.
+    
+    Compelling Storytelling and Memorable Characters:
+    The best TV shows of 2022 delivered powerful storytelling and introduced audiences to an array of captivating characters. From the suspenseful crime drama "Mare of Easttown" starring Kate Winslet to the enigmatic and mind-bending series "Loki" featuring Tom Hiddleston, viewers were treated to compelling narratives that kept them on the edge of their seats. Shows like "Succession" and "Ted Lasso" showcased complex characters and exceptional writing, exploring themes of power, family dynamics, and redemption. The year also witnessed the return of beloved series such as "Stranger Things" and "The Crown," continuing to enthrall fans with their rich storytelling and brilliant ensemble casts. Whether it was exploring contemporary social issues or diving into the depths of fantasy and science fiction, the best TV shows of 2022 were a testament to the power of storytelling and the ability of television to captivate audiences with multidimensional characters and intricate plotlines.
+    
+    Innovation and Genre Diversity
+    2022 also witnessed innovation and genre diversity in television. Shows like "Squid Game" introduced audiences to the world of South Korean dramas, blending social commentary with intense survival themes. The animated series "Arcane: League of Legends" demonstrated that animation could tackle complex narratives and resonate with both fans and newcomers alike. Additionally, "The White Lotus" pushed the boundaries of dark comedy and satire, offering a fresh and unconventional take on a luxury resort vacation. From thrilling mysteries and suspenseful thrillers to heartwarming comedies and thought-provoking sci-fi, the best TV shows of 2022 showcased the vast spectrum of storytelling possibilities, proving that television remains a powerful medium for creative expression.
+    
+    Conclusion
+    The year 2022 brought a wealth of outstanding television shows that left a lasting impact on audiences. From compelling storytelling to memorable characters and innovative approaches, these shows exemplified the artistry and depth of storytelling on the small screen. As the television landscape continues to evolve, we eagerly anticipate the next wave of captivating narratives and groundbreaking series. The best TV shows of 2022 remind us of the immense power of television to entertain, engage, and challenge our perspectives, further solidifying its position as a premier medium for storytelling and artistic expression.
+    
+    
+    
+    `,
+    image: null,
+    readingTime: 4,
+    pinned: false,
+    createdAt: '2023-08-20T13:20:10.633Z',
+    user: {
+      userId: 14,
+      username: 'Sarvar Musazade',
+      email: 'sarvar@example.com',
+      bio: "Sarvar's bio",
+      image: 'Sarvar-Musazade.jpg',
+    },
+    likes: [
+      {
+        userId: 9,
+        postId: 17,
+      },
+    ],
+    tags: [
+      {
+        tagId: 11,
+        name: 'Technology',
+      },
+    ],
+  },
+
 
 
 ];
