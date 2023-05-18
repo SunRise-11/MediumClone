@@ -3,7 +3,6 @@ import TagHeader from '../TagHeader';
 import TopWriters from '../TopWriters';
 import SortPosts from '../SortPosts';
 import { posts as storePosts } from '../../../../store/index';
-import PostList from '@/components/PostList';
 import Post from '@/components/Post';
 import Tags from '@/components/Tags';
 import Link from 'next/link';
@@ -34,10 +33,10 @@ const TagsPage = ({ params }: Params) => {
         <div className="flex flex-col gap-10">
           <div className="flex-col">
             <TagHeader tag={capitalize(params.tag)} />
-            <div className="flex lg:justify-start lg:space-x-2 my-4">
+            <div className="flex lg:justify-start space-x-2 items-center lg:space-x-5 my-4">
               <FollowUserButton />
               <Link href={"/posts/write"}>
-                <Button variant="outlined" color="success">
+                <Button variant="outlined" size='small' color="success">
                   Start Writing
                 </Button>
               </Link>
