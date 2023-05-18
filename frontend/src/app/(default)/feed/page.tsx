@@ -1,5 +1,6 @@
+
 import Carousel from '@/components/Carousel'
-import { tags } from '@/store'
+import { topics } from '@/store'
 import React from 'react'
 import Image from "next/image"
 import PostList from '@/components/PostList'
@@ -9,11 +10,13 @@ import UserFollowers from "../../(default)/users/UserFollowers"
 type Props = {}
 
 export default function page({ }: Props) {
+
+
     return (
         <div className='flex lg:divide-x-[1px] sm:px-10 md:px-15 w-full h-screen'>
             <div className='w-[90%] mx-auto my-16 flex gap-40'>
                 <div className='w-full lg:w-[50%]'>
-                    <Carousel data={tags} width={800} />
+                    <Carousel data={topics} width={800} />
                     <PostList />
                 </div>
                 <div className='hidden lg:flex lg:flex-col lg:w-[30%] mt-44'>
