@@ -20,7 +20,7 @@ const CreatePost = () => {
   
   return (
     <>
-    <div className="w-full lg:w-[65%] flex flex-col justify-center">
+    <div className="w-full flex flex-col justify-center items-center">
       <h1 className="text-center text-3xl font-semibold text-slate-800 mt-16">
         Create a new Post
       </h1>
@@ -47,13 +47,13 @@ const CreatePost = () => {
               className="w-[80%] flex justify-start items-center text-gray-900 text-sm font-semibold mb-2 mx-auto"
               htmlFor="desc"
             >
-              Description
+              Image Url
             </label>
             <input
               className="w-[80%] mx-auto flex justify-center items-center px-3 py-1 mb-5 focus:outline-none focus:border-green-600 border-2 border-green-400 "
               id="title"
               type="text"
-              placeholder="desc"
+              placeholder="url"
             />
 
             <label
