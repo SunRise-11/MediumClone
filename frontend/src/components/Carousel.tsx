@@ -1,12 +1,11 @@
 "use client"
-import { tags } from '@/store'
 import Tag from '@/types/Tag/Tag'
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 type Props = {
-    data: Array<any>
+    data: Array<Tag>
     width?: number,
     height?: number,
     sizeType?: "px" | "rem" | "%"
