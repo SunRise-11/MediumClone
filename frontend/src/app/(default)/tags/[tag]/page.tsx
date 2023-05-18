@@ -34,10 +34,10 @@ const TagsPage = ({ params }: Params) => {
         <div className="flex flex-col gap-10">
           <div className="flex-col">
             <TagHeader tag={capitalize(params.tag)} />
-            <div className="flex items-center space-x-4 my-4">
+            <div className="flex lg:justify-start lg:space-x-2 my-4">
               <FollowUserButton />
               <Link href={"/posts/write"}>
-                <Button variant="outlined" className='rounded-full' color="success">
+                <Button variant="outlined" color="success">
                   Start Writing
                 </Button>
               </Link>

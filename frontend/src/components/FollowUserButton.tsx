@@ -19,7 +19,7 @@ const FollowUserButton: React.FC<Props> = () => {
                 className={`${followButtonClass} 
                   rounded-full
                   w-[80px] h-[33px]
-                  hidden sm:flex 
+                  sm:flex 
                   justify-center 
                   items-center 
                   sm:text-sm 
