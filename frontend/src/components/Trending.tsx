@@ -47,7 +47,9 @@ const Trending = (): JSX.Element => {
                   </div>
 
                   <div className="post-name w-full text-sm md:text-base  whitespace-pre-line break-words font-semibold line-clamp-2">
+                    <Link href={`/posts/${titleToUrl(postName)}`}>
                     {postName}
+                    </Link>
                   </div>
                   <span className="space-y-2 text-brefing text-xs font-normal">
                     {time}

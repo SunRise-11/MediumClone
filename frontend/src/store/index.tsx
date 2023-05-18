@@ -2,43 +2,40 @@ import PostDTO from '@/types/Post/Post';
 
 export const trendUsers = [
   {
-    username: 'Sarvar Musazade',
-    image: '/images/Schauf-Bammer.jpg',
-    postName:
-      'A step-by-step guide to building a chatbot based on your own documents with GPT',
+    username: 'Paul Graham',
+    image: '/images/Paul-Graham.jpg',
+    postName: 'How To Think For Yourself',
     time: 'Mar 9· 4 min read',
   },
   {
-    username: 'Abbas Abdelila',
-    image: "/images/Abbas-Abdelila.jpg",
-    postName:
-      'A step-by-step guide to building a chatbot based on your own documents with GPT',
-    time: 'Mar 9· 4 min read',
+    username: 'Paul Graham',
+    image: '/images/Paul-Graham.jpg',
+    postName: 'How To Do What You Love',
+    time: 'Jan 6· 13 min read',
   },
   {
-    username: 'Ali Kalantari',
-    image: "/images/Ashley-Bretford.jpg",
-    postName: 'Demotivating a (Skilled) Programmer',
-    time: 'Mar 9· 4 min read',
+    username: 'Tim Urban',
+    image: '/images/Tim-Urban.jpg',
+    postName: 'Picking Career',
+    time: 'Feb 3· 30 min read',
   },
   {
-    username: 'Rza Maharramov',
-    image: "/images/Au-Chang.jpg",
-    postName: 'Demotivating a (Skilled) Programmer',
-    time: 'Mar 9· 4 min read',
+    username: 'James Clear',
+    image: '/images/James-Clear.jpg',
+    postName: 'The One Percent Rule',
+    time: 'Aug 7· 14 min read',
   },
   {
-    username: 'Mazahir',
-    image: "/images/fake-person-6.jpg",
-    postName:
-      'A step-by-step guide to building a chatbot based on your own documents with GPT',
-    time: 'Mar 9· 4 min read',
+    username: 'Shane Parrish',
+    image: '/images/Shane-Parrish.jpg',
+    postName: 'We Are What We Remember',
+    time: 'Jun 28· 8 min read',
   },
   {
-    username: 'Jon Doe',
-    image: '/images/John-Doe.jpg',
-    postName: 'Demotivating a (Skilled) Programmer',
-    time: 'Mar 9· 4 min read',
+    username: 'Naval Ravikant',
+    image: '/images/Naval-Ravikant.jpg',
+    postName: 'How To Get Rich Without Getting Lucky',
+    time: 'Nov 01· 7 min read',
   },
 ];
 
@@ -306,8 +303,7 @@ export const posts: PostDTO[] = [
   },
   {
     postId: 3,
-    title:
-      'A Biotech Startup Reverses Aging',
+    title: 'A Biotech Startup Reverses Aging',
     content: `
    Introduction
    In a groundbreaking development that has captivated both the scientific and business worlds, a biotech startup has claimed success in reversing aging. This remarkable achievement has paved the way for an unexpected market to emerge—the blood of the youth. As the quest for eternal youth and longevity continues to captivate human imagination, this newfound market raises ethical and societal questions while presenting potential opportunities for further research and medical advancements.
@@ -578,7 +574,6 @@ export const posts: PostDTO[] = [
     ],
   },
 
-
   {
     postId: 9,
     title: 'How To Do What You Love',
@@ -622,7 +617,6 @@ export const posts: PostDTO[] = [
       },
     ],
   },
-
 
   {
     postId: 10,
@@ -668,7 +662,6 @@ export const posts: PostDTO[] = [
     ],
   },
 
-
   {
     postId: 11,
     title: 'Picking Career',
@@ -712,7 +705,6 @@ export const posts: PostDTO[] = [
       },
     ],
   },
-
 
   {
     postId: 12,
@@ -758,8 +750,6 @@ export const posts: PostDTO[] = [
     ],
   },
 
-
-  
   {
     postId: 13,
     title: 'The One Percent Rule',
@@ -803,7 +793,6 @@ export const posts: PostDTO[] = [
       },
     ],
   },
-
 
   {
     postId: 14,
@@ -849,8 +838,6 @@ export const posts: PostDTO[] = [
     ],
   },
 
-
-  
   {
     postId: 16,
     title: 'How To Get Started With Learning Turkish',
@@ -895,7 +882,6 @@ export const posts: PostDTO[] = [
     ],
   },
 
-
   {
     postId: 17,
     title: 'Learn Git',
@@ -939,7 +925,4 @@ export const posts: PostDTO[] = [
       },
     ],
   },
-
-
-
 ];
