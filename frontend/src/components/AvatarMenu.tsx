@@ -9,11 +9,12 @@ import defaultImage from "../../public/images/profile.png"
 import Image from "next/image";
 import User from "@/types/user/User";
 import Avatar from "./Avatar";
+import { titleToUrl } from "@/util/titleToUrl";
 
 
 export default function AvatarMenu() {
     //burası değişicek
-    const [loggedInUser, setLoggedInUser] = useState<User | null>({ userId: 1, username: "Ali", email: "ali@gmail.com", image: defaultImage.src, bio: "SDU" });
+    const [loggedInUser, setLoggedInUser] = useState<User | null>({ userId: 1, username: "Abbas Abdelila", email: "abbas@gmail.com", image: defaultImage.src, bio: "SDU" });
     const logout = () => {
         setLoggedInUser(null)
     }
@@ -122,7 +123,7 @@ function AuthMenu({
                     "aria-labelledby": "basic-button",
                 }}
             >
-                <Link href={`/users/${username}`}>
+                <Link href={`/users/${titleToUrl(username)}`}>
                     <MenuItem
                         onClick={handleClose}
                         className="flex flex-row items-center px-4 py-2 hover:bg-transparent"
@@ -131,7 +132,7 @@ function AuthMenu({
                         <p className="ml-2 text-gray-600 text-sm">Profile</p>
                     </MenuItem>
                 </Link>
-                <Link href="/write">
+                <Link href="/posts/write">
                     <MenuItem
                         onClick={handleClose}
                         className="flex flex-row items-center px-4 py-2 hover:bg-transparent"
