@@ -8,6 +8,7 @@ import Tags from '@/components/Tags';
 import Link from 'next/link';
 import Button from "@mui/material/Button"
 import FollowUserButton from '@/components/FollowUserButton';
+import TagWriters from '@/components/TagWriters';
 
 type Params = {
   params: {
@@ -56,6 +57,9 @@ const TagsPage = ({ params }: Params) => {
       </div>
       <div className="hidden lg:flex lg:w-[35%] order-last  lg:top-[100px] lg:h-screen lg:sticky top-10">
         <div className="flex flex-col mt-16 lg:ml-8">
+          <TagWriters tag={{
+            name: params.tag
+          }} />
           <TopWriters />
           <div className='max-w-[350px] mt-3'>
             <Tags title='Related topics' />
