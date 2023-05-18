@@ -27,10 +27,3 @@ const UserInfoBox = (props: Props) => {
 }
 
 export default UserInfoBox
-/**
- * 
- * 
- * 
- * 
- * 
- */

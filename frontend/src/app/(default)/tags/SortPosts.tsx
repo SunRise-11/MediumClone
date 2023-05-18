@@ -5,11 +5,11 @@ const SortPosts = () => {
   const [trending, setTrending] = useState(false);
   const [latest, setLatest] = useState(false);
   const [best, setBest] = useState(true);
-  const handleChange = (value : string) => {
-    console.log(`selected ${value}`); 
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
   };
   return (
-    <div className="flex items-center space-x-8 border-b text-gray-600 border-gray-200 mt-8">
+    <div className="flex items-center space-x-2 lg:space-x-8 border-b text-gray-600 border-gray-200 mt-8">
       <p
         className={`py-4 px-2 border-gray-950 cursor-pointer ${trending ? "border-b" : ""
           }`}

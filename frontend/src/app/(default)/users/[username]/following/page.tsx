@@ -4,6 +4,7 @@ import { carrotIcon } from '../../../../../../public/icons/icons';
 import Link from 'next/link';
 import { followers } from '@/store';
 import UserFollowers from '../../UserFollowers';
+import { titleToUrl } from '@/util/titleToUrl';
 
 type Params = { params: { username: string } };
 
@@ -19,7 +20,7 @@ const Page = ({ params: { username } }: Params) => {
         <div className='w-full md:w-[65%] order-first  h-10 flex justify-start flex-col'>
             <div className="flex flex-col px-32 pt-16 mt-8">
                 <div className="header flex gap-4 font-normal text-sm">
-                    <Link href={`/users/${username}`} className=' '>
+                    <Link href={`/users/${titleToUrl(username)}`} className=' '>
                         <p className=' text-gray-700 hover:text-gray-500'>{username}</p>
                     </Link>
                     <span> {`>`} </span>

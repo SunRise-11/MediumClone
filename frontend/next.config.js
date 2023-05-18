@@ -3,7 +3,7 @@ const nextConfig = {
   experimental: {
     mdxRs: true,
   },
-   eslint: {
+  eslint: {
     // Warning: This allows production builds to successfully complete even if
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
@@ -15,7 +15,7 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-}
+};
 
-const withMDX = require('@next/mdx')()
-module.exports = withMDX(nextConfig)
+const withMDX = require('@next/mdx')();
+module.exports = withMDX(nextConfig);

@@ -19,3 +19,7 @@
 .carousel-item {
   transition: margin-right 0.3s ease-in-out;
 }
+
+.MuiButton-outlined {
+  border-radius: 50px !important;
+}
