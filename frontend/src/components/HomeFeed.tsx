@@ -13,7 +13,7 @@ const HomeFeed = (): JSX.Element => {
             <Hero />
             <Center>
                 <Trending />
-                <div className="flex flex-col lg:flex-row w-[80%] mx-auto my-16 space-x-[10%]">
+                <div className="flex flex-col lg:flex-row w-[80%] mx-auto my-16 lg:space-x-[10%] space-x-7">
                     <div className="w-full lg:w-[70%] lg:max-w-[710px]">
                         <PostList />
                     </div>

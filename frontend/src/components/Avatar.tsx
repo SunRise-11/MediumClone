@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCallback, useState } from 'react';
-import defaultImage from '../../../frontend/public/images/profile.png';
+import defaultImage from '../../public/images/profile.png';
 import { titleToUrl } from '@/util/titleToUrl';
 import Link from 'next/link';
 

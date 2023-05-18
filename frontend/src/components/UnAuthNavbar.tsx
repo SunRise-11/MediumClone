@@ -60,7 +60,7 @@ const UnAuthNavbar = (): JSX.Element => {
           </Link>
           <li
             className={
-              `transition-colors duration-100 text-sm h-[37px] cursor-pointer ${backgroundForButton} text-white px-[1rem] pt-[7px] pb-[9px] inline-block text-center rounded-full`
+              `flex justify-center items-center transition-colors duration-100 text-xs lg:text-sm h-[37px] cursor-pointer ${backgroundForButton} text-white px-[1rem] pt-[7px] pb-[9px] rounded-full`
             }
           >
             Get started

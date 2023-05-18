@@ -18,16 +18,17 @@ const FollowUserButton: React.FC<Props> = () => {
                 onClick={() => setIsFollow(!isFollow)}
                 className={`${followButtonClass} 
                   rounded-full
-                  w-[80px] h-[33px]
-                  hidden sm:flex 
+                  w-[90px] h-[30px]
+                  sm:flex 
                   justify-center 
                   items-center 
                   sm:text-sm 
                   duration-150
                   transition-all
-                  pt-[4px]
-                  px-[12px] 
-                  pb-[6px]`}
+                  py-[1px]
+                  px-[12px]
+                  sm:px-[16px] 
+                  `}
             >
                 {isFollow ? "Following" : "Follow"}
             </button >

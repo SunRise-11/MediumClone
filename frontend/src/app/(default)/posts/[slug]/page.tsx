@@ -60,9 +60,7 @@ const PostPage = ({ params: { slug } }: Params): JSX.Element => {
               <div className="flex space-x-5">
 
                 <FollowUserButton />
-                <button className="px-4 py-2 bg-green-500 text-white rounded-3xl">
-                  M
-                </button>
+                
               </div>
             </div>
           </div>

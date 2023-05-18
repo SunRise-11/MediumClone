@@ -81,7 +81,7 @@ const UserProfile = (props: Props) => {
 
                 }
                 {
-                    users.length > 5 && <Link href={`/users/${username}/following`}>
+                    users.length > 5 && <Link href={`/users/${titleToUrl(username)}/following`}>
                         <span className='cursor-pointer text-xs mt-2 text-[#191919] hover:text-gray-600'>See All({`${users.length}`})</span>
                     </Link>
                 }
