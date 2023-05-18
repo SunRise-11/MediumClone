@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useState } from "react";
 import { EditorState, convertToRaw } from "draft-js";
+import Link from "antd/es/typography/Link";
 // import { draftToMarkdown } from "markdown-draft-js";
 
 
@@ -78,6 +79,7 @@ const CreatePost = () => {
             />
           </div>
           <div>
+            <Link href="/users/paul-graham">
             <button
               className="w-[80%] mx-auto flex justify-center
                          items-center rounded-lg bg-green-500 hover:bg-green-600 transition-transform
@@ -85,6 +87,7 @@ const CreatePost = () => {
             >
               Create Post
             </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -41,6 +41,11 @@ const Post = ({ post, handleDeletePost }: Props) => {
         setPin(!pin)
     }
 
+    let imageLink  = "/images/generative-ai.jpg"
+
+    if(postImage) {
+        imageLink = postImage
+    }
 
 
 
@@ -83,7 +88,7 @@ const Post = ({ post, handleDeletePost }: Props) => {
 
                 <div className="w-[30%] relative">
                     <Image
-                        src="/images/learn-turkish.jpg"
+                        src={imageLink}
                         alt="ChatGPT image"
                         height={128}
                         width={192}
