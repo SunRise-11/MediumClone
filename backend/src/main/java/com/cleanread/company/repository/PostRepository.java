@@ -26,5 +26,22 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     Page<Post> findAllByUserIn(List<User> users, Pageable pageable);
 
+    @Query("SELECT p FROM Post p LEFT JOIN p.likedUsers pl GROUP BY p.id ORDER BY COUNT(pl.user) DESC")
+    Page<Post> findPostsOrderByLikeCount(Pageable pageable);
+
+    Page<Post> findAllByUserOrderByPinnedDesc(Pageable pageable, User user);
+
+    @Query("select p from Post p where p.title like concat('%', ?1, '%')")
+    Page<Post> findByTitleContaining(String title, Pageable pageable);
+
+    //@Query("select p from Post p order by p.createdAt DESC")
+    Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable);
+
+    //@Query("select p from Post p where p.createdAt between ?1 and ?2")
+    Page<Post> findByCreatedAtBetween(Date start, Date end, Pageable pageable);
+
+    @Query("select count(l) from PostLikeUser l where l.post.id=:postId")
+    Long countByPostLike(@Param("postId") Long postId);
+
     void deleteById(Long postId);
 }

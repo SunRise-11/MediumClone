@@ -28,6 +28,11 @@ public interface PostService {
 
     Page<Post> getAllPosts(Pageable pageable);
 
+    Page<Post> getAllPostOrderByLikes(Pageable pageable);
+
+    Page<Post> getAllPostsOrderByCreatedAt(Pageable pageable);
+
+    Page<Post> getAllPostsOrderByPinned(Pageable pageable, Long userId);
 
     Page<Post> getAllPostOfFollowing(Long userId, Pageable pageable);
 
@@ -35,5 +40,9 @@ public interface PostService {
 
     Page<Post> getPostByUser(Long userId, Pageable pageable);
 
+    Page<Post> searchPosts(String title, Pageable pageable);
 
+    Page<Post> getLatestPosts(Pageable pageable);
+
+    Page<Post> getPostByDateBetween(Date start, Date end, Pageable pageable);
 }

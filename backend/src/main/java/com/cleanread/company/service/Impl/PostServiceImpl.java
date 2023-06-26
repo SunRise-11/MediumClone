@@ -22,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -111,7 +112,23 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<Post> getAllPosts(Pageable pageable) {
-        return null;
+        return postRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Post> getAllPostOrderByLikes(Pageable pageable) {
+        return postRepository.findPostsOrderByLikeCount(pageable);
+    }
+
+    @Override
+    public Page<Post> getAllPostsOrderByCreatedAt(Pageable pageable) {
+        return postRepository.findAllByOrderByCreatedAtDesc(pageable);
+    }
+
+    @Override
+    public Page<Post> getAllPostsOrderByPinned(Pageable pageable, Long userId) {
+        User user = userService.getUserById(userId);
+        return postRepository.findAllByUserOrderByPinnedDesc(pageable, user);
     }
 
     @Override
@@ -132,6 +149,23 @@ public class PostServiceImpl implements PostService {
     public Page<Post> getPostByUser(Long userId, Pageable pageable) {
         User user = userService.getUserById(userId);
         return postRepository.findAllByUser(user, pageable);
+    }
+
+    @Override
+    public Page<Post> searchPosts(String title, Pageable pageable) {
+        return postRepository.findByTitleContaining(title, pageable);
+    }
+
+    @Override
+    public Page<Post> getLatestPosts(Pageable pageable) {
+        return postRepository.findAllByOrderByCreatedAtDesc(pageable);
+    }
+
+    @Override
+    public Page<Post> getPostByDateBetween(Date start, Date end, Pageable pageable) {
+        if (start == null || end == null)
+            return getAllPosts(pageable);
+        return postRepository.findByCreatedAtBetween(start, end, pageable);
     }
 
     private Set<Tag> setTagsToPost(Set<Long> tagIds) {
