@@ -16,9 +16,14 @@ type Params = {
   };
 };
 
+
+
 const capitalize = (str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
+
+
+
 
 const TagsPage = ({ params }: Params) => {
   const posts = storePosts.filter((post) =>
