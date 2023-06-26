@@ -10,9 +10,7 @@ const ProfileImage: React.FC = () => {
     const onChangeFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         const fileReader = new FileReader();
-        console.log(file);
-
-
+       
         fileReader.onloadend = () => {
             setNewImage(fileReader.result?.toString());
         };

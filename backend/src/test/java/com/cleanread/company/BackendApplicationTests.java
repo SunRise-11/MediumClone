@@ -1,10 +1,10 @@
-package com.company.cleanreading;
+package com.cleanread.company;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CleanreadingApplicationTests {
+class BackendApplicationTests {
 
     @Test
     void contextLoads() {

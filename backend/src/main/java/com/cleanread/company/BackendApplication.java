@@ -1,13 +1,13 @@
-package com.company.cleanreading;
+package com.cleanread.company;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CleanreadingApplication {
+public class BackendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CleanreadingApplication.class, args);
+        SpringApplication.run(BackendApplication.class, args);
     }
 
 }

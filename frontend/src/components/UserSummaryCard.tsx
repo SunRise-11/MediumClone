@@ -3,7 +3,6 @@
 import User from '@/types/user/User'
 import React from 'react'
 import Link from "next/link"
-import Button from './Button'
 import useFollow from '@/hook/useFollow'
 import Avatar from './Avatar'
 import defaultImage from "../../public/images/abbas-profile.jpg"
