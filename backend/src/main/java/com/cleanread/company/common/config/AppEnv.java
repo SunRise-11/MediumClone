@@ -37,7 +37,9 @@ public class AppEnv {
                 "/posts/{postId}/**",
                 "/users/{userId}",
                 "/tags/{tagId}",
-                "/users"};
+                "/users",
+                "/swagger-ui/**",
+                "/api-docs/**"};
         return publicUrls;
     }
 }

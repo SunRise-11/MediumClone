@@ -114,7 +114,6 @@ public class UserController {
         return ResponseEntity.ok(usersDTOS);
     }
 
-
     @Operation(summary = "Update user profile image")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Profile image updated",
@@ -126,7 +125,6 @@ public class UserController {
     public ResponseEntity<GenericResponse> updateUserProfileImage(
             @Valid @RequestBody UpdateProfileImageRequest request,
             @CurrentUser UserPrincipal userPrincipal) {
-        log.info("image burayakadar geldi");
         userService.updateProfileImage(userPrincipal.getUser().getId(), request);
         return ResponseEntity.ok(new GenericResponse(HttpStatus.OK.value(), "Profile image updated"));
     }

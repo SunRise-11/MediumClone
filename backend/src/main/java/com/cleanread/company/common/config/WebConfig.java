@@ -29,6 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
     }
 
+
     @Bean
     public CommandLineRunner createStorages() {
         return (args) -> {
@@ -45,3 +46,4 @@ public class WebConfig implements WebMvcConfigurer {
             folder.mkdir();
     }
 }
+
