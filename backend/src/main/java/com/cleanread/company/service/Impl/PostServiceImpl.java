@@ -104,14 +104,6 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post updatePinOfPost(Long postId, PinRequest request) {
-        Post postDB = postRepository.findById(postId)
-                .orElseThrow(() -> new ResourceNotFoundException("Post", "postId", String.valueOf(postId)));
-        postDB.setPinned(!request.getPinned());
-        return postRepository.save(postDB);
-    }
-
-    @Override
     public void deletePost(Long postId) {
         Post post = getPostById(postId);
         postRepository.deleteById(postId);

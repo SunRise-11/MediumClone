@@ -24,8 +24,6 @@ public interface PostService {
 
     PostDTO getPostDTOById(Long postId);
 
-    Post updatePinOfPost(Long postId, PinRequest request);
-
     void deletePost(Long postId);
 
     Page<Post> getAllPosts(Pageable pageable);
