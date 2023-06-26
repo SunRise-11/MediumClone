@@ -62,6 +62,7 @@ public class UserController {
     public ResponseEntity<GenericResponse> deleteUser(
             @Parameter(description = "ID of user to delete") @PathVariable Long userId) {
         userService.deleteUser(userId);
+
         return ResponseEntity.noContent().build();
     }
 
