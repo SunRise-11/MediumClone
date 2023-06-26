@@ -1,11 +1,14 @@
 package com.cleanread.company.controller;
 
+import com.cleanread.company.common.annatations.CurrentUser;
 import com.cleanread.company.common.mapper.ObjectMapper;
 import com.cleanread.company.entity.User;
 import com.cleanread.company.model.request.RegisterRequest;
+import com.cleanread.company.model.request.UpdateProfileImageRequest;
 import com.cleanread.company.model.request.UserUpdateRequest;
 import com.cleanread.company.model.response.GenericResponse;
 import com.cleanread.company.model.response.UserDTO;
+import com.cleanread.company.security.user.UserPrincipal;
 import com.cleanread.company.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -17,6 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -111,19 +115,19 @@ public class UserController {
     }
 
 
-//    @Operation(summary = "Update user profile image")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "200", description = "Profile image updated",
-//                    content = {@Content(mediaType = "application/json",
-//                            schema = @Schema(implementation = GenericResponse.class))}),
-//            @ApiResponse(responseCode = "400", description = "Bad request",
-//                    content = @Content)})
-//    @PutMapping("/users/profileImage")
-//    public ResponseEntity<GenericResponse> updateUserProfileImage(
-//            @Valid @RequestBody UpdateProfileImageRequest request,
-//            @CurrentUser UserPrincipal userPrincipal) {
-//        log.info("image burayakadar geldi");
-//        userService.updateProfileImage(userPrincipal.getUser().getId(), request);
-//        return ResponseEntity.ok(new GenericResponse(HttpStatus.OK.value(), "Profile image updated"));
-//    }
+    @Operation(summary = "Update user profile image")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Profile image updated",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = GenericResponse.class))}),
+            @ApiResponse(responseCode = "400", description = "Bad request",
+                    content = @Content)})
+    @PutMapping("/users/profileImage")
+    public ResponseEntity<GenericResponse> updateUserProfileImage(
+            @Valid @RequestBody UpdateProfileImageRequest request,
+            @CurrentUser UserPrincipal userPrincipal) {
+        log.info("image burayakadar geldi");
+        userService.updateProfileImage(userPrincipal.getUser().getId(), request);
+        return ResponseEntity.ok(new GenericResponse(HttpStatus.OK.value(), "Profile image updated"));
+    }
 }
