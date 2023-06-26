@@ -3,6 +3,9 @@ package com.cleanread.company.controller;
 import com.cleanread.company.common.mapper.ObjectMapper;
 import com.cleanread.company.common.util.pattern.date.DateRangeFactory;
 import com.cleanread.company.common.util.pattern.date.Range;
+import com.cleanread.company.common.util.pattern.order.OrderService;
+import com.cleanread.company.common.util.pattern.order.OrderServiceFactory;
+import com.cleanread.company.common.util.pattern.order.PostOrderServiceFactory;
 import com.cleanread.company.entity.Post;
 import com.cleanread.company.model.request.CreatePostRequest;
 import com.cleanread.company.model.request.PostUpdateRequest;
@@ -155,7 +158,6 @@ public class PostController {
             @ApiResponse(responseCode = "400", description = "Invalid date range format",
                     content = @Content)})
 
-
     @GetMapping("/posts/filter")
     public ResponseEntity<Page<PostDTO>> getPostsByDate(
             @Parameter(description = "Pageable request parameters")
@@ -225,12 +227,11 @@ public class PostController {
             return getOrderResponseEntity(postService.getAllPostsOrderByPinned(pageable, userId));
         }
 
-//        OrderServiceFactory factory = new PostOrderServiceFactory(postService, pageable, objectMapper);
-//
-//        OrderService service = factory.createOrderService(orderBy);
-//
-//        return ResponseEntity.ok(service.getAllPosts());
-        return null;
+        OrderServiceFactory factory = new PostOrderServiceFactory(postService, pageable, objectMapper);
+
+        OrderService service = factory.createOrderService(orderBy);
+
+        return ResponseEntity.ok(service.getAllPosts());
     }
 
     @Operation(summary = "Get all posts of following users")
