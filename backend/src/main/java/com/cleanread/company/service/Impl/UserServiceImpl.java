@@ -1,8 +1,10 @@
 package com.cleanread.company.service.Impl;
 
 import com.cleanread.company.common.mapper.ObjectMapper;
+import com.cleanread.company.entity.Role;
 import com.cleanread.company.entity.User;
 import com.cleanread.company.exceptions.ResourceNotFoundException;
+import com.cleanread.company.model.enums.ERole;
 import com.cleanread.company.model.request.RegisterRequest;
 import com.cleanread.company.model.request.UpdateProfileImageRequest;
 import com.cleanread.company.model.request.UserUpdateRequest;
@@ -16,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @project: backend
@@ -35,6 +38,9 @@ public class UserServiceImpl implements UserService {
     public User registerUser(RegisterRequest request) {
         User inDB = objectMapper.mapForRequest(request, User.class);
         inDB.setPassword(passwordEncoder.encode(request.getPassword()));
+        Role userRole = new Role();
+        userRole.setRoleName(ERole.USER);
+        inDB.setRoles(Set.of(userRole));
         return userRepository.save(inDB);
     }
 

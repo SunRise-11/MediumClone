@@ -17,6 +17,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +42,7 @@ public class TagController {
                     content = @Content(schema = @Schema(implementation = TagDTO.class)))})
 
     @PostMapping("/tags")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<TagDTO> createTag(
             @Parameter(description = "Tag request body", required = true)
             @Valid @RequestBody TagRequest request) {
@@ -57,6 +59,7 @@ public class TagController {
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = TagDTO.class))))})
 
     @GetMapping("/tags")
+
     public ResponseEntity<List<TagDTO>> findAll() {
         List<TagDTO> tagDTOS = tagService.getAll().stream()
                 .map(tag -> objectMapper.mapForResponse(tag, TagDTO.class))
