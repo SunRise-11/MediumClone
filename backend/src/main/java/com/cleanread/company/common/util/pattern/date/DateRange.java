@@ -7,7 +7,6 @@ import java.util.Date;
 
 /**
  * @project: backend
- * @author: Sarvar55
  */
 @Data
 @NoArgsConstructor

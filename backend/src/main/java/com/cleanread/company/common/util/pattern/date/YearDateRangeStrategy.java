@@ -4,7 +4,6 @@ import com.cleanread.company.common.util.DateUtil;
 
 /**
  * @project: backend
- * @author: Sarvar55
  */
 public class YearDateRangeStrategy implements Range {
     @Override

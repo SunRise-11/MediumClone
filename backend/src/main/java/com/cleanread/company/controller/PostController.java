@@ -31,7 +31,6 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * @project: backend
- * @author: Sarvar55
  */
 @RestController
 @AllArgsConstructor
