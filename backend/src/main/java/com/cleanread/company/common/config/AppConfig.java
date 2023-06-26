@@ -1,4 +1,4 @@
-package com.cleanread.company.common.annatations;
+package com.cleanread.company.common.config;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
