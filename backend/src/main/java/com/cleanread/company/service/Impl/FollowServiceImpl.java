@@ -6,8 +6,6 @@ import com.cleanread.company.exceptions.AlreadyFollowedException;
 import com.cleanread.company.exceptions.ResourceNotFoundException;
 import com.cleanread.company.exceptions.SelfFollowException;
 import com.cleanread.company.repository.FollowRepository;
-import com.cleanread.company.repository.TagFollowRepository;
-import com.cleanread.company.repository.UserRepository;
 import com.cleanread.company.service.FollowService;
 import com.cleanread.company.service.UserService;
 import lombok.AllArgsConstructor;
@@ -39,7 +37,6 @@ public class FollowServiceImpl implements FollowService {
             throw new AlreadyFollowedException("Kullanıcı zaten takip ediliyor");
         }
 
-        //null kontrolu etmee gerek yok eger yok ise zaten userservice içinde kontrol ediliyor yok sa hata firlatır
         Follow follow = new Follow();
         follow.setFollowingUser(followingUser);
         follow.setFollowedUser(followedUser);
