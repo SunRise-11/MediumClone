@@ -11,7 +11,6 @@ import java.util.Date;
  * @author: Sarvar55
  */
 @Data
-@RedisHash("refreshToken")
 public class RefreshToken implements Serializable {
     private String refreshToken;
     private Date createdAt;

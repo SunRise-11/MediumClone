@@ -41,8 +41,6 @@ public class UserServiceImpl implements UserService {
     public User registerUser(RegisterRequest request) {
         User inDB = objectMapper.mapForRequest(request, User.class);
         inDB.setPassword(passwordEncoder.encode(request.getPassword()));
-        Role role = roleRepository.findByRoleName(ERole.USER);
-        inDB.setRoles(Set.of(role));
         return userRepository.save(inDB);
     }
 

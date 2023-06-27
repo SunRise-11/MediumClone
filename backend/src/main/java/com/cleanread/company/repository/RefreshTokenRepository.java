@@ -28,6 +28,6 @@ public class RefreshTokenRepository {
     }
 
     public void delete(RefreshToken refreshToken) {
-        redisTemplate.opsForHash().delete(HASH_KEY, refreshToken.getRefreshToken(), refreshToken);
+        redisTemplate.opsForHash().delete(HASH_KEY, refreshToken.getRefreshToken());
     }
 }

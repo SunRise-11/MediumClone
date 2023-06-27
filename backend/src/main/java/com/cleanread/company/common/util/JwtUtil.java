@@ -1,5 +1,6 @@
 package com.cleanread.company.common.util;
 
+import com.cleanread.company.security.user.UserPrincipal;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -52,14 +53,14 @@ public class JwtUtil {
     }
 
     public String generateToken(UserDetails userDetails) {
-//        return Jwts
-//                .builder()
-//                .setSubject(((UserPrincipal) userDetails).getUser().getEmail())
-//                .setIssuedAt(new Date(System.currentTimeMillis()))
-//                .setExpiration(new Date(System.currentTimeMillis() + Duration.ofMinutes(EXPIRED_TOKEN_MS).toMillis()))
-//                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-//                .compact();
-        return null;
+        return Jwts
+                .builder()
+                .setSubject(((UserPrincipal) userDetails).getUser().getEmail())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + Duration.ofMinutes(EXPIRED_TOKEN_MS).toMillis()))
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .compact();
+
     }
 
     public String generateRefreshToken(String email) {
@@ -90,7 +91,6 @@ public class JwtUtil {
 //                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
 //                .compact();
 //    }
-
 
 
     public boolean isTokenValid(String token) {

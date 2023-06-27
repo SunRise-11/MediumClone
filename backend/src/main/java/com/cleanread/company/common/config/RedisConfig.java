@@ -13,7 +13,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  */
 @Configuration
 public class RedisConfig {
-
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
@@ -35,7 +34,6 @@ public class RedisConfig {
 
         redisTemplate.setEnableTransactionSupport(true);
         redisTemplate.afterPropertiesSet();
-
 
         return redisTemplate;
     }
