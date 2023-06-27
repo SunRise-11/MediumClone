@@ -42,7 +42,7 @@ public class TagController {
                     content = @Content(schema = @Schema(implementation = TagDTO.class)))})
 
     @PostMapping("/tags")
-    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
+    //@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     public ResponseEntity<TagDTO> createTag(
             @Parameter(description = "Tag request body", required = true)
             @Valid @RequestBody TagRequest request) {

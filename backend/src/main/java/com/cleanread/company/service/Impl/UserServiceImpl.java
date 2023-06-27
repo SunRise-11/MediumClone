@@ -8,6 +8,7 @@ import com.cleanread.company.model.enums.ERole;
 import com.cleanread.company.model.request.RegisterRequest;
 import com.cleanread.company.model.request.UpdateProfileImageRequest;
 import com.cleanread.company.model.request.UserUpdateRequest;
+import com.cleanread.company.repository.RoleRepository;
 import com.cleanread.company.repository.UserRepository;
 import com.cleanread.company.service.UserService;
 import lombok.AllArgsConstructor;
@@ -30,6 +31,7 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final FileServiceImpl fileServiceImpl;
     private final ObjectMapper objectMapper;
     private final PasswordEncoder passwordEncoder;
@@ -38,9 +40,8 @@ public class UserServiceImpl implements UserService {
     public User registerUser(RegisterRequest request) {
         User inDB = objectMapper.mapForRequest(request, User.class);
         inDB.setPassword(passwordEncoder.encode(request.getPassword()));
-        Role userRole = new Role();
-        userRole.setRoleName(ERole.USER);
-        inDB.setRoles(Set.of(userRole));
+        Role role = roleRepository.findByRoleName(ERole.USER);
+        inDB.setRoles(Set.of(role));
         return userRepository.save(inDB);
     }
 

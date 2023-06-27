@@ -1,6 +1,8 @@
 package com.cleanread.company.exceptions.advisor;
 
+import com.cleanread.company.exceptions.ResourceNotFoundException;
 import com.cleanread.company.exceptions.model.ApiError;
+import com.cleanread.company.model.response.GenericResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -34,5 +36,16 @@ public class GlobalExceptionHandler {
         validationResponse.setValidationErrors(validationErrors);
 
         return ResponseEntity.badRequest().body(validationResponse);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public GenericResponse handleResourceNotFoundException(ResourceNotFoundException exception) {
+        return response(exception, HttpStatus.NOT_FOUND);
+    }
+
+    private GenericResponse response(RuntimeException exception, HttpStatus status) {
+        GenericResponse response = new GenericResponse(status.value(), exception.getMessage());
+        return response;
     }
 }

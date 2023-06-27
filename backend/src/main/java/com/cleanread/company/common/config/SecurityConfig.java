@@ -40,11 +40,10 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
-                    authorizationManagerRequestMatcherRegistry.requestMatchers(HttpMethod.GET, appEnv.getPublicUrls())
-                            .permitAll()
-                            .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
-                            .anyRequest().authenticated();
+                    authorizationManagerRequestMatcherRegistry.anyRequest().
+                            permitAll();
                 });
+
         return http.build();
     }
 }

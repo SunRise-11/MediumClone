@@ -21,7 +21,7 @@ public class Role extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ERole roleName;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
     @JsonManagedReference
     private Set<User> users;
 }

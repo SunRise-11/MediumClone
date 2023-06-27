@@ -38,6 +38,7 @@ public class Post extends BaseEntityAudit {
     @JoinColumn(name = "user_id")
     @JsonManagedReference
     private User user;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "post_tags",
             joinColumns = {@JoinColumn(name = "post_id")},

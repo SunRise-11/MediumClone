@@ -8,6 +8,7 @@ import com.cleanread.company.common.util.pattern.order.OrderServiceFactory;
 import com.cleanread.company.common.util.pattern.order.PostOrderServiceFactory;
 import com.cleanread.company.entity.Post;
 import com.cleanread.company.model.request.CreatePostRequest;
+import com.cleanread.company.model.request.PinRequest;
 import com.cleanread.company.model.request.PostUpdateRequest;
 import com.cleanread.company.model.response.GenericResponse;
 import com.cleanread.company.model.response.PostDTO;
@@ -60,6 +61,13 @@ public class PostController {
         return ResponseEntity.ok(postDTO);
     }
 
+    @PutMapping("/posts/{postId}/pin")
+    public ResponseEntity<GenericResponse> updatePinOfPost(@Parameter(description = "Id of the post to be updated")
+                                                           @PathVariable Long postId,
+                                                           @RequestBody PinRequest request) {
+        postService.updatePinOfPost(postId, request);
+        return ResponseEntity.ok(new GenericResponse(HttpStatus.OK.value(), "pinned succesfully"));
+    }
 
     @Operation(summary = "Update a post by its postId")
     @ApiResponses(value = {
@@ -171,7 +179,7 @@ public class PostController {
                 getPostByDateBetween(dateRange.getDateRange().getStart(), dateRange.getDateRange().getEnd(), pageable)
                 .map(post -> objectMapper.mapForResponse(post, PostDTO.class));
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(postDTOS);
     }
 
 
