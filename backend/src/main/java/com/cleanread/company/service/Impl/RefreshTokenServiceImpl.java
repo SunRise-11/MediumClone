@@ -2,6 +2,7 @@ package com.cleanread.company.service.Impl;
 
 import com.cleanread.company.common.util.JwtUtil;
 import com.cleanread.company.entity.RefreshToken;
+import com.cleanread.company.exceptions.ResourceNotFoundException;
 import com.cleanread.company.repository.RefreshTokenRepository;
 import com.cleanread.company.service.RefreshTokenService;
 import lombok.AllArgsConstructor;
@@ -21,16 +22,22 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
 
     @Override
     public RefreshToken getRefreshTokenByToken(String refreshToken) {
-        return null;
+        return refreshTokenRepository.findByRefreshToken(refreshToken)
+                .orElseThrow(() -> new ResourceNotFoundException("Token", "refreshtoken", refreshToken));
     }
 
     @Override
     public RefreshToken generateRefreshToken(String email) {
-        return null;
+        String generatedRefreshToken = jwtUtil.generateRefreshToken(email);
+        RefreshToken refreshToken = new RefreshToken(generatedRefreshToken);
+        refreshTokenRepository.save(refreshToken);
+        return refreshToken;
     }
 
     @Override
     public void deleteRefreshToken(String refreshToken) {
+        RefreshToken deletedToken = refreshTokenRepository.findByRefreshToken(refreshToken)
+                .orElseThrow(() -> new ResourceNotFoundException("refreshToken", "token", "null"));
 
+        refreshTokenRepository.delete(deletedToken);
     }
-}
