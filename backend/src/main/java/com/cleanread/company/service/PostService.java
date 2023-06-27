@@ -28,6 +28,8 @@ public interface PostService {
 
     Page<Post> getAllPosts(Pageable pageable);
 
+    Post updatePinOfPost(Long postId, PinRequest request);
+
     Page<Post> getAllPostOrderByLikes(Pageable pageable);
 
     Page<Post> getAllPostsOrderByCreatedAt(Pageable pageable);

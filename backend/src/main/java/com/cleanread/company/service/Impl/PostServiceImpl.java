@@ -115,6 +115,13 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAll(pageable);
     }
 
+    public Post updatePinOfPost(Long postId, PinRequest request) {
+        Post postDB = postRepository.findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException("Post", "postId", String.valueOf(postId)));
+        postDB.setPinned(!request.getPinned());
+        return postRepository.save(postDB);
+    }
+
     @Override
     public Page<Post> getAllPostOrderByLikes(Pageable pageable) {
         return postRepository.findPostsOrderByLikeCount(pageable);
