@@ -1,6 +1,9 @@
 package com.cleanread.company.exceptions.advisor;
 
+import com.cleanread.company.exceptions.AlreadyFollowedException;
 import com.cleanread.company.exceptions.ResourceNotFoundException;
+import com.cleanread.company.exceptions.SelfFollowException;
+import com.cleanread.company.exceptions.TokenExpiredException;
 import com.cleanread.company.exceptions.model.ApiError;
 import com.cleanread.company.model.response.GenericResponse;
 import org.springframework.http.HttpStatus;
@@ -42,6 +45,30 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public GenericResponse handleResourceNotFoundException(ResourceNotFoundException exception) {
         return response(exception, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(SelfFollowException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public GenericResponse handleSelfFollowException(SelfFollowException exception) {
+        return response(exception, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AlreadyFollowedException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public GenericResponse handleSelfFollowException(AlreadyFollowedException exception) {
+        return response(exception, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public GenericResponse handleIllegalArgumentException(IllegalArgumentException exception) {
+        return response(exception, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TokenExpiredException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public GenericResponse handleTokenExpiredException(TokenExpiredException exception) {
+        return response(exception, HttpStatus.UNAUTHORIZED);
     }
 
     private GenericResponse response(RuntimeException exception, HttpStatus status) {
