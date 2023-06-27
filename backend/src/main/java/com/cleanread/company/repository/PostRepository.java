@@ -44,4 +44,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Long countByPostLike(@Param("postId") Long postId);
 
     void deleteById(Long postId);
+
 }

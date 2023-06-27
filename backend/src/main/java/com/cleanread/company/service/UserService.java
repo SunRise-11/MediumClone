@@ -1,5 +1,6 @@
 package com.cleanread.company.service;
 
+import com.cleanread.company.entity.Post;
 import com.cleanread.company.entity.User;
 import com.cleanread.company.model.request.RegisterRequest;
 import com.cleanread.company.model.request.UpdateProfileImageRequest;
@@ -31,4 +32,5 @@ public interface UserService {
     User findByUsername(String username);
 
     void updateProfileImage(Long userId, UpdateProfileImageRequest request);
+
 }

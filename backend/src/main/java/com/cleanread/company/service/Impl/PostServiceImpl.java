@@ -17,6 +17,7 @@ import com.cleanread.company.service.FollowService;
 import com.cleanread.company.service.PostService;
 import com.cleanread.company.service.TagService;
 import com.cleanread.company.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -105,9 +106,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public void deletePost(Long postId) {
         Post post = getPostById(postId);
-        postRepository.deleteById(postId);
+        postRepository.delete(post);
     }
 
     @Override

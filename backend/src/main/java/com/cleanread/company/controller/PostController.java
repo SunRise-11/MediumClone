@@ -7,12 +7,14 @@ import com.cleanread.company.common.util.pattern.order.OrderService;
 import com.cleanread.company.common.util.pattern.order.OrderServiceFactory;
 import com.cleanread.company.common.util.pattern.order.PostOrderServiceFactory;
 import com.cleanread.company.entity.Post;
+import com.cleanread.company.entity.User;
 import com.cleanread.company.model.request.CreatePostRequest;
 import com.cleanread.company.model.request.PinRequest;
 import com.cleanread.company.model.request.PostUpdateRequest;
 import com.cleanread.company.model.response.GenericResponse;
 import com.cleanread.company.model.response.PostDTO;
 import com.cleanread.company.service.PostService;
+import com.cleanread.company.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -29,6 +31,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @project: backend
@@ -181,7 +185,6 @@ public class PostController {
 
         return ResponseEntity.ok(postDTOS);
     }
-
 
     @Operation(summary = "Get posts by tagId")
     @ApiResponses(value = {

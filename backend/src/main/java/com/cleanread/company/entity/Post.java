@@ -34,7 +34,7 @@ public class Post extends BaseEntityAudit {
     @Builder.Default
     private boolean pinned = false;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     @JsonManagedReference
     private User user;

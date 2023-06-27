@@ -1,6 +1,7 @@
 package com.cleanread.company.service.Impl;
 
 import com.cleanread.company.common.mapper.ObjectMapper;
+import com.cleanread.company.entity.Post;
 import com.cleanread.company.entity.Role;
 import com.cleanread.company.entity.User;
 import com.cleanread.company.exceptions.ResourceNotFoundException;
