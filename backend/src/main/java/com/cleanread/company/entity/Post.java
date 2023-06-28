@@ -3,7 +3,11 @@ package com.cleanread.company.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
 
 import java.util.*;
 
@@ -19,7 +23,6 @@ import java.util.*;
 @NoArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "post_id",
         nullable = false, columnDefinition = "BIGINT UNSIGNED"))
-@EqualsAndHashCode(callSuper = false)
 public class Post extends BaseEntityAudit {
     private String title;
 
@@ -39,14 +42,14 @@ public class Post extends BaseEntityAudit {
     @JsonManagedReference
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "post_tags",
             joinColumns = {@JoinColumn(name = "post_id")},
             inverseJoinColumns = {@JoinColumn(name = "tag_id")})
     @JsonBackReference
     private Set<Tag> tags = new HashSet<>();
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonBackReference
     private Set<PostLikeUser> likedUsers = new HashSet<>();
 
@@ -59,13 +62,13 @@ public class Post extends BaseEntityAudit {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Post)) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Post post = (Post) o;
-        return Objects.equals(getId(), post.getId()) && Objects.equals(getTitle(), post.getTitle());
+        return id != null && Objects.equals(id, post.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle());
+        return getClass().hashCode();
     }
 }

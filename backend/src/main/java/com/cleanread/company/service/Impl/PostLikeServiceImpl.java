@@ -12,8 +12,6 @@ import com.cleanread.company.service.UserService;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import lombok.AllArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +28,6 @@ public class PostLikeServiceImpl implements PostLikeService {
     private final PostLikeRepository postLikeRepository;
 
     @Override
-    @Caching(evict = @CacheEvict(value = {"posts", "postdto", "post"}, allEntries = true))
     public PostLikeUser createOneLike(Long userId, Long postId) {
         Post post = postService.getPostById(postId);
         User user = userService.getUserById(userId);
@@ -46,16 +43,16 @@ public class PostLikeServiceImpl implements PostLikeService {
     }
 
     @Override
-    @Caching(evict = @CacheEvict(value = {"posts", "postdto", "post"}, allEntries = true))
     public void deleteOneLike(Long userId, Long postId) {
         Specification<PostLikeUser> spec = Specification.where(userHasLikedPost(userId))
                 .and(postHasBeenLikedByUser(postId));
 
         Optional<PostLikeUser> optionalPostLikeUser = postLikeRepository.findOne(spec);
-        optionalPostLikeUser.orElseThrow(() -> new ResourceNotFoundException("Post or User not found", "", ""));
+        if (optionalPostLikeUser.isPresent()) {
+            PostLikeUser postLikeUser = optionalPostLikeUser.get();
+            postLikeRepository.delete(postLikeUser);
+        } else throw new ResourceNotFoundException("Post or User not found", "", "");
 
-        PostLikeUser postLikeUser = optionalPostLikeUser.get();
-        postLikeRepository.delete(postLikeUser);
     }
 
 

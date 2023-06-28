@@ -28,22 +28,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:./" + appEnv.getUploadPath().concat(File.separator))
                 .setCacheControl(CacheControl.maxAge(365, TimeUnit.DAYS));
     }
-
-
-    @Bean
-    public CommandLineRunner createStorages() {
-        return (args) -> {
-            createStorageDirectory(appEnv.getUploadPath());
-            createStorageDirectory(appEnv.getProfileImagePath());
-        };
-    }
-
-    private void createStorageDirectory(String path) {
-        File folder = new File(path);
-        log.info("profile image path" + path);
-        boolean folderExists = folder.exists() && folder.isDirectory();
-        if (!folderExists)
-            folder.mkdir();
-    }
 }
 

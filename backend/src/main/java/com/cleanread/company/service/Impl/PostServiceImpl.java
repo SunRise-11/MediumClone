@@ -11,6 +11,9 @@ import com.cleanread.company.model.request.CreatePostRequest;
 import com.cleanread.company.model.request.PinRequest;
 import com.cleanread.company.model.request.PostUpdateRequest;
 import com.cleanread.company.model.response.PostDTO;
+import com.cleanread.company.model.response.PostLikeDTO;
+import com.cleanread.company.model.response.TagDTO;
+import com.cleanread.company.repository.PostLikeRepository;
 import com.cleanread.company.repository.PostRepository;
 import com.cleanread.company.repository.TagRepository;
 import com.cleanread.company.service.FollowService;
@@ -19,6 +22,7 @@ import com.cleanread.company.service.TagService;
 import com.cleanread.company.service.UserService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,6 +37,7 @@ import java.util.stream.Collectors;
  * @project: backend
  * @author: Sarvar55
  */
+@Slf4j
 @Service
 @AllArgsConstructor
 public class PostServiceImpl implements PostService {
@@ -42,7 +47,7 @@ public class PostServiceImpl implements PostService {
     private final ObjectMapper objectMapper;
     private final UserService userService;
     private final MarkdownUtil markdownUtil;
-    //private final PostLikeRepository likeRepository;
+    private final PostLikeRepository likeRepository;
     private final FollowService followService;
 
 
@@ -94,14 +99,14 @@ public class PostServiceImpl implements PostService {
 
         Set<Tag> tags = tagRepository.findByPosts(postDB);
 
-//        Set<PostLikeDTO> likesList = likeRepository.findAllByPost(postDB).stream().map(PostLikeDTO::new)
-//                .collect(Collectors.toSet());
-//
-//        postDTO.setTags(tags.stream()
-//                .map(tag -> objectMapper
-//                        .mapForResponse(tag, TagDTO.class)).collect(Collectors.toSet()));
-//
-//        postDTO.setLikes(likesList);
+        Set<PostLikeDTO> likesList = likeRepository.findAllByPost(postDB).stream().map(PostLikeDTO::new)
+                .collect(Collectors.toSet());
+
+        postDTO.setTags(tags.stream()
+                .map(tag -> objectMapper
+                        .mapForResponse(tag, TagDTO.class)).collect(Collectors.toSet()));
+
+        postDTO.setLikes(likesList);
         return postDTO;
     }
 
@@ -113,8 +118,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Page<Post> getAllPosts(Pageable pageable) {
-        return postRepository.findAll(pageable);
+    public Page<PostDTO> getAllPosts(Pageable pageable) {
+        return mapPostToPostDTO(postRepository.findAll(pageable), pageable);
     }
 
     public Post updatePinOfPost(Long postId, PinRequest request) {
@@ -125,56 +130,57 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Page<Post> getAllPostOrderByLikes(Pageable pageable) {
-        return postRepository.findPostsOrderByLikeCount(pageable);
+    public Page<PostDTO> getAllPostOrderByLikes(Pageable pageable) {
+        return mapPostToPostDTO(postRepository.findPostsOrderByLikeCount(pageable), pageable);
     }
 
     @Override
-    public Page<Post> getAllPostsOrderByCreatedAt(Pageable pageable) {
-        return postRepository.findAllByOrderByCreatedAtDesc(pageable);
+    public Page<PostDTO> getAllPostsOrderByCreatedAt(Pageable pageable) {
+        return mapPostToPostDTO(postRepository.findAllByOrderByCreatedAtDesc(pageable), pageable);
     }
 
     @Override
-    public Page<Post> getAllPostsOrderByPinned(Pageable pageable, Long userId) {
+    public Page<PostDTO> getAllPostsOrderByPinned(Pageable pageable, Long userId) {
         User user = userService.getUserById(userId);
-        return postRepository.findAllByUserOrderByPinnedDesc(pageable, user);
+        return mapPostToPostDTO(postRepository.findAllByUserOrderByPinnedDesc(pageable, user), pageable);
     }
 
     @Override
-    public Page<Post> getAllPostOfFollowing(Long userId, Pageable pageable) {
+    public Page<PostDTO> getAllPostOfFollowing(Long userId, Pageable pageable) {
         List<User> users = followService.getFollowingByUser(userId)
                 .stream().map(Follow::getFollowedUser).collect(Collectors.toList());
 
-        return postRepository.findAllByUserIn(users, pageable);
+        return mapPostToPostDTO(postRepository.findAllByUserIn(users, pageable), pageable);
     }
 
     @Override
-    public Page<Post> getPostByTag(Long tagId, Pageable pageable) {
+    public Page<PostDTO> getPostByTag(Long tagId, Pageable pageable) {
         Tag tag = tagService.getTagById(tagId);
-        return postRepository.findAllByTags(tag, pageable);
+        return mapPostToPostDTO(postRepository.findAllByTags(tag, pageable), pageable);
     }
 
     @Override
-    public Page<Post> getPostByUser(Long userId, Pageable pageable) {
+    public Page<PostDTO> getPostByUser(Long userId, Pageable pageable) {
         User user = userService.getUserById(userId);
-        return postRepository.findAllByUser(user, pageable);
+        return mapPostToPostDTO(postRepository.findAllByUser(user, pageable), pageable);
     }
 
     @Override
-    public Page<Post> searchPosts(String title, Pageable pageable) {
-        return postRepository.findByTitleContaining(title, pageable);
+    public Page<PostDTO> searchPosts(String title, Pageable pageable) {
+        return mapPostToPostDTO(postRepository.findByTitleContaining(title, pageable), pageable);
+    }
+
+
+    @Override
+    public Page<PostDTO> getLatestPosts(Pageable pageable) {
+        return mapPostToPostDTO(postRepository.findAllByOrderByCreatedAtDesc(pageable), pageable);
     }
 
     @Override
-    public Page<Post> getLatestPosts(Pageable pageable) {
-        return postRepository.findAllByOrderByCreatedAtDesc(pageable);
-    }
-
-    @Override
-    public Page<Post> getPostByDateBetween(Date start, Date end, Pageable pageable) {
+    public Page<PostDTO> getPostByDateBetween(Date start, Date end, Pageable pageable) {
         if (start == null || end == null)
             return getAllPosts(pageable);
-        return postRepository.findByCreatedAtBetween(start, end, pageable);
+        return mapPostToPostDTO(postRepository.findByCreatedAtBetween(start, end, pageable), pageable);
     }
 
     private Set<Tag> setTagsToPost(Set<Long> tagIds) {
@@ -187,4 +193,20 @@ public class PostServiceImpl implements PostService {
         }
         return tags;
     }
+
+    private Page<PostDTO> mapPostToPostDTO(Page<Post> posts, Pageable pageable) {
+        List<PostDTO> postDTOs = posts.stream()
+                .map(post -> {
+                    Set<Tag> tags = tagRepository.findByPosts(post);
+                    PostDTO postDTO = objectMapper.mapForResponse(post, PostDTO.class);
+                    postDTO.setTags(tags.stream()
+                            .map(tag -> objectMapper.mapForResponse(tag, TagDTO.class))
+                            .collect(Collectors.toSet()));
+                    return postDTO;
+                }).collect(Collectors.toList());
+
+        return objectMapper.convertListToPage(postDTOs, pageable);
+
+    }
+
 }

@@ -1,9 +1,6 @@
 package com.cleanread.company.exceptions.advisor;
 
-import com.cleanread.company.exceptions.AlreadyFollowedException;
-import com.cleanread.company.exceptions.ResourceNotFoundException;
-import com.cleanread.company.exceptions.SelfFollowException;
-import com.cleanread.company.exceptions.TokenExpiredException;
+import com.cleanread.company.exceptions.*;
 import com.cleanread.company.exceptions.model.ApiError;
 import com.cleanread.company.model.response.GenericResponse;
 import org.springframework.http.HttpStatus;
@@ -45,6 +42,12 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public GenericResponse handleResourceNotFoundException(ResourceNotFoundException exception) {
         return response(exception, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ImageUploadException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public GenericResponse handleImageUploadException(ImageUploadException exception) {
+        return response(exception, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(SelfFollowException.class)

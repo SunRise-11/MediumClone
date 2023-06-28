@@ -5,18 +5,23 @@ import com.cleanread.company.entity.Role;
 import com.cleanread.company.model.enums.ERole;
 import com.cleanread.company.repository.RoleRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import java.io.File;
+
+@Slf4j
 @AllArgsConstructor
 @SpringBootApplication
 @EnableConfigurationProperties(value = AppEnv.class)
 public class BackendApplication {
 
     private final RoleRepository roleRepository;
+    private final AppEnv appEnv;
 
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
@@ -25,6 +30,8 @@ public class BackendApplication {
     @Bean
     public CommandLineRunner runner() {
         return args -> {
+            createStorageDirectory(appEnv.getUploadPath());
+            createStorageDirectory(appEnv.getProfileImagePath());
             createRoleIfNotExists(roleRepository, ERole.USER);
             createRoleIfNotExists(roleRepository, ERole.ADMIN);
         };
@@ -36,6 +43,14 @@ public class BackendApplication {
             role.setRoleName(roleName);
             roleRepository.save(role);
         }
+    }
+
+    private void createStorageDirectory(String path) {
+        File folder = new File(path);
+        log.info("profile image path" + path);
+        boolean folderExists = folder.exists() && folder.isDirectory();
+        if (!folderExists)
+            folder.mkdir();
     }
 
 }

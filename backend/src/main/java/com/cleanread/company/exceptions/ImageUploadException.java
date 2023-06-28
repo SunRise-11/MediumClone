@@ -5,13 +5,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * @project: backend
- * @author: Sarvar55
  */
+
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class AlreadyFollowedException extends RuntimeException {
+public class ImageUploadException extends RuntimeException {
     private String message;
 
-    public AlreadyFollowedException(String message) {
+    public ImageUploadException(String message) {
         super(message);
+    }
+
+    public ImageUploadException() {
+        super("Profil resmi yükleme hatası: Geçersiz resim türü.");
     }
 }

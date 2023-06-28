@@ -1,13 +1,10 @@
 package com.cleanread.company.service.Impl;
 
 import com.cleanread.company.common.mapper.ObjectMapper;
-import com.cleanread.company.entity.Post;
-import com.cleanread.company.entity.Role;
 import com.cleanread.company.entity.User;
+import com.cleanread.company.exceptions.ImageUploadException;
 import com.cleanread.company.exceptions.ResourceNotFoundException;
-import com.cleanread.company.model.enums.ERole;
 import com.cleanread.company.model.request.RegisterRequest;
-import com.cleanread.company.model.request.UpdateProfileImageRequest;
 import com.cleanread.company.model.request.UserUpdateRequest;
 import com.cleanread.company.repository.RoleRepository;
 import com.cleanread.company.repository.UserRepository;
@@ -18,9 +15,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Set;
+import java.util.UUID;
 
 /**
  * @project: backend
@@ -49,6 +47,7 @@ public class UserServiceImpl implements UserService {
         User inDB = getUserById(userId);
         User updatedUser = objectMapper.mapForRequest(request, User.class);
         updatedUser.setId(inDB.getId());
+        updatedUser.setPassword(passwordEncoder.encode(request.getPassword()));
         return userRepository.save(updatedUser);
     }
 
@@ -95,19 +94,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateProfileImage(Long userId, UpdateProfileImageRequest request) {
+    public void updateProfileImage(Long userId, MultipartFile file) {
+        if (!isValidImageType(file)) {
+            throw new ImageUploadException("Geçersiz resim türü. Sadece JPEG ve PNG desteklenir.");
+        }
         User user = getUserById(userId);
-        String url = uploadImage(request.getImage());
-        user.setImage(url);
+        String oldImage = user.getImage();
+
+        if (oldImage != null) {
+            fileServiceImpl.deleteProfileImage(oldImage);
+            user.setImage(null);
+        }
+
+        String imageName = uploadImage(file);
+        user.setImage(imageName);
+
         userRepository.save(user);
     }
 
-    private String uploadImage(String file) {
-        try {
-            return fileServiceImpl.saveImageWithEncode(file);
-        } catch (Exception e) {
-            log.info("Upload Image Exception:{}", e);
-            return null;
-        }
+    private boolean isValidImageType(MultipartFile file) {
+        String contentType = file.getContentType();
+        return contentType != null && (contentType.equals("image/jpeg") || contentType.equals("image/png"));
+    }
+
+    private String uploadImage(MultipartFile file) {
+        String imageName = generateImageName(file);
+        return fileServiceImpl.uploadImage(file, imageName);
+    }
+
+    private String generateImageName(MultipartFile file) {
+        String originalFilename = file.getOriginalFilename();
+        String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+        String imageName = UUID.randomUUID() + "." + extension;
+        return imageName;
     }
 }

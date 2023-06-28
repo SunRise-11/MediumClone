@@ -1,20 +1,21 @@
 package com.cleanread.company.service.Impl;
 
 import com.cleanread.company.common.config.AppEnv;
+import com.cleanread.company.exceptions.ImageUploadException;
 import com.cleanread.company.service.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
-import java.util.UUID;
 
 /**
  * @project: backend
@@ -31,23 +32,23 @@ public class FileServiceImpl implements FileService {
         tika = new Tika();
     }
 
+    public String uploadImage(MultipartFile file, String imageName) {
+        try {
+            File targetDirectory = new File(appEnv.getProfileImagePath());
+            if (!targetDirectory.exists()) {
+                targetDirectory.mkdirs();
+            }
 
-    public String saveImageWithEncode(String image) {
-        String fileName = generateRandomName();
-        byte[] decodedImage = Base64.getDecoder().decode(image);
-        try (FileOutputStream fos = new
-                FileOutputStream(appEnv.getProfileImagePath().concat(File.separator).concat(fileName))) {
-            fos.write(decodedImage);
-        } catch (FileNotFoundException exception) {
-            log.error("FileNotFoundException: {}", exception);
-        } catch (IOException exception) {
-            log.error("IOException: {}", exception);
+            File targetFile = new File(targetDirectory, imageName);
+
+            OutputStream outputStream = new FileOutputStream(targetFile);
+            outputStream.write(file.getBytes());
+            outputStream.close();
+
+            return imageName;
+        } catch (IOException e) {
+            throw new ImageUploadException(e.getMessage());
         }
-        return fileName;
-    }
-
-    private String generateRandomName() {
-        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
     public void deleteProfileImage(String oldImageName) {

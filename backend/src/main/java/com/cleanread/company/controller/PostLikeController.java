@@ -54,7 +54,6 @@ public class PostLikeController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = GenericResponse.class))})
     })
-
     @DeleteMapping("/users/{userId}/posts/{postId}/unlike")
     public ResponseEntity<?> deleteOneLike(@Parameter(description = "ID of the user")
                                            @PathVariable Long userId,

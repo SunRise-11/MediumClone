@@ -1,7 +1,6 @@
 package com.cleanread.company.entity;
 
 import lombok.Data;
-import org.springframework.data.redis.core.RedisHash;
 
 import java.io.Serializable;
 import java.util.Date;

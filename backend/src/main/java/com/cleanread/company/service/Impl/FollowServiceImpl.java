@@ -8,6 +8,7 @@ import com.cleanread.company.exceptions.SelfFollowException;
 import com.cleanread.company.repository.FollowRepository;
 import com.cleanread.company.service.FollowService;
 import com.cleanread.company.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,7 @@ public class FollowServiceImpl implements FollowService {
     }
 
     @Override
+    @Transactional
     public void unfollowUser(Long followingUserId, Long followedUserId) {
         if (followingUserId.equals(followedUserId)) {
             throw new IllegalArgumentException("unFollow Error");

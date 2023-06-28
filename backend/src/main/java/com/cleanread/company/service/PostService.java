@@ -26,25 +26,25 @@ public interface PostService {
 
     void deletePost(Long postId);
 
-    Page<Post> getAllPosts(Pageable pageable);
+    Page<PostDTO> getAllPosts(Pageable pageable);
 
     Post updatePinOfPost(Long postId, PinRequest request);
 
-    Page<Post> getAllPostOrderByLikes(Pageable pageable);
+    Page<PostDTO> getAllPostOrderByLikes(Pageable pageable);
 
-    Page<Post> getAllPostsOrderByCreatedAt(Pageable pageable);
+    Page<PostDTO> getAllPostsOrderByCreatedAt(Pageable pageable);
 
-    Page<Post> getAllPostsOrderByPinned(Pageable pageable, Long userId);
+    Page<PostDTO> getAllPostsOrderByPinned(Pageable pageable, Long userId);
 
-    Page<Post> getAllPostOfFollowing(Long userId, Pageable pageable);
+    Page<PostDTO> getAllPostOfFollowing(Long userId, Pageable pageable);
 
-    Page<Post> getPostByTag(Long tagId, Pageable pageable);
+    Page<PostDTO> getPostByTag(Long tagId, Pageable pageable);
 
-    Page<Post> getPostByUser(Long userId, Pageable pageable);
+    Page<PostDTO> getPostByUser(Long userId, Pageable pageable);
 
-    Page<Post> searchPosts(String title, Pageable pageable);
+    Page<PostDTO> searchPosts(String title, Pageable pageable);
 
-    Page<Post> getLatestPosts(Pageable pageable);
+    Page<PostDTO> getLatestPosts(Pageable pageable);
 
-    Page<Post> getPostByDateBetween(Date start, Date end, Pageable pageable);
+    Page<PostDTO> getPostByDateBetween(Date start, Date end, Pageable pageable);
 }

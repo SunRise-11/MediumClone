@@ -12,21 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MarkdownUtil {
 
-//    public int calculateReadingTime(String content) {
-//        Parser parser = Parser.builder().build();
-//        HtmlRenderer renderer = HtmlRenderer.builder().build();
-//        String markdownContent = renderer.render(parser.parse(content));
-//
-//        // Metin içerisindeki karakter, kelime ve paragraf sayılarını hesaplıyoruz
-//        int charCount = StringUtils.countMatches(markdownContent, "");
-//        int wordCount = markdownContent.split("\\s+").length;
-//        int paragraphCount = StringUtils.countMatches(markdownContent, "");
-//
-//        // Okuma süresini hesaplıyoruz
-//        int readingTimeMinutes = (int) Math.ceil(wordCount / 200.0);
-//
-//        return readingTimeMinutes;
-//    }
     public int calculateReadingTime(String content) {
         Parser parser = Parser.builder().build();
         HtmlRenderer renderer = HtmlRenderer.builder().build();
@@ -34,8 +19,8 @@ public class MarkdownUtil {
 
         // Metin içerisindeki karakter, kelime ve paragraf sayılarını hesaplıyoruz
         int charCount = StringUtils.countMatches(markdownContent, "");
-        int wordCount = StringUtils.countMatches(markdownContent, "\\w+");
-        int paragraphCount = StringUtils.countMatches(markdownContent, "\\n\\s*\\n");
+        int wordCount = markdownContent.split("\\s+").length;
+        int paragraphCount = StringUtils.countMatches(markdownContent, "");
 
         // Okuma süresini hesaplıyoruz
         double averageReadingSpeed = 200.0; // 200 kelime/dakika (ortalama okuma hızı)
@@ -49,6 +34,6 @@ public class MarkdownUtil {
         double averageCharReadingTime = 0.01; // Her karakter için 0.01 dakika ortalama süre
         readingTimeMinutes += (int) Math.ceil(charCount * averageCharReadingTime);
 
-        return readingTimeMinutes;
+        return readingTimeMinutes == 0 ? 1 : readingTimeMinutes;
     }
 }

@@ -7,14 +7,12 @@ import com.cleanread.company.common.util.pattern.order.OrderService;
 import com.cleanread.company.common.util.pattern.order.OrderServiceFactory;
 import com.cleanread.company.common.util.pattern.order.PostOrderServiceFactory;
 import com.cleanread.company.entity.Post;
-import com.cleanread.company.entity.User;
 import com.cleanread.company.model.request.CreatePostRequest;
 import com.cleanread.company.model.request.PinRequest;
 import com.cleanread.company.model.request.PostUpdateRequest;
 import com.cleanread.company.model.response.GenericResponse;
 import com.cleanread.company.model.response.PostDTO;
 import com.cleanread.company.service.PostService;
-import com.cleanread.company.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -32,7 +30,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 /**
  * @project: backend
@@ -43,7 +40,6 @@ import java.util.List;
 @CrossOrigin("*")
 public class PostController {
     private final PostService postService;
-    // private final PostLikeService likeService;
     private final ObjectMapper objectMapper;
 
 
@@ -120,8 +116,7 @@ public class PostController {
             @Parameter(description = "Pageable object for pagination and sorting")
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
 
-        Page<PostDTO> pageablePostDTOS = postService.getPostByUser(userId, pageable)
-                .map(post -> objectMapper.mapForResponse(post, PostDTO.class));
+        Page<PostDTO> pageablePostDTOS = postService.getPostByUser(userId, pageable);
 
         return ResponseEntity.ok(pageablePostDTOS);
     }
@@ -141,8 +136,7 @@ public class PostController {
             @Parameter(description = "Pageable object for pagination and sorting")
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 2) Pageable pageable) {
 
-        Page<PostDTO> pageablePostDTOS = postService.searchPosts(query, pageable)
-                .map(post -> objectMapper.mapForResponse(post, PostDTO.class));
+        Page<PostDTO> pageablePostDTOS = postService.searchPosts(query, pageable);
 
         return ResponseEntity.ok(pageablePostDTOS);
     }
@@ -180,8 +174,7 @@ public class PostController {
         Range dateRange = DateRangeFactory.getDateRange(range);
 
         Page<PostDTO> postDTOS = postService.
-                getPostByDateBetween(dateRange.getDateRange().getStart(), dateRange.getDateRange().getEnd(), pageable)
-                .map(post -> objectMapper.mapForResponse(post, PostDTO.class));
+                getPostByDateBetween(dateRange.getDateRange().getStart(), dateRange.getDateRange().getEnd(), pageable);
 
         return ResponseEntity.ok(postDTOS);
     }
@@ -200,7 +193,7 @@ public class PostController {
                                                        @PageableDefault(size = 5, sort = "createdAt", direction = Sort.Direction.DESC)
                                                                Pageable pageable) {
         Page<PostDTO> pageablePostDTOS = postService.
-                getPostByTag(tagId, pageable).map(post -> objectMapper.mapForResponse(post, PostDTO.class));
+                getPostByTag(tagId, pageable);
 
         return ResponseEntity.ok(pageablePostDTOS);
     }
@@ -215,10 +208,7 @@ public class PostController {
             @Parameter(description = "Pageable request parameters")
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 6) Pageable pageable) {
 
-        Page<PostDTO> pageablePostDTOS = postService.getLatestPosts(pageable)
-                .map(post -> objectMapper.mapForResponse(post, PostDTO.class));
-
-        return ResponseEntity.ok(pageablePostDTOS);
+        return ResponseEntity.ok(postService.getLatestPosts(pageable));
     }
 
     @Operation(summary = "Get all posts")
@@ -234,7 +224,7 @@ public class PostController {
             @Parameter(description = "id of user to filter posts") @PathVariable(required = false) Long userId) {
 
         if (orderBy == null && userId != null) {
-            return getOrderResponseEntity(postService.getAllPostsOrderByPinned(pageable, userId));
+            return ResponseEntity.ok(postService.getAllPostsOrderByPinned(pageable, userId));
         }
 
         OrderServiceFactory factory = new PostOrderServiceFactory(postService, pageable, objectMapper);
@@ -258,13 +248,8 @@ public class PostController {
             @PageableDefault(size = 3) Pageable pageable) {
 
         Page<PostDTO> postDTOS = postService.
-                getAllPostOfFollowing(userId, pageable)
-                .map(post -> objectMapper.mapForResponse(post, PostDTO.class));
+                getAllPostOfFollowing(userId, pageable);
 
         return ResponseEntity.ok(postDTOS);
-    }
-
-    private ResponseEntity<Page<PostDTO>> getOrderResponseEntity(Page<Post> postList) {
-        return ResponseEntity.ok(postList.map(post -> objectMapper.mapForResponse(post, PostDTO.class)));
     }
 }

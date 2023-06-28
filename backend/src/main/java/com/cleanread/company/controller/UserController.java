@@ -4,7 +4,6 @@ import com.cleanread.company.common.annatations.CurrentUser;
 import com.cleanread.company.common.mapper.ObjectMapper;
 import com.cleanread.company.entity.User;
 import com.cleanread.company.model.request.RegisterRequest;
-import com.cleanread.company.model.request.UpdateProfileImageRequest;
 import com.cleanread.company.model.request.UserUpdateRequest;
 import com.cleanread.company.model.response.GenericResponse;
 import com.cleanread.company.model.response.UserDTO;
@@ -23,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -122,11 +122,15 @@ public class UserController {
                             schema = @Schema(implementation = GenericResponse.class))}),
             @ApiResponse(responseCode = "400", description = "Bad request",
                     content = @Content)})
+
     @PutMapping("/users/profileImage")
     public ResponseEntity<GenericResponse> updateUserProfileImage(
-            @Valid @RequestBody UpdateProfileImageRequest request,
+            @RequestParam("image") MultipartFile file,
             @CurrentUser UserPrincipal userPrincipal) {
-        userService.updateProfileImage(userPrincipal.getUser().getId(), request);
-        return ResponseEntity.ok(new GenericResponse(HttpStatus.OK.value(), "Profile image updated"));
+        if (userPrincipal != null && userPrincipal.getUser() != null) {
+            userService.updateProfileImage(userPrincipal.getUser().getId(), file);
+            return ResponseEntity.ok(new GenericResponse(HttpStatus.OK.value(), "Profile image updated"));
+        }
+        return ResponseEntity.ok(new GenericResponse(HttpStatus.UNAUTHORIZED.value(), "UNAUTHORIZED"));
     }
 }

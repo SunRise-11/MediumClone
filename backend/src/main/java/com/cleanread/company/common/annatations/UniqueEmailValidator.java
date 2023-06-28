@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
     private final UserRepository userRepository;
+
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
         return email != null && !userRepository.existsByEmail(email);

@@ -2,7 +2,11 @@ package com.cleanread.company.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -20,7 +24,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AttributeOverride(name = "id", column = @Column(name = "user_id",
         nullable = false, columnDefinition = "BIGINT UNSIGNED"))
-@EqualsAndHashCode(callSuper = false)
 public class User extends BaseEntity {
     private String username;
 
@@ -61,25 +64,16 @@ public class User extends BaseEntity {
     @JsonBackReference
     private Set<Follow> followers = new HashSet<>();
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         User user = (User) o;
-        return isEmailVerified == user.isEmailVerified &&
-                Objects.equals(username, user.username) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password) &&
-                Objects.equals(image, user.image) &&
-                Objects.equals(bio, user.bio) &&
-                Objects.equals(roles, user.roles) &&
-                Objects.equals(posts, user.posts);
+        return id != null && Objects.equals(id, user.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), username, email, password, image, bio, isEmailVerified, roles, posts);
+        return getClass().hashCode();
     }
 }

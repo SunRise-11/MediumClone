@@ -1,20 +1,13 @@
 package com.cleanread.company.security.user;
 
-import com.cleanread.company.entity.Role;
 import com.cleanread.company.entity.User;
-import com.cleanread.company.repository.RoleRepository;
-import com.cleanread.company.repository.UserRepository;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**

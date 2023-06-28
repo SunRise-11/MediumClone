@@ -10,6 +10,7 @@ import com.cleanread.company.repository.TagFollowRepository;
 import com.cleanread.company.service.TagFollowUserService;
 import com.cleanread.company.service.TagService;
 import com.cleanread.company.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,6 +48,7 @@ public class TagFollowUserServiceImpl implements TagFollowUserService {
     }
 
     @Override
+    @Transactional
     public void unfollowTag(Long tagId, Long userId) {
 
         User followingUser = userService.getUserById(userId);
