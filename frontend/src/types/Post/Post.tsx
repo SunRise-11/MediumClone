@@ -12,7 +12,7 @@ export default interface PostDTO {
         email: string;
         bio?: string | null;
         image?: string | null;
-    };
+    };  
     likes?: {
         userId: number;
         postId: number;
