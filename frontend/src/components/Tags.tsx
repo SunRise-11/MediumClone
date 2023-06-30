@@ -1,16 +1,21 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import { tags as topics } from '../store';
+import React from 'react'
 import Link from 'next/link';
 import Tag from '@/types/Tag/Tag';
-import { Chip } from '@mui/material';
+import Chip from './Chip';
 
 type Props = {
     title: string,
     footer?: React.ReactElement;
 }
 
-export default function Tags({ title, footer }: Props) {
+
+export default async function Tags({ title, footer }: Props) {
+
+    const tags = await fetch("http://192.168.43.164:8080/api/v1/tags",
+        { next: { revalidate: 10 } }
+    )
+        .then(response => response.json())
+
 
     return (
         <>
@@ -19,11 +24,11 @@ export default function Tags({ title, footer }: Props) {
             </p>
             <div className="flex flex-wrap gap-2 border-slate-300 pb-10">
                 {
-                    topics.map((tag: Tag) => {
-                        const { name, id, url } = tag;
+                    tags.map((tag: Tag) => {
+                        const { name, id } = tag;
                         return (
-                            <Link key={id} href={url}>
-                                <Chip key={tag.id} label={tag.name} clickable size='medium' />
+                            <Link key={id} href={`/tags/${name}`}>
+                                <Chip label={tag.name} />
                             </Link>
                         );
                     })}
