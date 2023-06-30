@@ -40,13 +40,6 @@
             <artifactId>cloudinary-http44</artifactId>
             <version>1.32.2</version>
         </dependency>
-
-        <dependency>
-            <groupId>io.github.cdimascio</groupId>
-            <artifactId>dotenv-java</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
         <!--        Tika-->
 
         <dependency>
@@ -59,6 +52,7 @@
             <artifactId>tika-core</artifactId>
             <version>2.7.0</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.modelmapper</groupId>

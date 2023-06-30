@@ -1,12 +1,8 @@
 package com.cleanread.company.common.config;
 
 import com.cloudinary.Cloudinary;
-import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @project: backend
@@ -14,18 +10,13 @@ import java.util.Map;
 @Configuration
 public class CloudinaryConfig {
 
+    private final String CLOUDINARY_URL = "cloudinary://346721151313273:geQgYnAQ3PlVL829o650Q7ENyns@dhshekhf56hsh91baltali";
+
     @Bean
     public Cloudinary cloudinary() {
-        Map<String, String> config = new HashMap<>();
-        config.put("cloud_name", dotenv().get("CLOUD_NAME"));
-        config.put("api_key", dotenv().get("API_KEY"));
-        config.put("api_secret", dotenv().get("api_secret"));
-        Cloudinary cloudinary = new Cloudinary(config);
+        Cloudinary cloudinary = new Cloudinary(CLOUDINARY_URL);
         cloudinary.config.secure = true;
         return cloudinary;
     }
 
-    private Dotenv dotenv() {
-        return Dotenv.load();
-    }
 }

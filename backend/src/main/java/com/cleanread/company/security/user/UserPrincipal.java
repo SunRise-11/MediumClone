@@ -27,7 +27,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        log.info("UserPrincipal çclişmaya başladı");
+        log.info("UserPrincipal çalişmaya başladı");
         return user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.getRoleName().name()))
                 .collect(Collectors.toList());
     }

@@ -8,6 +8,6 @@ import com.cleanread.company.common.util.DateUtil;
 public class MonthDateRangeStrategy implements Range {
     @Override
     public DateRange getDateRange() {
-        return new DateRange(DateUtil.getBeginWeek(), DateUtil.getEndMonth());
+        return new DateRange(DateUtil.getBeginMonth(), DateUtil.getEndMonth());
     }
 }

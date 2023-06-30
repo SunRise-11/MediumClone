@@ -12,7 +12,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
-import java.io.File;
 
 @Slf4j
 @AllArgsConstructor
@@ -30,8 +29,6 @@ public class BackendApplication {
     @Bean
     public CommandLineRunner runner() {
         return args -> {
-            createStorageDirectory(appEnv.getUploadPath());
-            createStorageDirectory(appEnv.getProfileImagePath());
             createRoleIfNotExists(roleRepository, ERole.USER);
             createRoleIfNotExists(roleRepository, ERole.ADMIN);
         };
@@ -45,12 +42,5 @@ public class BackendApplication {
         }
     }
 
-    private void createStorageDirectory(String path) {
-        File folder = new File(path);
-        log.info("profile image path" + path);
-        boolean folderExists = folder.exists() && folder.isDirectory();
-        if (!folderExists)
-            folder.mkdir();
-    }
 
 }

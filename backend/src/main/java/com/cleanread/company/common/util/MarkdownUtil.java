@@ -17,21 +17,20 @@ public class MarkdownUtil {
         HtmlRenderer renderer = HtmlRenderer.builder().build();
         String markdownContent = renderer.render(parser.parse(content));
 
-        // Metin içerisindeki karakter, kelime ve paragraf sayılarını hesaplıyoruz
         int charCount = StringUtils.countMatches(markdownContent, "");
         int wordCount = markdownContent.split("\\s+").length;
         int paragraphCount = StringUtils.countMatches(markdownContent, "");
 
-        // Okuma süresini hesaplıyoruz
-        double averageReadingSpeed = 200.0; // 200 kelime/dakika (ortalama okuma hızı)
+
+        double averageReadingSpeed = 200.0;
         int readingTimeMinutes = (int) Math.ceil(wordCount / averageReadingSpeed);
 
-        // Paragraf sayısına göre okuma süresini güncelleme
-        double averageParagraphReadingTime = 1.5; // Her paragraf için 1.5 dakika ortalama süre
+
+        double averageParagraphReadingTime = 1.5;
         readingTimeMinutes += (int) Math.ceil(paragraphCount * averageParagraphReadingTime);
 
-        // Karakter sayısına göre okuma süresini güncelleme
-        double averageCharReadingTime = 0.01; // Her karakter için 0.01 dakika ortalama süre
+
+        double averageCharReadingTime = 0.01;
         readingTimeMinutes += (int) Math.ceil(charCount * averageCharReadingTime);
 
         return readingTimeMinutes == 0 ? 1 : readingTimeMinutes;
