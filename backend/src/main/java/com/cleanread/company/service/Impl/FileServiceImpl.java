@@ -3,6 +3,7 @@ package com.cleanread.company.service.Impl;
 import com.cleanread.company.common.config.AppEnv;
 import com.cleanread.company.exceptions.ImageUploadException;
 import com.cleanread.company.service.FileService;
+import com.cloudinary.Cloudinary;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @project: backend
@@ -23,12 +26,15 @@ import java.util.Base64;
  */
 @Slf4j
 @Service
+
 public class FileServiceImpl implements FileService {
     private final AppEnv appEnv;
     private final Tika tika;
+    private final Cloudinary cloudinary;
 
-    public FileServiceImpl(AppEnv appEnv) {
+    public FileServiceImpl(AppEnv appEnv, Cloudinary cloudinary) {
         this.appEnv = appEnv;
+        this.cloudinary = cloudinary;
         tika = new Tika();
     }
 
@@ -49,6 +55,13 @@ public class FileServiceImpl implements FileService {
         } catch (IOException e) {
             throw new ImageUploadException(e.getMessage());
         }
+    }
+
+    public String uploadImage(MultipartFile file) throws IOException {
+        return cloudinary.uploader().upload(file.getBytes(),
+                        Map.of("public_id", UUID.randomUUID().toString()))
+                .get("secure_url")
+                .toString();
     }
 
     public void deleteProfileImage(String oldImageName) {

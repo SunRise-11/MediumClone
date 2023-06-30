@@ -4,7 +4,7 @@ import com.cleanread.company.model.enums.ERole;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import org.hibernate.Hibernate;
 
 import java.util.Objects;
 import java.util.Set;
@@ -18,7 +18,6 @@ import java.util.Set;
 @Table(name = "roles")
 @AttributeOverride(name = "id", column = @Column(name = "role_id",
         nullable = false, columnDefinition = "BIGINT UNSIGNED"))
-@EqualsAndHashCode(callSuper = false)
 public class Role extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
@@ -31,14 +30,13 @@ public class Role extends BaseEntity {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Role role = (Role) o;
-        return roleName == role.roleName && Objects.equals(users, role.users);
+        return id != null && Objects.equals(id, role.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), roleName, users);
+        return getClass().hashCode();
     }
 }
