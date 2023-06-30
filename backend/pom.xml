@@ -31,10 +31,7 @@
             <artifactId>jedis</artifactId>
             <version>4.3.1</version>
         </dependency>
-
-
 <!--        Cloudinary-->
-
         <dependency>
             <groupId>com.cloudinary</groupId>
             <artifactId>cloudinary-http44</artifactId>

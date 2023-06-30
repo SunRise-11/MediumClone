@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CloudinaryConfig {
 
-    private final String CLOUDINARY_URL = "cloudinary://346721151313273:geQgYnAQ3PlVL829o650Q7ENyns@dhshekhf56hsh91baltali";
+    private final String CLOUDINARY_URL = "";
 
     @Bean
     public Cloudinary cloudinary() {
