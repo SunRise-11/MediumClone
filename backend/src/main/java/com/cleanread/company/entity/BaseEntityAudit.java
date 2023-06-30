@@ -36,10 +36,10 @@ public abstract class BaseEntityAudit extends BaseEntity {
     private Date updatedAt;
 
     @CreatedBy
-    @Column(name = "created_by", nullable = true)
+    @Column(name = "created_by")
     private Long createdBy;
 
     @LastModifiedBy
-    @Column(name = "updated_by", nullable = true)
+    @Column(name = "updated_by")
     private Long updatedBy;
 }
