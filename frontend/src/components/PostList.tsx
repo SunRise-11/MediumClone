@@ -1,24 +1,30 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import { posts as storePosts } from '../store/index'
+
+import React from 'react'
+
 import Post from './Post'
 import PostDTO from '@/types/Post/Post'
 
 type Props = {}
 
-export default function PostList() {
-    const [posts, setPosts] = useState<PostDTO[]>([])
+export default async function PostList() {
 
-    const fetchAllPosts = () => {
-        setPosts(storePosts);
-    }
+
+
+    const posts = await fetch("http://localhost:8080/api/v1/posts/latest",
+        { cache: 'no-cache' }
+    )
+        .then(response => response.json())
+
+
+    console.log(posts);
+
 
     return (
         <>
             {
-                storePosts.map((post: PostDTO) => (
-                    <Post key={post.postId} post={post} handleDeletePost={() => { }} />
-                ))
+                posts.content && posts.content.length > 0 ? posts.content.map((post: PostDTO) => (
+                    <Post key={post.postId} post={post} />
+                )) : undefined
             }
         </>
     )

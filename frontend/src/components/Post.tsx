@@ -12,7 +12,7 @@ import { titleToUrl } from "@/util/titleToUrl";
 
 type Props = {
     post: PostDTO,
-    handleDeletePost: (e: React.FormEvent<HTMLButtonElement>, postId: number) => void
+    handleDeletePost?: (e: React.FormEvent<HTMLButtonElement>, postId: number) => void
 };
 
 
@@ -41,9 +41,9 @@ const Post = ({ post, handleDeletePost }: Props) => {
         setPin(!pin)
     }
 
-    let imageLink  = "/images/generative-ai.jpg"
+    let imageLink = "/images/generative-ai.jpg"
 
-    if(postImage) {
+    if (postImage) {
         imageLink = postImage
     }
 

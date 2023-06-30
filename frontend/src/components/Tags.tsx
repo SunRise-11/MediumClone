@@ -1,11 +1,7 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import { tags as topics } from '../store';
+import React from 'react'
 import Link from 'next/link';
 import Tag from '@/types/Tag/Tag';
-import { Chip } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
-import { useTags } from '@/hook/useTags';
+import Chip from './Chip';
 
 type Props = {
     title: string,
@@ -13,15 +9,13 @@ type Props = {
 }
 
 
-export default function Tags({ title, footer }: Props) {
+export default async function Tags({ title, footer }: Props) {
 
-    const { tags, isLoading } = useTags();
+    const tags = await fetch("http://localhost:8080/api/v1/tags",
+        { next: { revalidate: 10 } }
+    )
+        .then(response => response.json())
 
-    if (isLoading) {
-        return <CircularProgress />; // Veri yüklenirken gösterilecek bir yükleme durumu
-    }
-
-    console.log(tags);
 
     return (
         <>
@@ -34,7 +28,7 @@ export default function Tags({ title, footer }: Props) {
                         const { name, id } = tag;
                         return (
                             <Link key={id} href={`/tags/${name}`}>
-                                <Chip key={tag.id} label={tag.name} clickable size='medium' />
+                                <Chip label={tag.name} />
                             </Link>
                         );
                     })}
