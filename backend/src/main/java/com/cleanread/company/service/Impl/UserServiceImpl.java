@@ -17,8 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @project: backend
@@ -118,14 +118,10 @@ public class UserServiceImpl implements UserService {
     }
 
     private String uploadImage(MultipartFile file) {
-        String imageName = generateImageName(file);
-        return fileServiceImpl.uploadImage(file, imageName);
-    }
-
-    private String generateImageName(MultipartFile file) {
-        String originalFilename = file.getOriginalFilename();
-        String extension = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
-        String imageName = UUID.randomUUID() + "." + extension;
-        return imageName;
+        try {
+            return fileServiceImpl.uploadImage(file);
+        } catch (IOException e) {
+            throw new ImageUploadException(e.getMessage());
+        }
     }
 }
