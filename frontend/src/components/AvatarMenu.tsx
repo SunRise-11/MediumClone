@@ -182,13 +182,13 @@ export function GetStarted({
                 Get started on Medium
             </p>
             <Link
-                href="/auth/login"
+                href="/auth/register"
                 className="bg-green-600 text-white rounded-lg py-2 px-3 text-sm w-44 text-center"
             >
                 Sign up
             </Link>
             <Link
-                href="/auth/register"
+                href="/auth/login"
                 className="border-gray-300 border rounded-lg py-2 px-3 text-gray-500 text-sm w-44 text-center"
             >
                 Sign In

@@ -111,7 +111,7 @@ const CreatePost = () => {
             </div>
             <div>
               <Link 
-              href="/users/Mike-Greenwood">
+              href="/users/paul-graham">
               <button
                 className="w-[80%] mx-auto flex justify-center
                          items-center rounded-lg bg-green-500 hover:bg-green-600 transition-transform

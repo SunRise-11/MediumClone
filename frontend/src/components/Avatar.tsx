@@ -40,6 +40,7 @@ const Avatar: React.FC<AvatarProps> = ({
     }
     return { w: 30, h: 30 };
   };
+  
 
   return (
     <div

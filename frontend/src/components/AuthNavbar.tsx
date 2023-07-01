@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Link from "next/link"
-import { writeBlogIcon, searchIcon, mediumLogo } from '../../public/icons/icons'
+import { writeBlogIcon,} from '../../public/icons/icons'
 import Search from './Search'
 import AvatarMenu from './AvatarMenu'
 type Props = {}

@@ -186,7 +186,10 @@ export const avatars = [
   },
 ];
 
+
+
 export const tags = [
+
   {
     id: 1,
     name: 'Programming',
@@ -202,6 +205,26 @@ export const tags = [
   { id: 9, name: 'Education', url: 'tags/education' },
   { id: 10, name: 'Politics', url: 'tags/politics' },
 ];
+export const topics = [
+  {
+    id: 0,
+    name: 'Following',
+  },
+  {
+    id: 1,
+    name: 'Programming',
+    url: 'tags/programming',
+  },
+  { id: 2, name: 'Science', url: 'tags/science' },
+  { id: 3, name: 'Technology', url: 'tags/technology' },
+  { id: 4, name: 'Art', url: 'tags/art' },
+  { id: 5, name: 'Business', url: 'tags/business' },
+  { id: 6, name: 'Sports', url: 'tags/sports' },
+  { id: 7, name: 'Entertainment', url: 'tags/entertainment' },
+  { id: 8, name: 'Health', url: 'tags/health' },
+  { id: 9, name: 'Education', url: 'tags/education' },
+  { id: 10, name: 'Politics', url: 'tags/politics' },
+]
 
 export const posts: PostDTO[] = [
   {
@@ -234,7 +257,7 @@ export const posts: PostDTO[] = [
     Well-documented code is essential for clean coding practices. Comments help explain the intent, purpose, and functionality of code blocks. Use comments to clarify complex algorithms, provide insights into decision-making processes, or document any assumptions or limitations. However, it's important to strike a balance with comments. Avoid excessive or redundant comments that merely restate the code. Focus on adding value by providing context and explaining the reasoning behind the implementation choices.
     `,
 
-    image: null,
+    image: '/images/5-Javascript-Clean-Coding-Patterns-To-Enhance-Your-Code.png',
     readingTime: 2,
     pinned: true,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -277,7 +300,7 @@ export const posts: PostDTO[] = [
     
     
     `,
-    image: null,
+    image: '/images/Wikipedia.jpg',
     readingTime: 2,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -320,7 +343,7 @@ export const posts: PostDTO[] = [
    
    
    `,
-    image: null,
+    image: '/images/A-Biotech-Startup-Reverses-Aging.jpeg',
     readingTime: 3,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -367,7 +390,7 @@ export const posts: PostDTO[] = [
     
     
     `,
-    image: null,
+    image: '/images/Good-Programmers-Are-Lazy.jpeg',
     readingTime: 4,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -411,7 +434,7 @@ export const posts: PostDTO[] = [
     
     
     `,
-    image: null,
+    image: '/images/Bio-Hacking-Is-The-New-Frontier-Of-Science.png',
     readingTime: 5,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -459,7 +482,7 @@ export const posts: PostDTO[] = [
     
 
     `,
-    image: null,
+    image: '/images/The-Art-Of-Design.jpeg',
     readingTime: 6,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -506,7 +529,7 @@ export const posts: PostDTO[] = [
    
    
    `,
-    image: null,
+    image: '/images/The-Best-Movies-Of-2021.jpeg',
     readingTime: 7,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -549,7 +572,7 @@ export const posts: PostDTO[] = [
     
     
     `,
-    image: null,
+    image: '/images/The-Best-Tv-Shows-Of-2022.jpeg',
     readingTime: 8,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -742,7 +765,7 @@ export const posts: PostDTO[] = [
     
     to Trevor Blackwell, Dan Friedman, Sarah Harlin, Jessica Livingston, Jackie McDonough, Robert Morris, Peter Norvig, David Sloo, and Aaron Swartz for reading drafts of this.
     `,
-    image: null,
+    image: '/images/How-To-Do-What-You-Love.jpeg',
     readingTime: 14,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -917,7 +940,7 @@ export const posts: PostDTO[] = [
     
     
     `,
-    image: null,
+    image: '/images/How-To-Think-For-Yourself.jpeg',
     readingTime: 12,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -1567,7 +1590,7 @@ export const posts: PostDTO[] = [
     
     That’s why I went through such an excruciatingly rigorous analysis in this post. I think this is one of those few topics in life that’s worth it. Other voices will never stop fiercely trying to live your life for you—you owe it to that little insecure character in the very center of your consciousness to get this right.
     `,
-    image: null,
+    image: '/images/Picking-Career.jpeg',
     readingTime: 30,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -1647,7 +1670,7 @@ export const posts: PostDTO[] = [
     
     Thanks for reading!
     `,
-    image: null,
+    image: '/images/How-To-Get-Rich-Without-Getting-Lucky.jpg',
     readingTime: 9,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -1766,7 +1789,7 @@ export const posts: PostDTO[] = [
     Thanks for reading!
 
     `,
-    image: null,
+    image: '/images/The-One-Percent-Rule.png',
     readingTime: 11,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -1848,7 +1871,7 @@ export const posts: PostDTO[] = [
     
     
     `,
-    image: null,
+    image: '/images/We-Are-What-We-Remember.png',
     readingTime: 8,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -1939,7 +1962,7 @@ export const posts: PostDTO[] = [
     
     Thanks for reading!
     `,
-    image: null,
+    image: '/images/learn-turkish.jpg',
     readingTime: 4,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',
@@ -1947,7 +1970,7 @@ export const posts: PostDTO[] = [
       userId: 14,
       username: 'Abbas Abdelila',
       email: 'abbas@example.com',
-      bio: "Shane's bio",
+      bio: "Abbas' bio",
       image: 'Abbas-Abdelila.jpg',
     },
     likes: [
@@ -1967,7 +1990,7 @@ export const posts: PostDTO[] = [
   {
     postId: 17,
     title: 'Learn Git',
-   content:`
+    content: `
    Learn Git
    Learn the Basics of Git in Under 10 Minutes
    https://miro.medium.com/v2/resize:fit:1975/1*4kDk9CZEEJBllqd3Fx549A.png
@@ -2223,7 +2246,7 @@ export const posts: PostDTO[] = [
    
    
    `,
-    image: null,
+    image: '/images/Learn-Git.png',
     readingTime: 4,
     pinned: false,
     createdAt: '2023-08-20T13:20:10.633Z',

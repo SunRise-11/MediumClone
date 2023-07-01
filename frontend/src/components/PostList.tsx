@@ -1,8 +1,10 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import { posts as storePosts } from '../store/index'
-import Post from './Post'
+
+import React from 'react'
+
 import PostDTO from '@/types/Post/Post'
+import Post from './Post'
+
+
 
 
 

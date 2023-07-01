@@ -39,7 +39,7 @@ const PostMenu: React.FC<Props> = ({ pinned, username, postId, handleDeletePost,
                 type="text"
                 className="text-black"
             >
-                {pinned ? "Un Pin Story" : "Pin Story"}
+                {pinned ? "Unpin Story" : "Pin Story"}
             </Button>
         </div>
     );

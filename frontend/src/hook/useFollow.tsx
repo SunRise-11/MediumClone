@@ -14,7 +14,6 @@ const useFollow = (userId: number) => {
         if (!currentUserId || currentUserId == null) {
             return push("/auth/login")
         }
-
         try {
             let request;
 
