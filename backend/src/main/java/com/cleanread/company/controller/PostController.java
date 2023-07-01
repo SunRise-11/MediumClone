@@ -203,12 +203,14 @@ public class PostController {
             @ApiResponse(responseCode = "200", description = "Latest posts retrieved successfully",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = PostDTO.class))))})
 
-    @GetMapping("/posts/latest")
+    @GetMapping({"/posts/latest", "/tags/{tagId}/posts/latest"})
     public ResponseEntity<Page<PostDTO>> getLatestPosts(
             @Parameter(description = "Pageable request parameters")
-            @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 6) Pageable pageable) {
+            @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 6) Pageable pageable,
+            @PathVariable(required = false) Long tagId
+    ) {
 
-        return ResponseEntity.ok(postService.getLatestPosts(pageable));
+        return ResponseEntity.ok(postService.getLatestPosts(pageable, tagId));
     }
 
     @Operation(summary = "Get all posts")

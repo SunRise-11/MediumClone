@@ -47,7 +47,9 @@ public class UserServiceImpl implements UserService {
         User inDB = getUserById(userId);
         User updatedUser = objectMapper.mapForRequest(request, User.class);
         updatedUser.setId(inDB.getId());
-        updatedUser.setPassword(passwordEncoder.encode(request.getPassword()));
+        if (request.getPassword() != null)
+            inDB.setPassword(passwordEncoder.encode(request.getPassword()));
+
         return userRepository.save(updatedUser);
     }
 
@@ -100,11 +102,6 @@ public class UserServiceImpl implements UserService {
         }
         User user = getUserById(userId);
         String oldImage = user.getImage();
-
-        if (oldImage != null) {
-            fileServiceImpl.deleteProfileImage(oldImage);
-            user.setImage(null);
-        }
 
         String imageName = uploadImage(file);
         user.setImage(imageName);

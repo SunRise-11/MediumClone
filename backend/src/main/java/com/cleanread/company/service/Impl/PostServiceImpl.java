@@ -20,11 +20,14 @@ import com.cleanread.company.service.FollowService;
 import com.cleanread.company.service.PostService;
 import com.cleanread.company.service.TagService;
 import com.cleanread.company.service.UserService;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -172,7 +175,11 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public Page<PostDTO> getLatestPosts(Pageable pageable) {
+    public Page<PostDTO> getLatestPosts(Pageable pageable, Long tagId) {
+        if (tagId != null) {
+            Specification<Post> spec = Specification.where(hasTag(tagId));
+            return mapPostToPostDTO(postRepository.findAllByOrderByCreatedAtDesc(pageable, spec), pageable);
+        }
         return mapPostToPostDTO(postRepository.findAllByOrderByCreatedAtDesc(pageable), pageable);
     }
 
@@ -207,6 +214,13 @@ public class PostServiceImpl implements PostService {
 
         return objectMapper.convertListToPage(postDTOs, pageable);
 
+    }
+
+    private Specification<Post> hasTag(Long tagId) {
+        return (root, query, builder) -> {
+            Join<Tag, Post> join = root.join("tags", JoinType.INNER);
+            return builder.equal(join.get("id"), tagId);
+        };
     }
 
 }

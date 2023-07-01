@@ -5,7 +5,9 @@ import com.cleanread.company.entity.Tag;
 import com.cleanread.company.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -18,7 +20,7 @@ import java.util.List;
  * @author: Sarvar55
  */
 @Repository
-public interface PostRepository extends JpaRepository<Post, Long> {
+public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificationExecutor<Post> {
     //@Query("select p from Post p where p.tags = ?1")
     Page<Post> findAllByTags(Tag tag, Pageable pageable);
 
@@ -36,6 +38,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     //@Query("select p from Post p order by p.createdAt DESC")
     Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable);
+
+    Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable, Specification<Post> spec);
 
     //@Query("select p from Post p where p.createdAt between ?1 and ?2")
     Page<Post> findByCreatedAtBetween(Date start, Date end, Pageable pageable);
