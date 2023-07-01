@@ -20,7 +20,7 @@ export default async function PostList() {
         <>
             {
                 content.map((post: PostDTO) => (
-                    <Post key={post.postId} post={post} handleDeletePost={() => { }} />
+                    <Post key={post.postId} post={post}  />
                 ))
             }
         </>

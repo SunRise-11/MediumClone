@@ -8,6 +8,7 @@ import Link from 'next/link';
 
 interface AvatarProps {
   username: string;
+  userId: number;
   image?: string | null;
   isLarge?: boolean;
   isMedium?: boolean;
@@ -19,6 +20,7 @@ interface AvatarProps {
 
 const Avatar: React.FC<AvatarProps> = ({
   username,
+  userId,
   image,
   isLarge,
   hasBorder,
@@ -57,7 +59,8 @@ const Avatar: React.FC<AvatarProps> = ({
         items-center
       `}
     >
-      <Link href={`/users/${name}`}>
+      <Link href={`/users/${userId}`}     
+      >
         <Image
           className="rounded-full"
           width={width ? width : handleImageSize().w}

@@ -3,21 +3,26 @@ import React, { useState } from 'react';
 import { urlToTitle } from '@/util/urlToTitle';
 import { posts as storePosts } from '@/store/index';
 import Post from '@/components/Post';
+import PostDTO from '@/types/Post/Post';
 
-type Params = { params: { username: string } };
+type Params = { params: { userId: string } };
 
-const UserProfile = ({ params: { username } }: Params) => {
-    const name = urlToTitle(username);
+const UserProfile = async ({ params: { userId } }: Params) => {
+    
 
-    const posts = storePosts.filter((post) => post.user.username === name);
+     
+    console.log("UserID is: ", userId)
 
+    // const posts = storePosts.filter((post) => post.user.username === name);
+
+    const { content } = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}/posts?page=0&size=1&sort=asc`, {"cache":"no-cache" }).then((res) => res.json());
     const [isActive, setIsActive] = useState<boolean>(false);
     return (
         <>
             <div className="px-5 md:px-10 lg:px-20 flex justify-between space-x-8 my-16">
                 <div className="w-full md:w-[65%] order-first">
                     <div className="flex flex-col space-y-4">
-                        <h1 className="text-3xl font-semibold items-start">{name}</h1>
+                        <h1 className="text-3xl font-semibold items-start">{userId}</h1>
                         <div className="flex items-center space-x-8 border-b text-gray-600 border-gray-200 mt-8">
                             <p
                                 onClick={() => setIsActive(false)}
@@ -35,11 +40,11 @@ const UserProfile = ({ params: { username } }: Params) => {
                             </p>
                         </div>
                         <div className="flex flex-col space-y-6">
-                            {posts.map((post) => (
+                            {content.map((post : PostDTO) => (
                                 <Post
                                     key={post.postId}
                                     post={post}
-                                    handleDeletePost={() => { }}
+                                    
                                 />
                             ))}
                         </div>

@@ -13,7 +13,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 
 type Params = {
   params: {
-    slug: string;
+    slug: string[];
   };
 };
 
