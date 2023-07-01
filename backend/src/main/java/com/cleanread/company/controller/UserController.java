@@ -105,10 +105,10 @@ public class UserController {
                     content = @Content(schema = @Schema(implementation = UserDTO.class))),
             @ApiResponse(responseCode = "404", description = "User not found")})
 
-    @GetMapping("/users/{username}")
+    @GetMapping("/users/username")
     public ResponseEntity<UserDTO> getUserByUsername(
             @Parameter(description = "username of user to get")
-            @PathVariable String username) {
+            @RequestBody String username) {
 
         User user = userService.findByUsername(username);
         UserDTO userDTO = objectMapper.mapForResponse(user, UserDTO.class);

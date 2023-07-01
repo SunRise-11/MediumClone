@@ -1,8 +1,10 @@
-FROM maven:3.8.2-jdk-11 AS build
+FROM maven:3.8.1-openjdk-17 AS build
+WORKDIR /app
 COPY . .
-RUN mvn clean package -Pprod -DskipTests
+RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:17
-ADD target/backend-0.0.1-SNAPSHOT.jar app.jar
+WORKDIR /app
+COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
