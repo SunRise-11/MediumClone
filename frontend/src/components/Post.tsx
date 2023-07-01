@@ -1,4 +1,4 @@
-'use client';
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
 import { savePost } from '../../public/icons/icons';
@@ -12,13 +12,10 @@ import { titleToUrl } from '@/util/titleToUrl';
 
 type Props = {
   post: PostDTO;
-  handleDeletePost: (
-    e: React.FormEvent<HTMLButtonElement>,
-    postId: number
-  ) => void;
+
 };
 
-const Post = ({ post, handleDeletePost }: Props) => {
+const Post = ({ post, }: Props) => {
   const {
     title,
     content,

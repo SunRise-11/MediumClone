@@ -11,10 +11,14 @@ type Props = {
     username: string,
     postId: number,
     hanldePin: () => void
-    handleDeletePost: (e: any, postId: number) => void
+
 }
 
-const PostMenu: React.FC<Props> = ({ pinned, username, postId, handleDeletePost, hanldePin }) => {
+const PostMenu: React.FC<Props> = ({ pinned, username, postId, hanldePin }) => {
+
+    const handleDeletePost = (e, postId: number) => {
+
+    }
 
 
     const content = (

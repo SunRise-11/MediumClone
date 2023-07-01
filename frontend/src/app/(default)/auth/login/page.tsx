@@ -1,8 +1,11 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import Input from '@/components/Input';
 import { Checkbox } from '@mui/material';
 import Link from 'next/link';
+import defaultImage from "../../../../public/images/Ashley-Bretford.jpg"
+import Input from '@/components/Input';
+import { signIn } from 'next-auth/react';
+
 
 type FormState = {
   email: string;
@@ -27,6 +30,7 @@ const Login = (): JSX.Element => {
     passwordError: '',
   });
 
+
   const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValidationErrors({});
     const { name, value } = e.target
@@ -40,13 +44,15 @@ const Login = (): JSX.Element => {
 
   const handleSumbit = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const { email } = form;
-    //burası test amaçlı next auth ile çozulecek 
-    setForm({
-      email: '',
-      password: '',
+    const { email, password } = form;
+
+    signIn("credentials", {
+      email, password
+      ,
+      callbackUrl: "/feed",
+      redirect: true
     });
-    //ToDo: some code here
+
   };
 
   const { email, password } = form;
@@ -100,7 +106,7 @@ const Login = (): JSX.Element => {
           <div className="flex justify-center">
             <p className="xl:text-base  text-sm font-normal text-gray-600">
               Don`t have an account?
-              <Link href="/auth/register">
+              <Link href="/register">
                 <span className="xl:text-base  text-sm cursor-pointer text-blue-500 hover:underline transition ease-in duration-150">
                   Sign Up
                 </span>

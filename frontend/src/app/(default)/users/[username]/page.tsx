@@ -6,10 +6,14 @@ import Post from '@/components/Post';
 
 type Params = { params: { username: string } };
 
-const UserProfile = ({ params: { username } }: Params) => {
+const UserProfile = async ({ params: { username } }: Params) => {
     const name = urlToTitle(username);
 
     const posts = storePosts.filter((post) => post.user.username === name);
+
+
+
+
 
     const [isActive, setIsActive] = useState<boolean>(false);
     return (

@@ -9,7 +9,8 @@ import { followers as users } from '@/store'
 import Link from "next/link"
 import { titleToUrl } from '@/util/titleToUrl';
 import { urlToTitle } from '@/util/urlToTitle';
-import { usernameToImage } from '@/util/usernameToImage';
+import { useUser } from '@/hook/useUser';
+import { CircularProgress } from '@mui/material';
 
 type Props = {
 
@@ -20,10 +21,12 @@ const UserProfile = (props: Props) => {
     const [followers, setFollowers] = useState<User[]>([])
     const [visibilityEditModal, setVisilityEditModal] = useState<boolean>(false)
 
-    const username = splitDataFromUrl(usePathname())
-    const name = urlToTitle(splitDataFromUrl(usePathname()))
-    const userImage = usernameToImage(name);
+    const path = usePathname()
 
+    const name = urlToTitle(splitDataFromUrl(path))
+
+
+    const { user, isError, isLoading } = useUser(name)
 
     function splitDataFromUrl(url: string): any {
         if (!url) return null;
@@ -46,12 +49,22 @@ const UserProfile = (props: Props) => {
         fetchFollowingByUsername()
     }, [])
 
+
+    if (isLoading) {
+        return null;
+    }
+    console.log(user);
+
+
+    // const { username, image, userId } = user;
+
+
     return (
         <div className="w-full hidden md:flex md:w-[35%] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
             <div className="profile flex flex-col space-y-3 ml-8">
                 <Link href={`/users/${username}`}>
                     <Image
-                        src={`/images/${userImage}.jpg`} // Route of the image file
+                        src={image} // Route of the image file
                         height={88}
                         width={88}
                         alt="Profile Picture"
@@ -81,7 +94,7 @@ const UserProfile = (props: Props) => {
 
                 }
                 {
-                    users.length > 5 && <Link href={`/users/${titleToUrl(username)}/following`}>
+                    users.length > 5 && <Link href={`/users/${titleToUrl(name)}/following`}>
                         <span className='cursor-pointer text-xs mt-2 text-[#191919] hover:text-gray-600'>See All({`${users.length}`})</span>
                     </Link>
                 }
