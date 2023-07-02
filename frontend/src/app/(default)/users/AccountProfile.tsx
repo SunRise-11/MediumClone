@@ -25,6 +25,8 @@ const UserProfile = (props: Props) => {
 
     const name = urlToTitle(splitDataFromUrl(path))
 
+    console.log(name);
+
 
     const { user, isError, isLoading } = useUser(name)
 
@@ -62,9 +64,9 @@ const UserProfile = (props: Props) => {
     return (
         <div className="w-full hidden md:flex md:w-[35%] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
             <div className="profile flex flex-col space-y-3 ml-8">
-                <Link href={`/users/${username}`}>
+                <Link href={`/users/${name}`}>
                     <Image
-                        src={image} // Route of the image file
+                        src={"/image"} // Route of the image file
                         height={88}
                         width={88}
                         alt="Profile Picture"
