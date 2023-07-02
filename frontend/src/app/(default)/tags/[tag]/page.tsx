@@ -23,15 +23,10 @@ const capitalize = (str: string) => {
 };
 
 
-
-
 const TagsPage = ({ params }: Params) => {
   const posts = storePosts.filter((post) =>
     post.tags?.some((tag) => tag.name === capitalize(params.tag))
   );
-
-
-
 
   return (
     <div className="px-5 md:px-10 lg:px-20 flex space-x-8 lg:divide-x-[1px]">

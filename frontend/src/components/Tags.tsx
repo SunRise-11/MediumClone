@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link';
 import Tag from '@/types/Tag/Tag';
 import Chip from './Chip';
+import { titleToUrl } from '@/util/titleToUrl';
 
 type Props = {
     title: string,
@@ -25,9 +26,10 @@ export default async function Tags({ title, footer }: Props) {
             <div className="flex flex-wrap gap-2 border-slate-300 pb-10">
                 {
                     tags.map((tag: Tag) => {
-                        const { name, id } = tag;
+                        const { name, tagId } = tag;
+                        const tagUrl = titleToUrl(name);
                         return (
-                            <Link key={id} href={`/tags/${name}`}>
+                            <Link key={tagId} href={`/tags/${tagUrl}/${tagId}`}>
                                 <Chip label={tag.name} />
                             </Link>
                         );

@@ -17,7 +17,11 @@ export default async function PostList() {
         <>
             {
                 content.map((post: PostDTO) => (
+<<<<<<< HEAD
                     <Post key={post.postId} post={post} />
+=======
+                    <Post key={post.postId} post={post}  />
+>>>>>>> 8f0971e385d953b454ce9864af752719a92e16b4
                 ))
             }
         </>

@@ -12,10 +12,17 @@ import { titleToUrl } from '@/util/titleToUrl';
 
 type Props = {
   post: PostDTO;
+<<<<<<< HEAD
 
 };
 
 const Post = ({ post, }: Props) => {
+=======
+  
+};
+
+const Post = ({ post }: Props) => {
+>>>>>>> 8f0971e385d953b454ce9864af752719a92e16b4
   const {
     title,
     content,
@@ -27,7 +34,7 @@ const Post = ({ post, }: Props) => {
     user,
     tags,
   } = post;
-  const { username, image: userImage } = user;
+  const { username, image: userImage, userId } = user;
   const postUrl = titleToUrl(title);
   const usernameUrl = titleToUrl(user.username);
 
@@ -62,10 +69,11 @@ const Post = ({ post, }: Props) => {
               width={24}
               height={36}
               username={user.username}
+              userId={user.userId}
             />
             <h1 className="text-sm font-semibold">{username}</h1>
           </div>
-          <Link href={`posts/${postUrl}/${postId}`}>
+          <Link href={`/posts/${postUrl}/${postId}`}>
             <p className="leading-[20px] md:leading-[28px] md:text-[22px] font-bold text-slate-800 space-y-[2px] cursor-pointer">
               {title}
             </p>
@@ -94,7 +102,7 @@ const Post = ({ post, }: Props) => {
                   username={user.username}
                   pinned={pinned}
                   hanldePin={hanldePin}
-                  handleDeletePost={handleDeletePost}
+                  
                 />
               )}
             </div>
