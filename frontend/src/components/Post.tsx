@@ -1,4 +1,4 @@
-'use client';
+"use client"
 import Image from 'next/image';
 import Link from 'next/link';
 import { savePost } from '../../public/icons/icons';
@@ -12,10 +12,10 @@ import { titleToUrl } from '@/util/titleToUrl';
 
 type Props = {
   post: PostDTO;
-  
+
 };
 
-const Post = ({ post }: Props) => {
+const Post = ({ post, }: Props) => {
   const {
     title,
     content,
@@ -95,7 +95,7 @@ const Post = ({ post }: Props) => {
                   username={user.username}
                   pinned={pinned}
                   hanldePin={hanldePin}
-                  
+
                 />
               )}
             </div>

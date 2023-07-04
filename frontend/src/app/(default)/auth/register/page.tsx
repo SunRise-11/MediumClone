@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
-import Input from '@/components/Input';
 import Link from 'next/link';
+import Input from '@/components/Input';
 
 type FormValues = {
   username: string;
@@ -125,7 +125,7 @@ const Register = (): JSX.Element => {
           <div className="flex justify-center mb-2">
             <p className="xl:text-base text-sm">
               Already have an account?
-              <Link href="/auth/login">
+              <Link href="/login">
                 <span className="xl:text-base  text-sm cursor-pointer text-blue-500 hover:underline transition ease-in duration-150">
                   Sign In
                 </span>

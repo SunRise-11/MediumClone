@@ -10,17 +10,15 @@ import Image from "next/image";
 import User from "@/types/user/User";
 import Avatar from "./Avatar";
 import { titleToUrl } from "@/util/titleToUrl";
+import { signOut, useSession } from "next-auth/react";
 
 
 export default function AvatarMenu() {
-    //burası değişicek
-    const [loggedInUser, setLoggedInUser] = useState<User | null>({ userId: 1, username: "Abbas Abdelila", email: "abbas@gmail.com", image: defaultImage.src, bio: "SDU" });
-    const logout = () => {
-        setLoggedInUser(null)
-    }
 
-    return loggedInUser ? (
-        <AuthMenu avatar={loggedInUser?.image} username={loggedInUser?.username} email={loggedInUser!.email} userId={loggedInUser!.userId} logout={logout} />
+    const user = useSession()
+
+    return user.data?.user ? (
+        <AuthMenu avatar={user.data?.user.image} username={user.data?.user?.username} email={user.data?.user?.email} userId={user.data.user.userId} logout={signOut} />
     ) : (
         <UnAuthMenu />
     )

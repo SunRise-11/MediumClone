@@ -9,7 +9,6 @@ type Props = {
     footer?: React.ReactElement;
 }
 
-
 export default async function Tags({ title, footer }: Props) {
 
     const tags = await fetch("http://192.168.43.164:8080/api/v1/tags",

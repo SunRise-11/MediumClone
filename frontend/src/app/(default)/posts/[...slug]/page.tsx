@@ -34,8 +34,8 @@ const PostPage = async ({ params: { slug } }: Params) => {
 
   const res = await fetch(
     `http://192.168.43.164:8080/api/v1/posts/${slug[1]}`, {
-      cache: "no-cache",
-    }
+    cache: "no-cache",
+  }
   ).then((res) => res.json());
 
   const post: PostDTO = res;

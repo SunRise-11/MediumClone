@@ -30,7 +30,10 @@ const UserFollowers = async ({ userId } : { userId : string}) => {
         <div>
             {
                 followed.map((user: User) => (
+                    <>
+                     {/* @ts-expect-error Server Component */}
                     <UserBio key={user.userId} user={user} />
+                    </>
                 ))
             }
         </div>

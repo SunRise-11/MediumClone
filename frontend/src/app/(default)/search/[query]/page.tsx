@@ -3,6 +3,10 @@ import PostList from '@/components/PostList';
 import Tags from '@/components/Tags';
 import React from 'react';
 import UserFollowers from '../../users/UserFollowers';
+import { useSearch } from '@/hook/useSearch';
+import { useState } from "react"
+import Post from '@/components/Post';
+import PostDTO from '@/types/Post/Post';
 
 
 type Params = {
@@ -10,7 +14,17 @@ type Params = {
         query: string;
     };
 };
-const SearchResultPage = ({ params: { query } }: Params) => {
+const SearchResultPage = async ({ params: { query } }: Params) => {
+
+    const [size, setSize] = useState(5)
+    const [page, setPage] = useState(0)
+    const [data, setData] = useState({})
+
+
+    const res = await fetch(`http://localhost:8080/api/v1/posts/search?query=${query}&currentPage=${page}&currentSize=${size}`)
+        .then(res => res.json())
+
+    const { content } = res;
 
     return (
         <div className='flex space-x-16 lg:divide-x-[1px] px-5 sm:px-10 md:px-15 lg:!px-32 my-20'>
@@ -20,7 +34,11 @@ const SearchResultPage = ({ params: { query } }: Params) => {
                         Results for <p className="text-gray-800 mx-2">{query}</p>
                     </h1>
                     <div className='text-sm'>
-                        <PostList />
+                        {
+                            (content?.map((post: PostDTO) => (
+                                <Post post={post} key={post.postId} />
+                            )))
+                        }
                     </div>
                 </div>
             </div>

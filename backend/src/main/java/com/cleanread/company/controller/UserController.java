@@ -89,7 +89,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "User not found")})
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<UserDTO> getUser(
+    public ResponseEntity<UserDTO> getUserById(
             @Parameter(description = "ID of user to get")
             @PathVariable Long userId) {
 
@@ -98,6 +98,24 @@ public class UserController {
 
         return ResponseEntity.ok(userDTO);
     }
+
+    @Operation(summary = "Get a user by username")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User found",
+                    content = @Content(schema = @Schema(implementation = UserDTO.class))),
+            @ApiResponse(responseCode = "404", description = "User not found")})
+
+    @GetMapping("/users/username")
+    public ResponseEntity<UserDTO> getUserByUsername(
+            @Parameter(description = "username of user to get")
+            @RequestBody String username) {
+
+        User user = userService.findByUsername(username);
+        UserDTO userDTO = objectMapper.mapForResponse(user, UserDTO.class);
+
+        return ResponseEntity.ok(userDTO);
+    }
+
 
     @Operation(summary = "Get All users")
     @ApiResponses(value = {

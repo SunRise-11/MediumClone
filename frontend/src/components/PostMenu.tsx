@@ -11,7 +11,8 @@ type Props = {
     username: string,
     postId: number,
     hanldePin: () => void
-    
+
+
 }
 
 const PostMenu: React.FC<Props> = ({ pinned, username, postId, hanldePin }) => {
@@ -28,7 +29,7 @@ const PostMenu: React.FC<Props> = ({ pinned, username, postId, hanldePin }) => {
                 </Button>
             </Link>
             <Button
-                
+
                 type="text"
                 className="!text-red-500 hover:!text-red-600"
             >

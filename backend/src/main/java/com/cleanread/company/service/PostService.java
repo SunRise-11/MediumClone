@@ -44,7 +44,7 @@ public interface PostService {
 
     Page<PostDTO> searchPosts(String title, Pageable pageable);
 
-    Page<PostDTO> getLatestPosts(Pageable pageable);
+    Page<PostDTO> getLatestPosts(Pageable pageable, Long tagId);
 
     Page<PostDTO> getPostByDateBetween(Date start, Date end, Pageable pageable);
 }

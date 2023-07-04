@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
     @Bean
-    public OpenAPI springShopOpenAPI() {
+    public OpenAPI mediumCloneOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("Medium Clone API")
                         .description("Spring medium clone sample application")
