@@ -61,6 +61,7 @@ const PostPage = async ({ params: { slug } }: Params) => {
           <div className="profile flex flex-col space-y-10">
             {/* <Image src={`/images/${userimage}.jpg`} width={88} height={88} alt="profile picture" /> */}
             <Avatar
+              userId = {post.user.userId}
               image={post.user.image}
               username={post.user.username}
               height={88}
