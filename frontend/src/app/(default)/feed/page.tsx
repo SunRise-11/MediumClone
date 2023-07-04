@@ -17,6 +17,7 @@ export default function page({ }: Props) {
             <div className='w-[90%] mx-auto my-16 flex gap-40'>
                 <div className='w-full lg:w-[50%]'>
                     <Carousel data={topics} width={800} />
+                    {/* @ts-expect-error Server Component */}
                     <PostList />
                 </div>
                 <div className='hidden lg:flex lg:flex-col lg:w-[30%] mt-44'>
@@ -32,7 +33,7 @@ export default function page({ }: Props) {
                                         alt="profile-pic"
                                         className="rounded-full"
                                     />
-                                    <p className='font-medium text-[13px]'>Asley Bertford</p>
+                                    <p className='font-medium text-[13px]'>Asley Bretford</p>
                                 </div>
                                 <p className='text-[#292929] leading-5 font-bold line-clamp-2' >Lorem ipsum voluptatem ducimus deleniti voluptates eveniet tempora neque id earum facere cupiditate.
                                 </p>
@@ -83,7 +84,9 @@ export default function page({ }: Props) {
 
 
                         </div>
+                        {/* @ts-expect-error Server Component */}
                         <Tags title='Recommended topics' />
+                        {/* @ts-expect-error Server Component */}
                         <UserFollowers></UserFollowers>
                     </div>
                 </div>
