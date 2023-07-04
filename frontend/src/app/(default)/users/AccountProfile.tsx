@@ -11,29 +11,31 @@ import { titleToUrl } from '@/util/titleToUrl';
 import { urlToTitle } from '@/util/urlToTitle';
 import { usernameToImage } from '@/util/usernameToImage';
 
-type Props = {
 
-}
 
-const UserProfile = (props: Props) => {
+const AccountProfile = async ({ userId  } : { userId : number}) => {
 
-    const [followers, setFollowers] = useState<User[]>([])
+    // const [followers, setFollowers] = useState<User[]>([])
     const [visibilityEditModal, setVisilityEditModal] = useState<boolean>(false)
 
-    const username = splitDataFromUrl(usePathname())
-    const name = urlToTitle(splitDataFromUrl(usePathname()))
-    const userImage = usernameToImage(name);
+    // const username = splitDataFromUrl(usePathname())
+    // const name = urlToTitle(splitDataFromUrl(usePathname()))
+    // const userImage = usernameToImage(name);
 
 
-    function splitDataFromUrl(url: string): any {
-        if (!url) return null;
-        const data = url?.split("/")[2]
-        return data
-    }
+    // function splitDataFromUrl(url: string): any {
+    //     if (!url) return null;
+    //     const data = url?.split("/")[2]
+    //     return data
+    // }
 
-    const fetchFollowingByUsername = (): void => {
-        setFollowers(users)
-    }
+    // const fetchFollowingByUsername = (): void => {
+    //     setFollowers(users)
+    // }
+
+    const user : User = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}`).then((res) => res.json());
+
+    const followed : User[] = await fetch(`http://192.168.43.164:8080/api/v1/following/${userId}`).then((res) => res.json());
 
     const handleCloseModal = () => {
         setVisilityEditModal(false)
@@ -42,26 +44,26 @@ const UserProfile = (props: Props) => {
         setVisilityEditModal(true)
     }
 
-    useEffect(() => {
-        fetchFollowingByUsername()
-    }, [])
+    // useEffect(() => {
+    //     fetchFollowingByUsername()
+    // }, [])
 
     return (
         <div className="w-full hidden md:flex md:w-[35%] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
             <div className="profile flex flex-col space-y-3 ml-8">
-                <Link href={`/users/${username}`}>
+                <Link href={`/users/${user.userId}`}>
                     <Image
-                        src={`/images/${userImage}.jpg`} // Route of the image file
+                        src={user.image} // Route of the image file
                         height={88}
                         width={88}
                         alt="Profile Picture"
                         className="rounded-full"
                     />
-                    <h1 className="text-[16px] font-semibold">{name}</h1>
+                    <h1 className="text-[16px] font-semibold">{user.username}</h1>
                 </Link>
                 <p className="text-[14px] text-slate-500 text-light">2 followers</p>
                 <p className="text-[14px] text-slate-500 text-light text-clip w-[70%]">
-                    Süleyman Demirel University Computer Engineering student jsfkjsdkfj ksjdfnjksdnk
+                    Süleyman Demirel University Computer Engineering student
                 </p>
 
                 <p
@@ -75,13 +77,13 @@ const UserProfile = (props: Props) => {
                 </div>
                 <h1>Following</h1>
                 {
-                    followers?.slice(0, 5).map((follow: any) => (
-                        <UserInfoBox key={follow.userId} image={follow.image} userId={follow.userId} username={follow.username} />
+                    followed?.slice(0, 5).map((user: User) => (
+                        <UserInfoBox key={user.userId} image={user.image} userId={user.userId} username={user.username} />
                     ))
 
                 }
                 {
-                    users.length > 5 && <Link href={`/users/${titleToUrl(username)}/following`}>
+                    users.length > 5 && <Link href={`/users/${user.userId}/following`}>
                         <span className='cursor-pointer text-xs mt-2 text-[#191919] hover:text-gray-600'>See All({`${users.length}`})</span>
                     </Link>
                 }
@@ -90,4 +92,4 @@ const UserProfile = (props: Props) => {
     )
 }
 
-export default UserProfile
+export default AccountProfile

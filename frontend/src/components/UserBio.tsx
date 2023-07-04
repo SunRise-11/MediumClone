@@ -13,14 +13,14 @@ type Props = {
 
 const FollowerProfileCard = (props: Props) => {
     const { user: { bio, email, image, username, userId } } = props;
-    const usernameUrl = titleToUrl(username)
+    // const usernameUrl = titleToUrl(username)
 
     return (
         <div className='w-full flex justify-between items-center my-4'>
             <div className="left h-full  flex  justify-between w-[60%]">
-                <Avatar username={usernameUrl} image={image} width={30} height={30} />
+                <Avatar userId={userId} username={username} image={image} width={30} height={30} />
                 <div className="detail flex flex-col w-[80%] ">
-                    <Link href={`/users/${usernameUrl}`}>
+                    <Link href={`/users/${userId}`}>
                         <p className='text-[#292929] text-sm'>{username}</p>
                     </Link>
                     <p className='text-[#757575] text-xs '>{bio}</p>
