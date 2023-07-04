@@ -7,6 +7,15 @@ import { draftToMarkdown } from 'markdown-draft-js';
 import getInputValue from './getInputValue';
 import { useRouter } from 'next/router';
 
+// {
+//     "content": "string",
+//     "title": "string",
+//     "image": "string",
+//     "tagIds": [
+//       0
+//     ]
+//   }
+
 const Editor = dynamic(
   () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
   { ssr: false }

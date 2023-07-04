@@ -9,6 +9,8 @@ import UserFollowers from "../../(default)/users/UserFollowers"
 
 type Props = {}
 
+
+
 export default function page({ }: Props) {
 
 
@@ -87,7 +89,7 @@ export default function page({ }: Props) {
                         {/* @ts-expect-error Server Component */}
                         <Tags title='Recommended topics' />
                         {/* @ts-expect-error Server Component */}
-                        <UserFollowers></UserFollowers>
+                        <UserFollowers />
                     </div>
                 </div>
             </div>
