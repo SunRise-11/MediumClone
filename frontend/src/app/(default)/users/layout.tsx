@@ -1,5 +1,5 @@
 import AuthNavbar from "@/components/AuthNavbar"
-import AccountProfile from "./AccountProfile"
+// import AccountProfile from "./AccountProfile"
 
 
 export default function UserLayout({
@@ -12,7 +12,7 @@ export default function UserLayout({
         <div className="md:divide-x-[1px]">
             <AuthNavbar />
             {children}
-            <AccountProfile />
+            {/* <AccountProfile /> */}
         </div>
     )
 }

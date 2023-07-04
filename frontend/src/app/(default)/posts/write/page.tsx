@@ -4,6 +4,8 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useState } from 'react';
 import { EditorState, convertToRaw } from 'draft-js';
 import { draftToMarkdown } from 'markdown-draft-js';
+import getInputValue from './getInputValue';
+import { useRouter } from 'next/router';
 
 const Editor = dynamic(
   () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
@@ -23,16 +25,17 @@ const CreatePost = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token') || '',
         },
         body: JSON.stringify({
-          postId: 36,
-          title: "If this works, I'am a genius",
+          // postId: 36,
+          title: getInputValue('title'),
           content: markdown,
-          image:
-            'https://images.unsplash.com/photo-1634179127417-4b7b8b0b4b0b?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzNnx8fGVufDB8fHx8&ixlib=rb-1.2.1&w=1000&q=80',
-          readingTime: 5,
-          pinned: false,
-          createdAt: '2021-10-14T20:00:00.000Z',
+          image: getInputValue('image'),
+
+          // readingTime: 5,
+          // pinned: false,
+          // createdAt: '2021-10-14T20:00:00.000Z',
           user: {
             userId: 1,
             username: 'wahala',
@@ -44,8 +47,8 @@ const CreatePost = () => {
 
           tags: [
             {
-              tagId: 3,
-              name: 'MDX',
+              // tagId: 3,
+              name: getInputValue('tag'),
             },
           ],
         }),
@@ -55,6 +58,8 @@ const CreatePost = () => {
       console.log(res);
     };
     handleCreatePost();
+    useRouter().push(`/users/${user.userId}`);
+
   };
 
   return (
@@ -80,8 +85,10 @@ const CreatePost = () => {
                 id="title"
                 type="text"
                 placeholder="title"
+                required
+                maxLength={100}
               />
-
+ 
               <label
                 className="w-[80%] flex justify-start items-center text-gray-900 text-sm font-semibold mb-2 mx-auto"
                 htmlFor="desc"
@@ -90,7 +97,7 @@ const CreatePost = () => {
               </label>
               <input
                 className="w-[80%] mx-auto flex justify-center items-center px-3 py-1 mb-5 focus:outline-none focus:border-green-600 border-2 border-green-400 "
-                id="title"
+                id="desc"
                 type="text"
                 placeholder="desc"
               />
@@ -103,10 +110,26 @@ const CreatePost = () => {
               </label>
               <input
                 className="w-[80%] mx-auto flex justify-center items-center px-3 py-1 mb-5 focus:outline-none focus:border-green-600 border-2 border-green-400 "
-                id="title"
+                id="tag"
                 type="text"
                 placeholder="tag"
               />
+
+<label
+                className="w-[80%] flex justify-start items-center text-gray-900 text-sm font-semibold mb-2 mx-auto"
+                htmlFor="image url"
+              >
+                Image URL
+              </label>
+              <input
+                className="w-[80%] mx-auto flex justify-center items-center px-3 py-1 mb-5 focus:outline-none focus:border-green-600 border-2 border-green-400 "
+                id="url"
+                type="text"
+                placeholder="image url(optional)"
+                
+              />
+
+
             </form>
             <div className="mt-16">
               <Editor
