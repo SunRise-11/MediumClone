@@ -1,5 +1,5 @@
 "use client"
-import { Box, Modal } from "@mui/material";
+import { Box, Modal, TextField } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ProfileImage from "./ProfileImage";
 import Input from "./Input";
@@ -7,6 +7,9 @@ import Button from '@/components/Button';
 import React, { ChangeEvent, FC, useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useSession } from "next-auth/react";
+import User from "@/types/user/User";
+import getInputValue from "@/app/(default)/posts/write/getInputValue";
 
 type Props = {
     visibilityEditModal: boolean;
@@ -35,32 +38,42 @@ const style = {
     p: 4,
 };
 
-const ProfileCard: FC<Props> = ({ visibilityEditModal, handleCloseModal }) => {
+async function ProfileCard({ visibilityEditModal, handleCloseModal }: Props) {
 
-    const [form, setForm] = useState<FormData>({ name: null, bio: null })
-    const [validationErrors, setValidationErrors] = useState<ValidationError>({ nameError: null, bioError: null })
+    const currentUser = useSession().data?.user;
+    const [form, setForm] = useState<FormData>({ name: null, bio: null });
+    const [validationErrors, setValidationErrors] = useState<ValidationError>({ nameError: null, bioError: null });
 
+    const userFromApi: User = await fetch(`http://localhost:8080/api/v1/users/${currentUser.userId}`)
+        .then((response) => response.json());
 
     const handleChangeForm = (e: ChangeEvent<HTMLInputElement>): void => {
-        setValidationErrors({ nameError: null, bioError: null })
-        const { name, value } = e.target;
-        setForm(prev => {
-            return {
-                ...prev,
-                [name]: value
+        setValidationErrors({ nameError: null, bioError: null });
+
+    };
+    const onClickSubmit = async (): void => {
+
+        const name = getInputValue("profilename")
+        const bio = getInputValue("profilebio");
+
+        const body = {
+            username: name,
+            bio
+        }
+        await fetch(`http://localhost:8080/api/v1/users/${currentUser.userId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + currentUser.accessToken
             }
         })
-    }
-
-
-    const onClickSubmit = (): void => {
-        //TODO: some code here
         handleCloseModal();
     };
 
-    const { name, bio } = form
+    const { name, bio } = form;
 
-    const { nameError, bioError } = validationErrors
+    const { nameError, bioError } = validationErrors;
+
+
     return (
         <Modal
             open={visibilityEditModal}
@@ -76,21 +89,21 @@ const ProfileCard: FC<Props> = ({ visibilityEditModal, handleCloseModal }) => {
                     </span>
                 </div>
                 <div className="my-5 flex flex-col">
-                    <ProfileImage />
+                    <ProfileImage image={userFromApi.image} />
                     <Input
-                        onChangeForm={handleChangeForm}
+                        id="profilename"
                         name="name"
                         errorMessage={nameError}
                         error={nameError ? true : false}
-                        label="Name"
+                        label={userFromApi.username || "Name"}
                         required={true}
                         description={"Appears on your Profile page, as your byline, and in your responses.  0/50"} value={name} />
                     <Input
-                        onChangeForm={handleChangeForm}
+                        id="profilebio"
                         name="bio"
                         errorMessage={bioError}
                         error={bioError ? true : false}
-                        label="Bio"
+                        label={userFromApi.bio || "Bio"}
                         description={"Appears on your Profile and next to your stories.  0/160"} value={bio} />
                 </div>
 
@@ -99,16 +112,16 @@ const ProfileCard: FC<Props> = ({ visibilityEditModal, handleCloseModal }) => {
                         <Button buttonType="delete" label="Delete account" onClick={handleCloseModal} />
                     </div>
                     <div className="block md:hidden">
-                        <IconButton onClick={handleCloseModal} aria-label="delete" >
+                        <IconButton onClick={handleCloseModal} aria-label="delete">
                             <DeleteIcon />
                         </IconButton>
                     </div>
                     <Button label="Cancel" onClick={handleCloseModal} buttonType="cancel" />
-                    <Button label="Submit" onClick={handleCloseModal} buttonType="submit" />
+                    <Button label="Submit" onClick={onClickSubmit} buttonType="submit" />
                 </div>
             </Box>
         </Modal>
     );
-};
+}
 
 export default ProfileCard;

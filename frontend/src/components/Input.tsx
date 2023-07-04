@@ -6,13 +6,15 @@ import { ChangeEvent } from 'react';
 type Props = {
   error?: boolean;
   name: string;
+  id?: string;
   inputType?: string;
   label: string;
+  placeHolder?: string;
   errorMessage?: string | null;
   variant?: 'standard' | 'outlined' | 'filled';
   description?: string;
   required?: boolean;
-  onChangeForm?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onChangeForm?: (event) => void;
   value: string | null;
 }
 
@@ -25,6 +27,8 @@ export default function Input({
   variant,
   description,
   required,
+  id,
+  placeHolder,
   onChangeForm,
   value, }: Props) {
   let type: 'standard' | 'outlined' | 'filled' = 'standard';
@@ -43,11 +47,13 @@ export default function Input({
         value={value}
         onChange={onChangeForm}
         fullWidth
+        id={id}
         type={inputType}
         required={required}
         error={error || errorMessage ? true : false}
         label={label}
         name={name}
+        placeholder={placeHolder}
         variant={type}
         helperText={desc}
       />

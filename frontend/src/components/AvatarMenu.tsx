@@ -11,20 +11,21 @@ import User from "@/types/user/User";
 import Avatar from "./Avatar";
 import { titleToUrl } from "@/util/titleToUrl";
 import { signOut, useSession } from "next-auth/react";
+import { useUser } from "@/hook/useUser";
 
 
-export default function AvatarMenu() {
+export default async function AvatarMenu() {
 
-    const user = useSession()
+    const currentUser = useSession()
 
-    return user.data?.user ? (
-        <AuthMenu avatar={user.data?.user.image} username={user.data?.user?.username} email={user.data?.user?.email} userId={user.data.user.userId} logout={signOut} />
+    const user: User = await fetch(`http://localhost:8080/api/v1/users/${currentUser.data.user.userId}`).then(res => res.json())
+
+    return user ? (
+        <AuthMenu avatar={user.image} username={user.username} email={user.email} userId={user.userId} logout={signOut} />
     ) : (
         <UnAuthMenu />
     )
 }
-
-
 function UnAuthMenu() {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
@@ -96,7 +97,7 @@ function AuthMenu({
     };
     return (
         <div className="avatar flex flex-row items-center">
-            <Avatar username={username} image={avatar} />
+            <Avatar userId={userId} username={username} image={avatar} />
             <span
                 onClick={handleClick}
                 className="text-gray-500 cursor-pointer"
@@ -121,7 +122,7 @@ function AuthMenu({
                     "aria-labelledby": "basic-button",
                 }}
             >
-                <Link href={`/users/${titleToUrl(username)}`}>
+                <Link href={`/users/${userId}`}>
                     <MenuItem
                         onClick={handleClose}
                         className="flex flex-row items-center px-4 py-2 hover:bg-transparent"

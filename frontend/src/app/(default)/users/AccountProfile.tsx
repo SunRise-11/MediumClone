@@ -11,6 +11,7 @@ import { titleToUrl } from '@/util/titleToUrl';
 import { urlToTitle } from '@/util/urlToTitle';
 import { useUser } from '@/hook/useUser';
 import { CircularProgress } from '@mui/material';
+import { useSession } from 'next-auth/react';
 
 
 
@@ -23,9 +24,9 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
     // const name = urlToTitle(splitDataFromUrl(usePathname()))
     // const userImage = usernameToImage(name);
 
-    const name = urlToTitle(splitDataFromUrl(path))
+    // const name = urlToTitle(splitDataFromUrl(path))
 
-    console.log(name);
+    // console.log(name);
 
 
     // function splitDataFromUrl(url: string): any {
@@ -37,6 +38,7 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
     // const fetchFollowingByUsername = (): void => {
     //     setFollowers(users)
     // }
+    const currentUser = useSession().data?.user;
 
     const user: User = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}`).then((res) => res.json());
 
@@ -54,10 +56,10 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
     // }, [])
 
 
-    if (isLoading) {
-        return null;
-    }
-    console.log(user);
+    // if (isLoading) {
+    //     return null;
+    // }
+    // console.log(user);
 
 
     // const { username, image, userId } = user;
@@ -80,13 +82,13 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
                 <p className="text-[14px] text-slate-500 text-light text-clip w-[70%]">
                     Süleyman Demirel University Computer Engineering student
                 </p>
-
-                <p
-                    className="text-[14px] font-light text-[#1A8917] cursor-pointer pt-8"
-                    onClick={() => handleOpenModal()}
-                >
-                    Edit Profile
-                </p>
+                {currentUser.userId == user.userId &&
+                    <p
+                        className="text-[14px] font-light text-[#1A8917] cursor-pointer pt-8"
+                        onClick={() => handleOpenModal()}
+                    >
+                        Edit Profile
+                    </p>}
                 <div className="flex justify-center items-center w-[50%]">
                     <ProfileCard visibilityEditModal={visibilityEditModal} handleCloseModal={handleCloseModal} />
                 </div>

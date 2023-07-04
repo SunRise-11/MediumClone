@@ -80,9 +80,6 @@ export default function page({ }: Props) {
                                 <p className='text-[#292929] leading-5 font-bold line-clamp-2' >Lorem ipsum voluptatem ducimus deleniti voluptates eveniet tempora neque id earum facere cupiditate.
                                 </p>
                             </div>
-
-
-
                         </div>
                         {/* @ts-expect-error Server Component */}
                         <Tags title='Recommended topics' />
