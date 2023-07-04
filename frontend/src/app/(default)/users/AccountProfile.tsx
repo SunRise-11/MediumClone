@@ -5,7 +5,7 @@ import ProfileCard from '@/components/ProfileCard'
 import { usePathname } from 'next/navigation';
 import UserInfoBox from './UserInfoBox'
 import User from '@/types/user/User'
-import { followers as users } from '@/store'
+// import { followers as users } from '@/store'
 import Link from "next/link"
 import { titleToUrl } from '@/util/titleToUrl';
 import { urlToTitle } from '@/util/urlToTitle';
@@ -49,11 +49,11 @@ const AccountProfile = async ({ userId  } : { userId : number}) => {
     // }, [])
 
     return (
-        <div className="w-full hidden md:flex md:w-[35%] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
+        <div className="w-full hidden md:flex md:w-[35%] md:min-w-[80px] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
             <div className="profile flex flex-col space-y-3 ml-8">
                 <Link href={`/users/${user.userId}`}>
                     <Image
-                        src={user.image} // Route of the image file
+                        src={user?.image} // Route of the image file
                         height={88}
                         width={88}
                         alt="Profile Picture"
@@ -63,7 +63,7 @@ const AccountProfile = async ({ userId  } : { userId : number}) => {
                 </Link>
                 <p className="text-[14px] text-slate-500 text-light">2 followers</p>
                 <p className="text-[14px] text-slate-500 text-light text-clip w-[70%]">
-                    Süleyman Demirel University Computer Engineering student
+                    {user?.bio || ''}
                 </p>
 
                 <p
@@ -78,13 +78,13 @@ const AccountProfile = async ({ userId  } : { userId : number}) => {
                 <h1>Following</h1>
                 {
                     followed?.slice(0, 5).map((user: User) => (
-                        <UserInfoBox key={user.userId} image={user.image} userId={user.userId} username={user.username} />
+                        <UserInfoBox key={user.userId} image={user?.image} userId={user.userId} username={user.username} />
                     ))
 
                 }
                 {
-                    users.length > 5 && <Link href={`/users/${user.userId}/following`}>
-                        <span className='cursor-pointer text-xs mt-2 text-[#191919] hover:text-gray-600'>See All({`${users.length}`})</span>
+                    followed.length > 5 && <Link href={`/users/${user.userId}/following`}>
+                        <span className='cursor-pointer text-xs mt-2 text-[#191919] hover:text-gray-600'>See All({`${followed.length}`})</span>
                     </Link>
                 }
             </div>
