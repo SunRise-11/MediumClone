@@ -58,7 +58,7 @@ const CreatePost = () => {
       console.log(res);
     };
     handleCreatePost();
-    useRouter().push(`/users/${user.userId}`);
+    useRouter().push(`/users/7`);
 
   };
 
