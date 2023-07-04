@@ -12,17 +12,10 @@ import { titleToUrl } from '@/util/titleToUrl';
 
 type Props = {
   post: PostDTO;
-<<<<<<< HEAD
 
 };
 
 const Post = ({ post, }: Props) => {
-=======
-  
-};
-
-const Post = ({ post }: Props) => {
->>>>>>> 8f0971e385d953b454ce9864af752719a92e16b4
   const {
     title,
     content,
@@ -102,7 +95,7 @@ const Post = ({ post }: Props) => {
                   username={user.username}
                   pinned={pinned}
                   hanldePin={hanldePin}
-                  
+
                 />
               )}
             </div>

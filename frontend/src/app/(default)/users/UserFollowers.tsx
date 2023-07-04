@@ -9,21 +9,9 @@ type Props = {
 }
 
 
-const UserFollowers = (props: Props) => {
+const UserFollowers = async (props: Props) => {
 
-    const { username, } = props;
-    const [followers, setFollowers] = useState<User[]>([])
-
-    const fetchFollowingByUsername = (): void => {
-        setFollowers(users)
-    }
-
-    useEffect(() => {
-        if (username) {
-            fetchFollowingByUsername()
-        }
-        //ToDo:some code here
-    }, [username])
+    const users = await fetch("http://localhost:8080/api/v1/users").then(res => res.json())
 
     return (
         <div>

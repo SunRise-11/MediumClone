@@ -1,37 +1,62 @@
 
+import { useSession } from "next-auth/react";
+import { headers } from "next/dist/client/components/headers";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 const useFollow = (userId: number) => {
-    const currentUserId = 1;
-    const { push } = useRouter()
-    const isFollowing = useMemo(() => {
-        //ToDO: some code here
-        return true;
-    }, [currentUserId, userId]);
+    const { data } = useSession();
+    const { userId: currentUserId } = data?.user;
+    const { push, refresh } = useRouter()
+    const [isFollow, setIsFollow] = useState(false)
+
+    const isFollowing = useMemo(async () => {
+        try {
+            const res = await fetch(`http://localhost:8080/api/v1/following/${currentUserId}/followed/${userId}`, {
+                cache: "no-cache"
+            })
+                .then(res => res.json())
+            console.log(res);
+
+            setIsFollow(res);
+        } catch (error) {
+            setIsFollow(false)
+        }
+    }, [currentUserId, userId])
 
     const toggleFollow = useCallback(async () => {
-        if (!currentUserId || currentUserId == null) {
+        if (!currentUserId || currentUserId == null)
             return push("/auth/login")
-        }
         try {
             let request;
 
-            if (isFollowing) {
-                request = () => { }//delete('/api/follow', { data: { userId } });
+            isFollowing
+            if (isFollow) {
+                request = () => fetch(`http://localhost:8080/api/v1/users/${currentUserId}/unfollow/${userId}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + data?.user?.accessToken
+                    }
+                })
             } else {
-                request = () => { }//post('/api/follow', { userId });
+                request = () => fetch(`http://localhost:8080/api/v1/users/${currentUserId}/follow/${userId}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + data?.user?.accessToken
+                    }
+                })
             }
-
-            await request();
-
+            await request()
+            refresh()
         } catch (error) {
-
+            console.log(error);
         }
     }, [currentUserId, isFollowing, userId]);
 
     return {
-        isFollowing,
+        isFollowing: isFollow,
         toggleFollow,
     }
 }

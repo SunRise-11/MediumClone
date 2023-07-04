@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 
 type Props = {
-
+    isFollow: boolean,
+    toogleFollow: () => void,
 };
 
-const FollowUserButton: React.FC<Props> = () => {
-    const [isFollow, setIsFollow] = useState<boolean>(false);
+const FollowUserButton: React.FC<Props> = ({ isFollow, toogleFollow }: Props) => {
 
     let followButtonClass = isFollow
         ? "bg-[#292929] text-white"
@@ -15,7 +15,7 @@ const FollowUserButton: React.FC<Props> = () => {
     return (
         <>
             <button
-                onClick={() => setIsFollow(!isFollow)}
+                onClick={toogleFollow}
                 className={`${followButtonClass} 
                   rounded-full
                   w-[90px] h-[30px]
