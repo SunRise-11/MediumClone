@@ -31,15 +31,15 @@ const TagsPage = async ({ params }: Params) => {
   // );
   console.log("I am from Params", params.tag[1])
 
-   
-  const { content } = await fetch(`http://192.168.43.164:8080/api/v1/tags/${params.tag[1].toString()}/posts?page=0&size=1&sort=asc`, {cache: "no-cache"}).then(res => res.json()) 
+
+  const { content } = await fetch(`http://192.168.43.164:8080/api/v1/tags/${params.tag[1].toString()}/posts?page=0&size=1&sort=asc`, { cache: "no-cache" }).then(res => res.json())
   // const content = [{
   //   postId: 1,
   //   title: '5 Javascript Clean Coding Patterns To Enhance Your Code',
   //   content: `
   //   Introduction
 
-    
+
   //   Well-documented code is essential for clean coding practices. Comments help explain the intent, purpose, and functionality of code blocks. Use comments to clarify complex algorithms, provide insights into decision-making processes, or document any assumptions or limitations. However, it's important to strike a balance with comments. Avoid excessive or redundant comments that merely restate the code. Focus on adding value by providing context and explaining the reasoning behind the implementation choices.
   //   `,
 
@@ -76,6 +76,7 @@ const TagsPage = async ({ params }: Params) => {
           <div className="flex-col">
             <TagHeader tag={params.tag[0]} />
             <div className="flex lg:justify-start space-x-2 items-center lg:space-x-5 my-4">
+              {/* @ts-expect-error Server Component */}
               <FollowUserButton />
               <Link href={"/posts/write"}>
                 <Button variant="outlined" size='small' color="success">
