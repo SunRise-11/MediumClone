@@ -11,17 +11,17 @@ import User from "@/types/user/User";
 import Avatar from "./Avatar";
 import { titleToUrl } from "@/util/titleToUrl";
 import { signOut, useSession } from "next-auth/react";
-import { useUser } from "@/hook/useUser";
 
 
 export default async function AvatarMenu() {
 
-    const currentUser = useSession()
+    const currentUser = useSession().data?.user
 
-    const user: User = await fetch(`http://localhost:8080/api/v1/users/${currentUser.data.user.userId}`).then(res => res.json())
+    if (currentUser)
+        var user: User = await fetch(`http://localhost:8080/api/v1/users/${currentUser?.userId}`).then(res => res.json())
 
     return user ? (
-        <AuthMenu avatar={user.image} username={user.username} email={user.email} userId={user.userId} logout={signOut} />
+        <AuthMenu avatar={user?.image} username={user.username} email={user.email} userId={user.userId} logout={signOut} />
     ) : (
         <UnAuthMenu />
     )

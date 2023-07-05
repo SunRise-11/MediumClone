@@ -1,4 +1,5 @@
 "use client";
+import { formatDate } from "@/util/DateFormat";
 import { titleToUrl } from "@/util/titleToUrl";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
@@ -8,12 +9,12 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import Image from "next/image";
 import Link from "next/link";
-const ProfileHeader = ({ username, userimage }: { username: string | undefined, userimage: string | null | undefined }) => {
+const ProfileHeader = ({ userId, username, userimage, readingTime, date }: { userId: Number, username: string, date: string, readingTime: number, userimage: string | null | undefined }) => {
   return (
     <>
       <div className="px-2 flex justify-between items-center mb-16">
         <div className="profile date flex justify-start space-x-3 sm:space-x-5">
-          <Link href={`/users/${titleToUrl(username)}`}>
+          <Link href={`/users/${userId}`}>
             <Image
               src={userimage}
               height={48}
@@ -23,12 +24,12 @@ const ProfileHeader = ({ username, userimage }: { username: string | undefined, 
             />
           </Link>
           <div className="flex flex-col gap-1">
-            <Link href={`/users/${titleToUrl(username)}`}>
+            <Link href={`/users/${userId}`}>
               <h1>{username}</h1>
             </Link>
             <div className="flex gap-3">
               <p className="text-light text-[#787878] text-[14px]">
-                Apr 28 · 6 min read ·
+                {`${formatDate(date)} · ${readingTime} min read ·`}
               </p>
               <span className="text-blue-400 text-[14px]">Listen</span>
             </div>

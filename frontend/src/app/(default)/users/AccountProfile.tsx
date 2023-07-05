@@ -47,6 +47,7 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
     const handleCloseModal = () => {
         setVisilityEditModal(false)
     }
+
     const handleOpenModal = () => {
         setVisilityEditModal(true)
     }
@@ -66,11 +67,11 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
 
 
     return (
-        <div className="w-full md:min-w-[40%] hidden md:flex md:w-[35%] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
+        <div className="w-full  hidden md:flex md:w-[35%] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
             <div className="profile flex flex-col space-y-3 ml-8">
                 <Link href={`/users/${user.userId}`}>
                     <Image
-                        src={user.image} // Route of the image file
+                        src={user?.image} // Route of the image file
                         height={88}
                         width={88}
                         alt="Profile Picture"
@@ -82,7 +83,7 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
                 <p className="text-[14px] text-slate-500 text-light text-clip w-[70%]">
                     {user.bio}
                 </p>
-                {currentUser.userId == user.userId &&
+                {currentUser?.userId == user.userId &&
                     <p
                         className="text-[14px] font-light text-[#1A8917] cursor-pointer pt-8"
                         onClick={() => handleOpenModal()}
@@ -95,9 +96,8 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
                 <h1>Following</h1>
                 {
                     followed?.slice(0, 5).map((user: User) => (
-                        <UserInfoBox key={user.userId} image={user.image} userId={user.userId} username={user.username} />
+                        <UserInfoBox key={user.userId} image={user?.image} userId={user?.userId} username={user?.username} />
                     ))
-
                 }
                 {
                     followed.length > 5 && <Link href={`/users/${user.userId}/following`}>

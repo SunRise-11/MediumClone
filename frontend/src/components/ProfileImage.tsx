@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import defaultImage from "../../public/images/profile.png";
 import { useSession } from "next-auth/react";
-import { type } from "os";
 
 type Props = {
     image: string | undefined

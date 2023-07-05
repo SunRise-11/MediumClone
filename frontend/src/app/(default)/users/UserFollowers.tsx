@@ -11,11 +11,11 @@ import { useSession } from 'next-auth/react'
 const UserFollowers = async () => {
 
     const currentUser = useSession().data?.user;
-    const followed: User[] = await fetch(`http://192.168.43.164:8080/api/v1/following/${currentUser.userId}`).then((res) => res.json());
+    const users: User[] = await fetch(`http://localhost:8080/api/v1/users`).then((res) => res.json());
 
     return (
         <div>
-            {followed?.map((user: User) => (
+            {users?.map((user: User) => (
                 <>
                     {/* @ts-expect-error Server Component */}
                     <UserBio key={user.userId} user={user} />

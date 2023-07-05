@@ -1,7 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import { urlToTitle } from '@/util/urlToTitle';
-import { posts as storePosts } from '@/store/index';
 import Post from '@/components/Post';
 import PostDTO from '@/types/Post/Post';
 import AccountProfile from '../AccountProfile'
@@ -17,7 +15,17 @@ const UserProfile = async ({ params: { userId } }: Params) => {
 
     // const posts = storePosts.filter((post) => post.user.username === name);
 
-    const { content }: { content: PostDTO[] } = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}/posts?page=0&size=1&sort=asc`, { "cache": "no-cache" }).then((res) => res.json());
+    let content: PostDTO[] = []
+
+
+    try {
+        content = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}/posts?page=0&size=1&sort=asc`, { "cache": "no-cache" }).then((res) => res.json());
+    } catch (error) {
+        console.log(error);
+
+    }
+
+
     return (
         <>
             <div className="px-5 md:px-10 lg:px-20 flex justify-between space-x-8 my-16">

@@ -6,7 +6,7 @@ import Avatar from '@/components/Avatar'
 type Props = {
     userId: number,
     username: string
-    image?: string
+    image?: string | null
 }
 
 const UserInfoBox = (props: Props) => {

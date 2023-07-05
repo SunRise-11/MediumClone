@@ -5,7 +5,7 @@ import LikeCommentShare from './LikeCommentShare';
 import { urlToTitle } from '@/util/urlToTitle';
 import { posts } from '@/store/index';
 import Avatar from '@/components/Avatar';
-import FollowUserButton from '@/components/FollowUserButton';
+import FollowButton from '@/components/FollowButton';
 import Image from 'next/image';
 import { usernameToImage } from '@/util/usernameToImage';
 import PostDTO from '@/types/Post/Post';
@@ -45,8 +45,11 @@ const PostPage = async ({ params: { slug } }: Params) => {
       <div className="sm:px-5 lg:px-20 lg:flex space-x-20 my-16">
         <div className="lg:w-[65%] lg:border-r border-gray-200 lg:pr-8">
           <ProfileHeader
+            userId={post.user.userId}
             username={post.user.username}
             userimage={post.user.image}
+            date={post.createdAt}
+            readingTime={post.readingTime}
           />
           <article className="px-3 prose lg:prose-md max-w-4xl sm:px-4">
             {/* @ts-expect-error Server Component */}
@@ -61,7 +64,7 @@ const PostPage = async ({ params: { slug } }: Params) => {
           <div className="profile flex flex-col space-y-10">
             {/* <Image src={`/images/${userimage}.jpg`} width={88} height={88} alt="profile picture" /> */}
             <Avatar
-              userId = {post.user.userId}
+              userId={post.user.userId}
               image={post.user.image}
               username={post.user.username}
               height={88}
@@ -78,7 +81,7 @@ const PostPage = async ({ params: { slug } }: Params) => {
                 Entrepreneur
               </p>
               <div className="flex space-x-5">
-                <FollowUserButton />
+                <FollowButton userId={post.user.userId} />
               </div>
             </div>
           </div>

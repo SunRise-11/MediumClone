@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 import Link from "next/link"
-import { writeBlogIcon,} from '../../public/icons/icons'
+import { writeBlogIcon, } from '../../public/icons/icons'
 import Search from './Search'
 import AvatarMenu from './AvatarMenu'
 type Props = {}
@@ -17,7 +17,7 @@ export default function Navbar({ }: Props) {
                     <span className="text-gray-500">{writeBlogIcon}</span>
                     <p className="text-sm">Write</p>
                 </Link>
-                <AvatarMenu />
+                <AvatarMenu key={""} />
             </div>
         </div>
     )
