@@ -41,7 +41,7 @@ const UserProfile = async ({ params: { userId } }: Params) => {
                             </p>
                         </div>
                         <div className="flex flex-col space-y-6">
-                            {(content && content.length > 0) ? (content.map((post: PostDTO) => (
+                            {(content && content.length > 0) ? (content?.map((post: PostDTO) => (
                                 <Post
                                     key={post.postId}
                                     post={post}

@@ -15,7 +15,7 @@ type Props = {
   description?: string;
   required?: boolean;
   onChangeForm?: (event) => void;
-  value: string | null;
+  value?: string | null;
 }
 
 export default function Input({

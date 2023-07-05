@@ -106,7 +106,7 @@ const Login = (): JSX.Element => {
           <div className="flex justify-center">
             <p className="xl:text-base  text-sm font-normal text-gray-600">
               Don`t have an account?
-              <Link href="/register">
+              <Link href="/auth/register">
                 <span className="xl:text-base  text-sm cursor-pointer text-blue-500 hover:underline transition ease-in duration-150">
                   Sign Up
                 </span>

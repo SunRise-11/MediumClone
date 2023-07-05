@@ -66,7 +66,7 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
 
 
     return (
-        <div className="w-full hidden md:flex md:w-[35%] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
+        <div className="w-full md:min-w-[40%] hidden md:flex md:w-[35%] order-last md:fixed md:top-[100px] md:right-0 md:h-screen">
             <div className="profile flex flex-col space-y-3 ml-8">
                 <Link href={`/users/${user.userId}`}>
                     <Image
@@ -78,9 +78,9 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
                     />
                     <h1 className="text-[16px] font-semibold">{user.username}</h1>
                 </Link>
-                <p className="text-[14px] text-slate-500 text-light">2 followers</p>
+                <p className="text-[14px] text-slate-500 text-light">{`${followed.length} followers`}</p>
                 <p className="text-[14px] text-slate-500 text-light text-clip w-[70%]">
-                    Süleyman Demirel University Computer Engineering student
+                    {user.bio}
                 </p>
                 {currentUser.userId == user.userId &&
                     <p
@@ -100,8 +100,8 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
 
                 }
                 {
-                    users.length > 5 && <Link href={`/users/${user.userId}/following`}>
-                        <span className='cursor-pointer text-xs mt-2 text-[#191919] hover:text-gray-600'>See All({`${users.length}`})</span>
+                    followed.length > 5 && <Link href={`/users/${user.userId}/following`}>
+                        <span className='cursor-pointer text-xs mt-2 text-[#191919] hover:text-gray-600'>See All({`${followed.length}`})</span>
                     </Link>
                 }
             </div>

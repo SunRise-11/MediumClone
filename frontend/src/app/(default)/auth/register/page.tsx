@@ -2,6 +2,8 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import Link from 'next/link';
 import Input from '@/components/Input';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 type FormValues = {
   username: string;
@@ -18,6 +20,11 @@ type ValidationErrors = {
 }
 
 const Register = (): JSX.Element => {
+
+  const currentUser = useSession().data?.user
+
+  const { push } = useRouter()
+
   const [form, setForm] = useState<FormValues>({
     username: '',
     email: '',
@@ -38,8 +45,38 @@ const Register = (): JSX.Element => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLButtonElement>): void => {
+  const handleSubmit = async (e: React.FormEvent<HTMLButtonElement>): void => {
     e.preventDefault();
+
+    const body = {
+      username: form.username,
+      email: form.email,
+      password: form.password
+    }
+    try {
+      const res = await fetch("http://localhost:8080/api/v1/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + currentUser.accessToken
+        },
+        body: JSON.stringify(body)
+      })
+
+      if (res.ok) {
+        push("/auth/login")
+      }
+
+      if (!res.ok) {
+        const errorData = await res.json()
+        if (errorData.validationErrors) {
+          setValidationErrors({ ...errorData.validationErrors });
+        }
+      }
+    } catch (error) {
+      console.log(error); s
+
+    }
     setForm({
       username: '',
       email: '',

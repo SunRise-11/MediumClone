@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ProfileImage from "./ProfileImage";
 import Input from "./Input";
 import Button from '@/components/Button';
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useSession } from "next-auth/react";
@@ -41,38 +41,50 @@ const style = {
 async function ProfileCard({ visibilityEditModal, handleCloseModal }: Props) {
 
     const currentUser = useSession().data?.user;
-    const [form, setForm] = useState<FormData>({ name: null, bio: null });
-    const [validationErrors, setValidationErrors] = useState<ValidationError>({ nameError: null, bioError: null });
+    const [validationErrors, setValidationErrors] = useState<ValidationError>({ username: null, bio: null });
 
     const userFromApi: User = await fetch(`http://localhost:8080/api/v1/users/${currentUser.userId}`)
         .then((response) => response.json());
 
     const handleChangeForm = (e: ChangeEvent<HTMLInputElement>): void => {
         setValidationErrors({ nameError: null, bioError: null });
-
     };
-    const onClickSubmit = async (): void => {
 
-        const name = getInputValue("profilename")
-        const bio = getInputValue("profilebio");
+    const onClickSubmit = async () => {
+        let name = getInputValue("profilename");
+        let bio = getInputValue("profilebio");
+
+        if (bio == userFromApi.bio && name == userFromApi.username)
+            handleCloseModal()
 
         const body = {
-            username: name,
-            bio
-        }
-        await fetch(`http://localhost:8080/api/v1/users/${currentUser.userId}`, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + currentUser.accessToken
+            username: (bio != null && (name === null || name.trim() == "")) ? userFromApi.username : name,
+            bio: (name != null && (bio == null || bio.trim() === "")) ? userFromApi.bio : bio
+        };
+
+        try {
+            const res = await fetch(`http://localhost:8080/api/v1/users/${currentUser.userId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + currentUser.accessToken
+                },
+                body: JSON.stringify(body)
+            });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                if (errorData.validationErrors) {
+                    setValidationErrors({ ...errorData.validationErrors });
+                }
             }
-        })
-        handleCloseModal();
+        } catch (error) {
+            console.error(error);
+        } finally {
+            handleCloseModal()
+        }
     };
-
-    const { name, bio } = form;
-
-    const { nameError, bioError } = validationErrors;
-
+    const { username: nameError, bio: bioError, } = validationErrors;
 
     return (
         <Modal
@@ -97,14 +109,14 @@ async function ProfileCard({ visibilityEditModal, handleCloseModal }: Props) {
                         error={nameError ? true : false}
                         label={userFromApi.username || "Name"}
                         required={true}
-                        description={"Appears on your Profile page, as your byline, and in your responses.  0/50"} value={name} />
+                        description={"Appears on your Profile page, as your byline, and in your responses.  0/50"} />
                     <Input
                         id="profilebio"
                         name="bio"
                         errorMessage={bioError}
                         error={bioError ? true : false}
                         label={userFromApi.bio || "Bio"}
-                        description={"Appears on your Profile and next to your stories.  0/160"} value={bio} />
+                        description={"Appears on your Profile and next to your stories.  0/160"} />
                 </div>
 
                 <div className="flex justify-end w-full gap-4">
@@ -117,7 +129,7 @@ async function ProfileCard({ visibilityEditModal, handleCloseModal }: Props) {
                         </IconButton>
                     </div>
                     <Button label="Cancel" onClick={handleCloseModal} buttonType="cancel" />
-                    <Button label="Submit" onClick={onClickSubmit} buttonType="submit" />
+                    <Button label="Submit" onClick={() => onClickSubmit()} buttonType="submit" />
                 </div>
             </Box>
         </Modal>

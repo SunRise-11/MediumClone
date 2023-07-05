@@ -42,18 +42,18 @@ function ProfileImage({ image }: Props) {
     const onClickUpdatedButton = () => {
         const updatedButton = document.querySelector('input[type="file"]');
         updatedButton?.click();
-
-        if (newImage) {
-        }
     };
 
+
+
     imageSource = image || newImage || defaultImage.src.toString();
+
     return (
         <div className="header flex justify-between">
             <div className="left flex flex-col">
                 <span className="text-[13px] md:text-sm text-gray-400 font-medium">Photo</span>
                 <Image
-                    src={imageSource}
+                    src={newImage || imageSource}
                     width={100}
                     height={100}
                     unoptimized
