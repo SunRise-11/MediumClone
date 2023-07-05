@@ -15,10 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,7 +57,7 @@ public class FollowController {
             @ApiResponse(responseCode = "404", description = "User not found",
                     content = @Content)})
 
-    @PostMapping("/users/{followingUserId}/unfollow/{followedUserId}")
+    @DeleteMapping("/users/{followingUserId}/unfollow/{followedUserId}")
     ResponseEntity<GenericResponse> unFollowUser(
             @Parameter(description = "id of user who is doing the unfollow") @PathVariable Long followingUserId,
             @Parameter(description = "id of user who is being unfollowed") @PathVariable Long followedUserId) {
@@ -106,6 +103,11 @@ public class FollowController {
                 .collect(Collectors.toList());
 
         return followedUsers;
+    }
+
+    @GetMapping("/following/{followingUserId}/followed/{followedUserId}")
+    public ResponseEntity<?> isFollowing(@PathVariable Long followingUserId, @PathVariable Long followedUserId) {
+        return ResponseEntity.ok(followService.isFollowing(followingUserId, followedUserId));
     }
 
 }

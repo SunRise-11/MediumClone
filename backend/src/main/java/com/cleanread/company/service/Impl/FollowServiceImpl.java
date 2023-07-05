@@ -70,6 +70,13 @@ public class FollowServiceImpl implements FollowService {
         return followRepository.findByFollowingUser(user);
     }
 
+    @Override
+    public boolean isFollowing(Long followingUserId, Long followedUserId) {
+        User followingUser = userService.getUserById(followingUserId);
+        User followedUser = userService.getUserById(followedUserId);
+        return followRepository.existsByFollowingUserAndFollowedUser(followingUser, followedUser);
+    }
+
 
     private boolean isAlreadyFollowed(User followedUser, User followingUser) {
         return followRepository.isFollowedByExists(followedUser, followingUser);

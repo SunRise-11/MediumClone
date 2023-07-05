@@ -45,12 +45,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User updateUser(UserUpdateRequest request, Long userId) {
         User inDB = getUserById(userId);
-        User updatedUser = objectMapper.mapForRequest(request, User.class);
-        updatedUser.setId(inDB.getId());
+
         if (request.getPassword() != null)
             inDB.setPassword(passwordEncoder.encode(request.getPassword()));
+        if (request.getBio() != null)
+            inDB.setBio(request.getBio());
+        if (request.getEmail() != null)
+            inDB.setEmail(request.getEmail());
+        if (request.getUsername() != null)
+            inDB.setUsername(request.getUsername());
 
-        return userRepository.save(updatedUser);
+        return userRepository.save(inDB);
     }
 
     @Override
