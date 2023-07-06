@@ -12,8 +12,8 @@ type Props = {
 const UserInfoBox = (props: Props) => {
     const { username, image, userId } = props;
     return (
-        <div className='w-full my-2'>
-            <div className='w-[60%] flex justify-between items-center'>
+        <div className='!w-full my-2'>
+            <div className='flex justify-between items-center'>
                 <Link href={`/users/${userId}`} className="flex justify-between items-center space-x-3">
                     <Avatar userId={userId} image={image} username={username} height={25} width={25} />
                     <p className='text-xs hover:underline duration-75 transition-transform'>{username}</p>

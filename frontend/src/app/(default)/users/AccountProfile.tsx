@@ -5,7 +5,7 @@ import ProfileCard from '@/components/ProfileCard'
 import { usePathname } from 'next/navigation';
 import UserInfoBox from './UserInfoBox'
 import User from '@/types/user/User'
-import { followers as users } from '@/store'
+// import { followers as users } from '@/store'
 import Link from "next/link"
 import { titleToUrl } from '@/util/titleToUrl';
 import { urlToTitle } from '@/util/urlToTitle';

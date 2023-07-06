@@ -21,7 +21,7 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         const { email, password } = credentials;
 
-        const result = await fetch("http://localhost:8080/api/v1/auth/login", {
+        const result = await fetch("http://192.168.43.164:8080/api/v1/auth/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
