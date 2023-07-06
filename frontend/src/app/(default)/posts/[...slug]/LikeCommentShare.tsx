@@ -5,6 +5,7 @@ import { Modal } from "antd";
 import { TextField } from "@mui/material";
 import PostDTO from "@/types/Post/Post";
 import PostLikeButton from "@/components/PostLikeButton";
+import CommentsContainer from "@/components/CommentsContainer";
 
 type Props = {
   post: PostDTO
@@ -12,9 +13,6 @@ type Props = {
 
 const LikeCommentShare = ({ post }: Props) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  console.log(post);
-
 
   return (
     <>
@@ -31,40 +29,7 @@ const LikeCommentShare = ({ post }: Props) => {
           </div>
         </div>
       </div>
-
-      <Modal
-        title="Comments"
-        open={isModalVisible}
-        footer={null}
-        onCancel={() => {
-          setIsModalVisible(false);
-        }}
-        className="fixed right-0 top-0"
-        style={{ borderRadius: 0 }}
-      >
-        <div className="flex flex-col space-y-8 min-h-screen">
-          <div className="flex justify-center write-comment mt-16">
-            <TextField
-              id="filled-textarea"
-              label="Write comment"
-              placeholder="Your comment here"
-              multiline
-              variant="filled"
-              rows={3}
-              className="w-full"
-              color="success"
-            />
-          </div>
-          <div>
-            <button className="px-4 py-2 bg-green-500 text-white rounded-3xl">
-              Post
-            </button>
-          </div>
-          <div>
-            <p className="text-center text-3xl text-gray-700">No comments yet...</p>
-          </div>
-        </div>
-      </Modal>
+      <CommentsContainer isModalVisible={isModalVisible} setIsModalVisible={setIsModalVisible} postId={post.postId} />
     </>
   );
 };

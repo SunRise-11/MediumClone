@@ -9,7 +9,7 @@ type Props = {
 }
 
 export default async function PostList({ url }: Props) {
-    const res = await fetch("http://192.168.43.164:8080/api/v1/posts/latest?page=0&size=1&sort=asc", {
+    const res = await fetch("http://localhost:8080/api/v1/posts/latest?page=0&size=1&sort=asc", {
         next: { revalidate: 60 }
     }).then(res => res.json())
 

@@ -42,13 +42,13 @@ const SortPosts = ({ content }: { content: PostDTO[] }) => {
         </p>
       </div>
     );
-  } 
+  }
 
   else {
     if (trending) {
       posts = content.sort((a, b) => {
         if (b.likes?.length && a.likes?.length) {
-          return b.likes.length - a.likes.length;
+          return b.likes?.length - a.likes?.length;
         }
         return 0;
       });
@@ -63,7 +63,7 @@ const SortPosts = ({ content }: { content: PostDTO[] }) => {
         posts = content.sort((a, b) => {
           if (b.likes?.length && a.likes?.length) {
             return (
-              b.likes.length - a.likes.length &&
+              b.likes?.length - a.likes?.length &&
               Date.parse(b.createdAt) - Date.parse(a.createdAt)
             );
           }
@@ -71,18 +71,17 @@ const SortPosts = ({ content }: { content: PostDTO[] }) => {
         });
       }
     }
-  
+
   }
 
 
-  
+
   return (
     <>
       <div className="flex items-center space-x-2 lg:space-x-8 border-b text-gray-600 border-gray-200 mt-8">
         <p
-          className={`py-4 px-2 border-gray-950 cursor-pointer ${
-            trending ? 'border-b' : ''
-          }`}
+          className={`py-4 px-2 border-gray-950 cursor-pointer ${trending ? 'border-b' : ''
+            }`}
           onClick={() => {
             setTrending(true);
             setLatest(false);
@@ -92,9 +91,8 @@ const SortPosts = ({ content }: { content: PostDTO[] }) => {
           Trending
         </p>
         <p
-          className={`py-4 px-2 border-gray-950 cursor-pointer ${
-            latest ? 'border-b' : ''
-          }`}
+          className={`py-4 px-2 border-gray-950 cursor-pointer ${latest ? 'border-b' : ''
+            }`}
           onClick={() => {
             setTrending(false);
             setLatest(true);
@@ -104,9 +102,8 @@ const SortPosts = ({ content }: { content: PostDTO[] }) => {
           Latest
         </p>
         <p
-          className={`py-4 px-2 border-gray-950 cursor-pointer ${
-            best ? 'border-b' : ''
-          }`}
+          className={`py-4 px-2 border-gray-950 cursor-pointer ${best ? 'border-b' : ''
+            }`}
           onClick={() => {
             setTrending(false);
             setLatest(false);
@@ -147,13 +144,13 @@ const SortPosts = ({ content }: { content: PostDTO[] }) => {
           </Space>
         )}
       </div>
-      // Sorted post should be here
+
       <div>
         {posts.map((post) => (
           <Post
             key={post.postId}
             post={post}
-            
+
           />
         ))}
       </div>

@@ -7,12 +7,13 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 type Props = {
     data: Array<any>
     width?: number,
+    setActive?: any,
     height?: number,
     sizeType?: "px" | "rem" | "%"
 }
 
-export default function Carousel({ width, height, data, sizeType }: Props) {
-    const [activeTags, setActiveTags] = useState<Array<number>>([data[0].id])
+export default function Carousel({ width, height, data, sizeType, setActive }: Props) {
+    const [activeTags, setActiveTags] = useState<Array<number>>([])
     const [leftEnd, setLeftEnd] = useState<boolean>(false)
     const [rightEnd, setRightEnd] = useState<boolean>(false)
     const carouselRef = useRef<HTMLDivElement>(null);
@@ -48,6 +49,11 @@ export default function Carousel({ width, height, data, sizeType }: Props) {
             }
         }
     };
+
+    const handleClick = (id: number) => {
+        setActiveTags([id])
+        setActive(id)
+    }
 
 
     const type = useCallback(() => {
@@ -85,9 +91,9 @@ export default function Carousel({ width, height, data, sizeType }: Props) {
                 {
                     data.map((tag: Tag) => (
                         <p
-                            key={tag.id}
-                            onClick={() => setActiveTags([tag.id])}
-                            className={`py-4 px-2 ${activeTags.includes(tag.id) && "border-b text-[#080808]"} s
+                            key={tag.tagId}
+                            onClick={() => handleClick(tag.tagId)}
+                            className={`py-4 px-2 ${activeTags.includes(tag.tagId) && "border-b text-[#080808]"} s
                         carousel-item border-gray-950 cursor-pointer
                         hover:text-[#080808]
                         text-gray-500

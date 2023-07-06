@@ -11,7 +11,7 @@ type Props = {
 
 export default async function Tags({ title, footer }: Props) {
 
-    const tags = await fetch("http://192.168.43.164:8080/api/v1/tags",
+    const tags = await fetch("http://localhost:8080/api/v1/tags",
         { next: { revalidate: 10 } }
     )
         .then(response => response.json())

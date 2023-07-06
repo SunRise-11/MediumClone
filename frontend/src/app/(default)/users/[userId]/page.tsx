@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Post from '@/components/Post';
 import PostDTO from '@/types/Post/Post';
 import AccountProfile from '../AccountProfile'
@@ -9,18 +9,23 @@ type Params = { params: { userId: string } };
 const UserProfile = async ({ params: { userId } }: Params) => {
 
     const [isActive, setIsActive] = useState(false);
+    const [posts, setPosts] = useState<PostDTO[]>()
 
 
     console.log("UserID is: ", userId)
 
-    // const posts = storePosts.filter((post) => post.user.username === name);
     let content: PostDTO[] = [];
 
-    try {
-        content = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}/posts?page=0&size=1&sort=asc`, { "cache": "no-cache" }).then((res) => res.json());
-    } catch (error) {
-        console.log(error)
+    const getPostsByUser = async (userId: number) => {
+        const res = await fetch(`http://localhost:8080/api/v1/users/${userId}/posts?page=0&size=1&sort=asc`,
+            { "cache": "no-cache" }).then((res) => res.json());
+        setPosts(res.content)
     }
+
+    useEffect(() => {
+        getPostsByUser(parseInt(userId))
+    }, [userId])
+
     return (
         <>
             <div className="px-5 md:px-10 lg:px-20 flex justify-between space-x-8 my-16">
@@ -44,7 +49,7 @@ const UserProfile = async ({ params: { userId } }: Params) => {
                             </p>
                         </div>
                         <div className="flex flex-col space-y-6">
-                            {(content && content.length > 0) ? (content.map((post: PostDTO) => (
+                            {(posts && posts.length > 0) ? (posts.map((post: PostDTO) => (
                                 <Post
                                     key={post.postId}
                                     post={post}

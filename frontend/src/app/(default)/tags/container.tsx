@@ -1,8 +1,8 @@
-import TagWriters from '@/components/TagWriters'
-import PostDTO from '@/types/Post/Post'
-import React, { useEffect, useState } from 'react'
-import TopWriters from './TopWriters'
-import User from '@/types/user/User'
+import TagWriters from "@/components/TagWriters";
+import PostDTO from "@/types/Post/Post";
+import { useEffect, useState } from "react";
+import TopWriters from "./TopWriters";
+import User from "@/types/user/User";
 
 type Props = {
     content: [PostDTO],
@@ -15,7 +15,7 @@ export default function Container({ content, totalElements }: Props) {
 
     useEffect(() => {
         const uniqueUsersSet = new Set<number>();
-        const uniqueUsersArray: User[] = [];
+        const uniqueUsersArray: User[] = []; // Değişiklik burada yapıldı
 
         content.forEach((post: PostDTO) => {
             if (post.user && !uniqueUsersSet.has(post.user.userId)) {
@@ -30,7 +30,6 @@ export default function Container({ content, totalElements }: Props) {
         <>
             <TagWriters users={uniqueUsers} totalStory={totalElements} />
             <TopWriters users={uniqueUsers} />
-
         </>
     )
 }

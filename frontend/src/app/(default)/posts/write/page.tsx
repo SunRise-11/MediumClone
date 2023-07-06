@@ -42,13 +42,13 @@ const WritePage = () => {
   const handleCreatePost = async () => {
     try {
       await fetch(
-        `http://192.168.43.164:8080/api/v1/posts/users/${data?.user?.userId}`,
+        `http://localhost:8080/api/v1/posts/users/${data?.user?.userId}`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + data?.user?.accessToken,
-            
+
           },
           body: JSON.stringify({
             title: postData.title,

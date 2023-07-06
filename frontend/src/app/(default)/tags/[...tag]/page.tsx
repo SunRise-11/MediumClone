@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import User from '@/types/user/User';
 import PostDTO from '@/types/Post/Post';
 import Container from '../container';
+import TagFollowButton from '@/components/TagFollowButton';
 
 type Params = {
   params: {
@@ -34,7 +35,7 @@ const TagsPage = async ({ params }: Params) => {
   console.log("I am from Params", params.tag[1])
 
 
-  const posts = await fetch(`http://192.168.43.164:8080/api/v1/tags/${params.tag[1].toString()}/posts?page=0&size=1&sort=asc`, { cache: "no-cache" }).then(res => res.json())
+  const posts = await fetch(`http://localhost:8080/api/v1/tags/${params.tag[1].toString()}/posts?page=0&size=1&sort=asc`, { cache: "no-cache" }).then(res => res.json())
   // const content = [{
   //   postId: 1,
   //   title: '5 Javascript Clean Coding Patterns To Enhance Your Code',
@@ -80,7 +81,7 @@ const TagsPage = async ({ params }: Params) => {
             <TagHeader tag={params.tag[0]} />
             <div className="flex lg:justify-start space-x-2 items-center lg:space-x-5 my-4">
               {/* @ts-expect-error Server Component */}
-              <FollowUserButton />
+              <TagFollowButton tagId={params.tag[1]} />
               <Link href={"/posts/write"}>
                 <Button variant="outlined" size='small' color="success">
                   Start Writing
@@ -105,7 +106,7 @@ const TagsPage = async ({ params }: Params) => {
       </div>
       <div className="hidden lg:flex lg:w-[35%] order-last  lg:top-[100px] lg:h-screen lg:sticky top-10">
         <div className="flex flex-col mt-16 lg:ml-8">
-          <Container content={posts.content} totalElements={posts.totalElements} />
+          <Container content={posts?.content} totalElements={posts?.totalElements} />
           <div className='max-w-[350px] mt-3'>
             {/* @ts-expect-error Server Component */}
             <Tags title='Related topics' />

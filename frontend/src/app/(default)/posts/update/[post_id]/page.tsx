@@ -28,20 +28,20 @@ import {
 // }
 
 type Params = {
-  params : {
-    post_id : string
+  params: {
+    post_id: string
   }
 }
 
 
 
 
-const UpdatePost = ( {params : { post_id }} : Params ) => {
+const UpdatePost = ({ params: { post_id } }: Params) => {
   const [postData, setPostData] = useState();
   const { data } = useSession();
   const [markdown, setMarkdown] = useState('');
-  
-  const post : PostDTO | undefined = getPostById(parseInt(post_id));
+
+  const post: PostDTO | undefined = getPostById(parseInt(post_id));
 
   let content = ""
   let title = ""
@@ -52,15 +52,15 @@ const UpdatePost = ( {params : { post_id }} : Params ) => {
     title = post.title;
     if (post.tags) {
       tag = post.tags[0].name;
-  }
+    }
     if (post?.image) {
       image = post.image;
     }
   }
 
 
-  
-  
+
+
   const [editorState, setEditorState] = useState(() =>
     EditorState.createWithContent(
       ContentState.createFromText(content)
@@ -79,17 +79,17 @@ const UpdatePost = ( {params : { post_id }} : Params ) => {
     setMarkdown(markdown);
     handleUpdatePost();
   };
-  
+
   const handleUpdatePost = async () => {
     try {
       await fetch(
-        `http://192.168.43.164:8080/api/v1/posts/${post_id}`,
+        `http://localhost:8080/api/v1/posts/${post_id}`,
         {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + data?.user?.accessToken,
-            
+
           },
           body: JSON.stringify({
             title: postData.title,
@@ -118,7 +118,7 @@ const UpdatePost = ( {params : { post_id }} : Params ) => {
           <div>
             <Form
               layout="vertical"
-              initialValues={{title: title, img_url: image, tag: tag}}
+              initialValues={{ title: title, img_url: image, tag: tag }}
               onFinish={(values) => {
                 console.log(values);
                 setPostData(values);
@@ -129,7 +129,7 @@ const UpdatePost = ( {params : { post_id }} : Params ) => {
               <Form.Item
                 label="Title"
                 name="title"
-                
+
                 required
               >
                 <Input width={600}
@@ -139,8 +139,8 @@ const UpdatePost = ( {params : { post_id }} : Params ) => {
                 label="Image URL"
                 name="img_url"
               >
-                <Input  
-                 />
+                <Input
+                />
               </Form.Item>
               <Form.Item
                 label="Tag"
@@ -155,7 +155,7 @@ const UpdatePost = ( {params : { post_id }} : Params ) => {
                   <Select.Option value={13}>Self-improvement</Select.Option>
                 </Select>
               </Form.Item>
-            
+
 
               <div className="mt-16">
                 <Editor
@@ -171,14 +171,14 @@ const UpdatePost = ( {params : { post_id }} : Params ) => {
                   className="w-[80%] mx-auto flex justify-center
                          items-center rounded-lg bg-green-500 hover:bg-green-600 transition-transform
                           ease-in-out duration-150 delay-75  text-white font-semibold py-2 mt-5 mb-16"
-                          onClick={handleGetMarkdown}
-                          type='submit'
+                  onClick={handleGetMarkdown}
+                  type='submit'
                 >
                   Update Post
                 </button>
               </div>
             </Form>
-            
+
           </div>
         </div>
       </div>

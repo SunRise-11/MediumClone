@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react'
 import Avatar from '@mui/material/Avatar';
 import AvatarGroup from '@mui/material/AvatarGroup';
 import Image from "next/image"
-import { avatars } from "../store/index"
-import PostDTO from '@/types/Post/Post';
 import User from '@/types/user/User';
+import profile from "../../public/images/profile.png"
 
 type Props = {
     totalStory: number,
-    users: [User]
+    users: User[]
 }
 type Avatar = {
     alt: string;
@@ -24,7 +23,7 @@ async function TagWriters({ totalStory, users }: Props) {
                     <p className='text-base text-gray-400'> Stories</p>
                 </div>
                 <div>
-                    <p className='font-bold leading-6 text-xl'>{`${users.length} K`}</p>
+                    <p className='font-bold leading-6 text-xl'>{`${users.length}`}</p>
                     <p className='text-base text-gray-400'>Writers</p>
                 </div>
             </div>
@@ -32,7 +31,7 @@ async function TagWriters({ totalStory, users }: Props) {
                 <AvatarGroup max={8}>
                     {users.map((user: User, index: number) => (
                         <Avatar key={index}>
-                            <Image width={40} height={40} src={user?.image} alt={`${user.username} image`} />
+                            <Image width={40} height={40} src={user.image != null ? user.image : profile.src} alt={`${user?.username} image`} />
                         </Avatar>
                     ))}
                 </AvatarGroup>

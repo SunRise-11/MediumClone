@@ -40,9 +40,9 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
     // }
     const currentUser = useSession().data?.user;
 
-    const user: User = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}`).then((res) => res.json());
+    const user: User = await fetch(`http://localhost:8080/api/v1/users/${userId}`).then((res) => res.json());
 
-    const followed: User[] = await fetch(`http://192.168.43.164:8080/api/v1/following/${userId}`).then((res) => res.json());
+    const followed: User[] = await fetch(`http://localhost:8080/api/v1/following/${userId}`).then((res) => res.json());
 
     const handleCloseModal = () => {
         setVisilityEditModal(false)

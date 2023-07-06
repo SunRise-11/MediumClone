@@ -12,8 +12,8 @@ type Props = {
 export default function PostLikeButton({ postId, likeCount }: Props) {
 
     const currentUser = useSession().data?.user;
-    const currentUserId = currentUser.userId;
-    const accessToken = currentUser.accessToken;
+    const currentUserId = currentUser?.userId;
+    const accessToken = currentUser?.accessToken;
 
     const { push } = useRouter()
     const [isLiked, setIsLiked] = useState(false)

@@ -31,7 +31,7 @@ const SearchResultPage = async ({ params: { query } }: Params) => {
             <div className='w-full lg:w-[60%]'>
                 <div className='flex flex-col space-y-7 text-sm'>
                     <h1 className="flex space-y-5 lg:text-5xl text-3xl mb-3 text-gray-500 truncate">
-                        Results for <p className="text-gray-800 mx-2">{query}</p>
+                        Results for <p className="text-gray-800 mx-2">{query.replace(/%20/g, "")}</p>
                     </h1>
                     <div className='text-sm'>
                         {

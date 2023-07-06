@@ -104,7 +104,7 @@ const Post = ({ post, }: Props) => {
 
         <div className="w-[30%] relative">
           <Image
-            src="/images/learn-turkish.jpg"
+            src={postImage}
             alt="ChatGPT image"
             height={128}
             width={192}

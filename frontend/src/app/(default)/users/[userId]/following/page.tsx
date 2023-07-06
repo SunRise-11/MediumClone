@@ -13,12 +13,8 @@ const Page = async ({ params: { userId } }: Params) => {
 
     const [isActive, setIsActive] = useState<boolean>(false);
 
-    const user : User = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}`).then((res) => res.json());
-    
+    const user: User = await fetch(`http://localhost:8080/api/v1/users/${userId}`).then((res) => res.json());
 
-    // const fetchFollowingByUsername = (username: string): void => {
-    //     console.log(username);
-    // }
 
     return (
         <div className='w-full md:w-[65%] order-first  h-10 flex justify-start flex-col'>
