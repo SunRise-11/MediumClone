@@ -25,8 +25,8 @@ const Editor = dynamic(
 //   }
 
 const WritePage = () => {
+  const [postData, setPostData] = useState();
   const { data } = useSession();
-  const [postData, setPostData] = useState({});
   const [markdown, setMarkdown] = useState('');
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
@@ -79,7 +79,7 @@ const WritePage = () => {
               onFinish={(values) => {
                 setPostData(values);
                 console.log(values);
-                console.log(postData);
+                console.log("BU post Data", postData);
               }}
               style={{ minWidth: 600 }}
             >
@@ -125,6 +125,7 @@ const WritePage = () => {
                          items-center rounded-lg bg-green-500 hover:bg-green-600 transition-transform
                           ease-in-out duration-150 delay-75  text-white font-semibold py-2 mt-5 mb-16"
                   onClick={handleGetMarkdown}
+                  type='submit'
                 >
                   Create Post
                 </button>
