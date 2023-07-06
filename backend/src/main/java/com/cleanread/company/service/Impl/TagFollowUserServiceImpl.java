@@ -73,4 +73,12 @@ public class TagFollowUserServiceImpl implements TagFollowUserService {
         Tag tag = tagService.getTagById(tagId);
         return tagFollowRepository.findAllByTag(tag);
     }
+
+    @Override
+    public boolean isFollowedUserTag(Long userId, Long tagId) {
+        User user = userService.getUserById(userId);
+        Tag tag = tagService.getTagById(tagId);
+
+        return tagFollowRepository.isFollowedTagByExists(user, tag);
+    }
 }

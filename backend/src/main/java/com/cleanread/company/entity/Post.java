@@ -56,7 +56,6 @@ public class Post extends BaseEntityAudit {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     @JsonBackReference
-    //dataintegrationviolation hatası cozuldu commetleri postu silerken yani parant tablo childlere ne olsun demedigimi icin hata verdi
     private List<Comment> comments = new ArrayList<>();
 
     @Override

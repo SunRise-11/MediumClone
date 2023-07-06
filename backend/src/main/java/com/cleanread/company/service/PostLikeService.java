@@ -10,4 +10,6 @@ public interface PostLikeService {
     PostLikeUser createOneLike(Long userId, Long postId);
 
     void deleteOneLike(Long userId, Long postId);
+
+    boolean isPostLikedByUserAndUserLikedPost(Long userId, Long postId);
 }

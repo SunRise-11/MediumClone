@@ -37,11 +37,6 @@ public class User extends BaseEntity {
 
     private boolean isEmailVerified;
 
-    //!! bunun bana neye magal olucagına nasıl bir etki edecegine dikkat et
-    //bir user silindidiginde ona ilgili olan roller silinicek
-    //ama bence cok  bir şey kayp etmem neden cunku many-to-many ilişik olduguundan
-    // o userin Moderator ve ya user rolun silindiginde ona ozel rol silinir yani yine de db de
-    // o role kalmıs olur
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

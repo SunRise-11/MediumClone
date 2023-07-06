@@ -118,4 +118,13 @@ public class TagFollowController {
 
         return ResponseEntity.ok(contentPage);
     }
+    @Operation(summary = "Check if a user has followed a tag")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User has followed the tag"),
+            @ApiResponse(responseCode = "404", description = "User or Tag not found")
+    })
+    @GetMapping("/users/{userId}/tags/{tagId}/liked")
+    public ResponseEntity<?> isFollowedUserTag(@PathVariable Long tagId, @PathVariable Long userId) {
+        return ResponseEntity.ok(tagFollowUserService.isFollowedUserTag(userId, tagId));
+    }
 }

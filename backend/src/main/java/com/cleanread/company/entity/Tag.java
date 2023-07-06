@@ -24,13 +24,10 @@ import java.util.*;
 public class Tag extends BaseEntity {
     private String name;
 
-    //!!burası soru bir tag silindiginde onunla iligili tum postlar da silinsin mi yoksa kalsın mı?
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE}, mappedBy = "tags")
     @JsonManagedReference
     private Set<Post> posts = new HashSet<>();
 
-    //burası mesela o şekilde bir tag silindiginde onu takip eden tum kullanıcı ve post_id silinicek yani
-    // kullanıcılar ve ya postlar sılınmıyecek
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tag")
     @JsonBackReference
     private List<TagFollowUser> tagFollowUsers = new ArrayList<>();

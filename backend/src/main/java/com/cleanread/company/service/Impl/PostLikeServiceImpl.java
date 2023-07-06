@@ -70,7 +70,7 @@ public class PostLikeServiceImpl implements PostLikeService {
         };
     }
 
-    private boolean isPostLikedByUserAndUserLikedPost(Long userId, Long postId) {
+    public boolean isPostLikedByUserAndUserLikedPost(Long userId, Long postId) {
         return postLikeRepository.exists(userHasLikedPost(userId).and(postHasBeenLikedByUser(postId)));
     }
 }

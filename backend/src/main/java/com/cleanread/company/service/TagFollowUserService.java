@@ -22,4 +22,6 @@ public interface TagFollowUserService {
     Page<TagFollowUser> getUsersFollowedTag(Long tagId, Pageable pageable);
 
     List<PostProjection> getUsersFollowedByTag(Long tagId);
+
+    boolean isFollowedUserTag(Long userId, Long tagId);
 }
