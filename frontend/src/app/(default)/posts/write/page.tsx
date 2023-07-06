@@ -1,11 +1,19 @@
 'use client';
 import dynamic from 'next/dynamic';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { EditorState, convertToRaw } from 'draft-js';
 import { draftToMarkdown } from 'markdown-draft-js';
 import getInputValue from './getInputValue';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
+import UserSession from '@/types/loggedInUser/UserSession';
+import { Form, Input, Select } from 'antd';
+
+const Editor = dynamic(
+  () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
+  { ssr: false }
+);
 
 // {
 //     "content": "string",
@@ -16,64 +24,48 @@ import { useRouter } from 'next/router';
 //     ]
 //   }
 
-const Editor = dynamic(
-  () => import('react-draft-wysiwyg').then((mod) => mod.Editor),
-  { ssr: false }
-);
-
-const CreatePost = () => {
+const WritePage = () => {
+  const { data } = useSession();
+  const [postData, setPostData] = useState({});
+  const [markdown, setMarkdown] = useState('');
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const handleGetMarkdown = () => {
     const markdown = draftToMarkdown(
       convertToRaw(editorState.getCurrentContent())
     );
-
-    const handleCreatePost = async () => {
-      const res = await fetch('http://127.0.0.1:8000/create/post', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem('token') || '',
-        },
-        body: JSON.stringify({
-          // postId: 36,
-          title: getInputValue('title'),
-          content: markdown,
-          image: getInputValue('image'),
-
-          // readingTime: 5,
-          // pinned: false,
-          // createdAt: '2021-10-14T20:00:00.000Z',
-          user: {
-            userId: 1,
-            username: 'wahala',
-            email: 'wahala',
-            bio: 'string',
-            image: 'string',
-          },
-          likes: [{ userId: 1, postId: 34 }],
-
-          tags: [
-            {
-              // tagId: 3,
-              name: getInputValue('tag'),
-            },
-          ],
-        }),
-      })
-        .then((res) => res.json())
-        .catch((error) => console.log(error));
-      console.log(res);
-    };
+    console.log(markdown);
+    setMarkdown(markdown);
     handleCreatePost();
-    useRouter().push(`/users/7`);
+  };
 
+  const handleCreatePost = async () => {
+    try {
+      await fetch(
+        `http://192.168.43.164:8080/api/v1/posts/users/${data?.user?.userId}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + data?.user?.accessToken,
+            
+          },
+          body: JSON.stringify({
+            title: postData.title,
+            content: markdown,
+            image: postData.img_url,
+            tagIds: [postData.tag],
+          }),
+        }
+      ).then((res) => res.json());
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
-      <div className="w-full lg:w-[65%] flex flex-col justify-start">
+      <div className="w-[90%] lg:w-[65%] mx-auto flex flex-col justify-center items-center">
         <h1 className="text-center text-3xl font-semibold text-slate-800 mt-16">
           Create a new Post
         </h1>
@@ -82,83 +74,62 @@ const CreatePost = () => {
         </h1>
         <div className="flex justify-start items-center">
           <div>
-            <form>
-              <label
-                className="w-[80%] flex justify-start items-center text-gray-900 text-sm font-semibold mb-2 mx-auto"
-                htmlFor="title"
-              >
-                Title
-              </label>
-              <input
-                className="w-[80%] mx-auto flex justify-center items-center px-3 py-1 mb-5 focus:outline-none focus:border-green-600 border-2 border-green-400 "
-                id="title"
-                type="text"
-                placeholder="title"
+            <Form
+              layout="vertical"
+              onFinish={(values) => {
+                setPostData(values);
+                console.log(values);
+                console.log(postData);
+              }}
+              style={{ minWidth: 600 }}
+            >
+              <Form.Item
+                label="Title"
+                name="title"
                 required
-                maxLength={100}
-              />
- 
-              <label
-                className="w-[80%] flex justify-start items-center text-gray-900 text-sm font-semibold mb-2 mx-auto"
-                htmlFor="desc"
               >
-                Description
-              </label>
-              <input
-                className="w-[80%] mx-auto flex justify-center items-center px-3 py-1 mb-5 focus:outline-none focus:border-green-600 border-2 border-green-400 "
-                id="desc"
-                type="text"
-                placeholder="desc"
-              />
-
-              <label
-                className="w-[80%] flex justify-start items-center text-gray-900 text-sm font-semibold mb-2 mx-auto"
-                htmlFor="tag"
+                <Input width={600} />
+              </Form.Item>
+              <Form.Item
+                label="Image URL"
+                name="img_url"
               >
-                Tag
-              </label>
-              <input
-                className="w-[80%] mx-auto flex justify-center items-center px-3 py-1 mb-5 focus:outline-none focus:border-green-600 border-2 border-green-400 "
-                id="tag"
-                type="text"
-                placeholder="tag"
-              />
-
-<label
-                className="w-[80%] flex justify-start items-center text-gray-900 text-sm font-semibold mb-2 mx-auto"
-                htmlFor="image url"
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="Tag"
+                name="tag"
               >
-                Image URL
-              </label>
-              <input
-                className="w-[80%] mx-auto flex justify-center items-center px-3 py-1 mb-5 focus:outline-none focus:border-green-600 border-2 border-green-400 "
-                id="url"
-                type="text"
-                placeholder="image url(optional)"
-                
-              />
+                <Select style={{ width: 120 }}>
+                  <Select.Option value={10}>Tech</Select.Option>
+                  <Select.Option value={21}>Lifestyle</Select.Option>
+                  <Select.Option value={12}>Travel</Select.Option>
+                  <Select.Option value={11}>Health</Select.Option>
+                  <Select.Option value={122}>Finance</Select.Option>
+                  <Select.Option value={9}>Self-improvement</Select.Option>
+                </Select>
+              </Form.Item>
 
-
-            </form>
-            <div className="mt-16">
-              <Editor
-                toolbarClassName="flex sticky top-0 z-50 justify-center items-center"
-                wrapperClassName="w-[80%] mx-auto my-10 shadow-lg"
-                editorClassName="px-5 min-h-[300px]"
-                editorState={editorState}
-                onEditorStateChange={setEditorState}
-              />
-            </div>
-            <div>
-              <button
-                className="w-[80%] mx-auto flex justify-center
+              <div className="mt-16">
+                <Editor
+                  toolbarClassName="flex sticky top-0 z-50 justify-center items-center"
+                  wrapperClassName="w-[95%] mx-auto my-10 shadow-lg"
+                  editorClassName="px-5 min-h-[300px]"
+                  editorState={editorState}
+                  onEditorStateChange={setEditorState}
+                />
+              </div>
+              <div>
+                <button
+                  className="w-[80%] mx-auto flex justify-center
                          items-center rounded-lg bg-green-500 hover:bg-green-600 transition-transform
                           ease-in-out duration-150 delay-75  text-white font-semibold py-2 mt-5 mb-16"
-                onClick={() => handleGetMarkdown()}
-              >
-                Create Post
-              </button>
-            </div>
+                  onClick={handleGetMarkdown}
+                >
+                  Create Post
+                </button>
+              </div>
+            </Form>
           </div>
         </div>
       </div>
@@ -166,4 +137,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default WritePage;
