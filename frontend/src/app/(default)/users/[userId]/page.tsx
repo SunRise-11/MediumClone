@@ -16,27 +16,11 @@ const UserProfile = async ({ params: { userId } }: Params) => {
     // const posts = storePosts.filter((post) => post.user.username === name);
     let content: PostDTO[] = [];
 
-<<<<<<< HEAD
-    let content: PostDTO[] = []
-
-
     try {
         content = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}/posts?page=0&size=1&sort=asc`, { "cache": "no-cache" }).then((res) => res.json());
     } catch (error) {
-        console.log(error);
-
-    }
-
-
-=======
-    try {
-        content = await fetch(`http://192.168.43.164:8080/api/v1/users/${userId}/posts?page=0&size=1&sort=asc`, {"cache":"no-cache" }).then((res) => res.json());
-    } catch (error) {
         console.log(error)
     }
-
-    
->>>>>>> 0e1dd15d1ec58c45e68572cc9f49518985743891
     return (
         <>
             <div className="px-5 md:px-10 lg:px-20 flex justify-between space-x-8 my-16">
@@ -60,15 +44,11 @@ const UserProfile = async ({ params: { userId } }: Params) => {
                             </p>
                         </div>
                         <div className="flex flex-col space-y-6">
-<<<<<<< HEAD
-                            {(content && content.length > 0) ? (content?.map((post: PostDTO) => (
-=======
-                            {(content && content.length > 0) ? (content.map((post : PostDTO) => (
->>>>>>> 0e1dd15d1ec58c45e68572cc9f49518985743891
+                            {(content && content.length > 0) ? (content.map((post: PostDTO) => (
                                 <Post
                                     key={post.postId}
                                     post={post}
-                                    
+
                                 />
                             ))) : (<p className="text-2xl text-gray-800 italic text-center ">No Post Available...</p>)}
                         </div>

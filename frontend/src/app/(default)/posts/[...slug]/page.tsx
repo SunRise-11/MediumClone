@@ -38,7 +38,13 @@ const PostPage = async ({ params: { slug } }: Params) => {
   }
   ).then((res) => res.json());
 
+
+
+
   const post: PostDTO = res;
+
+  console.log(post);
+
 
   return (
     <article>
@@ -56,7 +62,7 @@ const PostPage = async ({ params: { slug } }: Params) => {
             <MDXRemote source={post.content} />
           </article>
           <div>
-            <LikeCommentShare />
+            <LikeCommentShare post={post} />
           </div>
         </div>
 
