@@ -37,7 +37,7 @@ type Params = {
 
 
 const UpdatePost = ( {params : { post_id }} : Params ) => {
-  const [postData, setPostData] = useState();
+  const [postData, setPostData] = useState({});
   const { data } = useSession();
   const [markdown, setMarkdown] = useState('');
   
