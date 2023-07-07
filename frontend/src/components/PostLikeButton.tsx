@@ -79,9 +79,10 @@ export default function PostLikeButton({ postId, likeCount }: Props) {
                 setIsLiked(true);
             }
         } catch (error) {
+            setIsLoading(false)
             console.error(error);
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
     }
 

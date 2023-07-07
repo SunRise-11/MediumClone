@@ -1,15 +1,10 @@
 import ProfileHeader from './ProfileHeader';
-import dynamic from 'next/dynamic';
-import type { Metadata } from 'next';
 import LikeCommentShare from './LikeCommentShare';
-import { urlToTitle } from '@/util/urlToTitle';
-import { posts } from '@/store/index';
 import Avatar from '@/components/Avatar';
 import FollowButton from '@/components/FollowButton';
-import Image from 'next/image';
-import { usernameToImage } from '@/util/usernameToImage';
 import PostDTO from '@/types/Post/Post';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import User from '@/types/user/User';
 
 type Params = {
   params: {
@@ -17,20 +12,9 @@ type Params = {
   };
 };
 
-// export function generateMetadata({ params: { slug } }: Params): Metadata {
-//   return {
-//     title: `${urlToTitle(slug)} | Medium`,
-//     description: "Discover Ideas and Stories that Matters to You",
-//   };
-// }
 
 const PostPage = async ({ params: { slug } }: Params) => {
-  // const title = urlToTitle(slug);
-  // const username = posts.find((post) => post.title === title)?.user.username;
-  // const userimage = posts.find((post) => post.title === title)?.user.image;
-  // const Content = dynamic(() => import(`@/app/(default)/contents/${slug}.mdx`), {
-  //   ssr: false,
-  // });
+
 
   const res = await fetch(
     `http://localhost:8080/api/v1/posts/${slug[1]}`, {
@@ -38,23 +22,19 @@ const PostPage = async ({ params: { slug } }: Params) => {
   }
   ).then((res) => res.json());
 
-
-
-
   const post: PostDTO = res;
 
-  console.log(post);
-
+  const followed: User[] = await fetch(`http://localhost:8080/api/v1/followers/${post?.user?.userId}`).then((res) => res.json());
 
   return (
     <article>
       <div className="sm:px-5 lg:px-20 lg:flex space-x-20 my-16">
         <div className="lg:w-[65%] lg:border-r border-gray-200 lg:pr-8">
           <ProfileHeader
-            userId={post.user.userId}
-            username={post.user.username}
-            userimage={post.user.image}
-            date={post.createdAt}
+            userId={post.user?.userId}
+            username={post.user?.username}
+            userimage={post.user?.image}
+            date={post?.createdAt}
             readingTime={post.readingTime}
           />
           <article className="px-3 prose lg:prose-md max-w-4xl sm:px-4">
@@ -70,24 +50,24 @@ const PostPage = async ({ params: { slug } }: Params) => {
           <div className="profile flex flex-col space-y-10">
             {/* <Image src={`/images/${userimage}.jpg`} width={88} height={88} alt="profile picture" /> */}
             <Avatar
-              userId={post.user.userId}
-              image={post.user.image}
-              username={post.user.username}
+              userId={post.user?.userId}
+              image={post.user?.image}
+              username={post.user?.username}
               height={88}
               width={88}
             />
             <div className="flex flex-col space-y-2">
               <h1 className="text-[16px] mt-4 font-semibold">
-                {post.user.username}
+                {post.user?.username}
               </h1>
               <p className="text-[16px] text-slate-500 text-light">
-                2.2k followers
+                {`${followed.length} followers`}
               </p>
               <p className="text-[14px] text-slate-500 text-light">
-                Entrepreneur
+                {post?.user?.bio}
               </p>
               <div className="flex space-x-5">
-                <FollowButton userId={post.user.userId} />
+                <FollowButton userId={post.user?.userId} />
               </div>
             </div>
           </div>

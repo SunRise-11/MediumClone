@@ -3,6 +3,7 @@ import Image from "next/image"
 import Tags from '@/components/Tags'
 import UserFollowers from "../../(default)/users/UserFollowers"
 import Filter from './Filter'
+import UserList from '../users/UserList'
 
 type Props = {}
 
@@ -79,7 +80,7 @@ export default function page({ }: Props) {
                         {/* @ts-expect-error Server Component */}
                         <Tags title='Recommended topics' />
                         {/* @ts-expect-error Server Component */}
-                        <UserFollowers></UserFollowers>
+                        <UserList />
                     </div>
                 </div>
             </div>

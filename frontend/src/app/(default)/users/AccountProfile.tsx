@@ -7,6 +7,7 @@ import UserInfoBox from './UserInfoBox'
 import User from '@/types/user/User'
 // import { followers as users } from '@/store'
 import Link from "next/link"
+import profile from "../../../../public/images/profile.png"
 import { titleToUrl } from '@/util/titleToUrl';
 import { urlToTitle } from '@/util/urlToTitle';
 import { useUser } from '@/hook/useUser';
@@ -71,7 +72,7 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
             <div className="profile flex flex-col space-y-3 ml-8">
                 <Link href={`/users/${user.userId}`}>
                     <Image
-                        src={user?.image} // Route of the image file
+                        src={user.image != null ? user.image : profile.src} // Route of the image file
                         height={88}
                         width={88}
                         alt="Profile Picture"
@@ -100,7 +101,7 @@ const AccountProfile = async ({ userId }: { userId: number }) => {
                     ))
                 }
                 {
-                    followed.length > 5 && <Link href={`/users/${user.userId}/following`}>
+                    followed.length > 3 && <Link href={`/users/${user.userId}/following`}>
                         <span className='cursor-pointer text-xs mt-2 text-[#191919] hover:text-gray-600'>See All({`${followed.length}`})</span>
                     </Link>
                 }

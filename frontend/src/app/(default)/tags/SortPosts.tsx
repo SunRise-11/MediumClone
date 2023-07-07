@@ -1,87 +1,49 @@
-'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Select, Space } from 'antd';
 import PostDTO from '@/types/Post/Post';
 import Post from '@/components/Post';
-const SortPosts = ({ content }: { content: PostDTO[] }) => {
-  const [trending, setTrending] = useState(false);
+
+type Props = {
+  tagId: string;
+}
+const SortPosts = ({ tagId }: Props) => {
+  const [trending, setTrending] = useState(true);
   const [latest, setLatest] = useState(false);
-  const [best, setBest] = useState(true);
-  const handleChange = (value: string) => {
+  const [best, setBest] = useState(false);
+  const [posts, setPosts] = useState<PostDTO[]>([]);
+
+  const getPostsByRange = async (range: string) => {
+    const response = await fetch(`http://localhost:8080/api/v1/posts/filter?date=${range}`).then(response => response.json());
+    setPosts(response?.content);
+  };
+  const getPosts = async (order: string) => {
+    const response = await fetch(`http://localhost:8080/api/v1/tags/${tagId}/posts/filter?orderBy=${order}`).then(response => response.json());
+    setPosts(response?.content)
+  }
+
+  const handleChange = async (value: string) => {
     console.log(`selected ${value}`);
+
     if (value === 'Year') {
-      posts = posts.filter((post) => {
-        return (
-          Date.parse(post.createdAt) - Date.parse(new Date().toISOString()) >
-          365
-        );
-      });
-    }
-    if (value === 'Month') {
-      posts = posts.filter((post) => {
-        return (
-          Date.parse(post.createdAt) - Date.parse(new Date().toISOString()) > 30
-        );
-      });
-    }
-    if (value === 'Week') {
-      posts = posts.filter((post) => {
-        return (
-          Date.parse(post.createdAt) - Date.parse(new Date().toISOString()) > 7
-        );
-      });
+      await getPostsByRange("year");
+    } else if (value === 'Month') {
+      await getPostsByRange("month");
+    } else if (value === 'Week') {
+      await getPostsByRange("week");
     }
   };
-  let posts = content;
-  if (!posts) {
-    return (
-      <div className="flex flex-col items-center justify-center mt-16">
-        <h1 className="text-4xl font-bold text-gray-900">No Posts Found</h1>
-        <p className="text-gray-500 text-lg mt-4">
-          Be the first one to post something
-        </p>
-      </div>
-    );
-  }
 
-  else {
-    if (trending) {
-      posts = content.sort((a, b) => {
-        if (b.likes?.length && a.likes?.length) {
-          return b.likes?.length - a.likes?.length;
-        }
-        return 0;
-      });
-    }
-    else if (latest) {
-      posts = content.sort((a, b) => {
-        return Date.parse(b.createdAt) - Date.parse(a.createdAt);
-      });
-    }
-    else if (best) {
-      {
-        posts = content.sort((a, b) => {
-          if (b.likes?.length && a.likes?.length) {
-            return (
-              b.likes?.length - a.likes?.length &&
-              Date.parse(b.createdAt) - Date.parse(a.createdAt)
-            );
-          }
-          return 0;
-        });
-      }
-    }
-
-  }
-
-
+  useEffect(() => {
+    if (trending)
+      getPosts("like")
+    else if (latest) getPosts("createdAt")
+  }, [trending, latest])
 
   return (
     <>
       <div className="flex items-center space-x-2 lg:space-x-8 border-b text-gray-600 border-gray-200 mt-8">
         <p
-          className={`py-4 px-2 border-gray-950 cursor-pointer ${trending ? 'border-b' : ''
-            }`}
+          className={`py-4 px-2 border-gray-950 cursor-pointer ${trending ? 'border-b' : ''}`}
           onClick={() => {
             setTrending(true);
             setLatest(false);
@@ -91,8 +53,7 @@ const SortPosts = ({ content }: { content: PostDTO[] }) => {
           Trending
         </p>
         <p
-          className={`py-4 px-2 border-gray-950 cursor-pointer ${latest ? 'border-b' : ''
-            }`}
+          className={`py-4 px-2 border-gray-950 cursor-pointer ${latest ? 'border-b' : ''}`}
           onClick={() => {
             setTrending(false);
             setLatest(true);
@@ -102,8 +63,7 @@ const SortPosts = ({ content }: { content: PostDTO[] }) => {
           Latest
         </p>
         <p
-          className={`py-4 px-2 border-gray-950 cursor-pointer ${best ? 'border-b' : ''
-            }`}
+          className={`py-4 px-2 border-gray-950 cursor-pointer ${best ? 'border-b' : ''}`}
           onClick={() => {
             setTrending(false);
             setLatest(false);
@@ -144,13 +104,11 @@ const SortPosts = ({ content }: { content: PostDTO[] }) => {
           </Space>
         )}
       </div>
-
       <div>
-        {posts.map((post) => (
+        {posts.map((post: PostDTO) => (
           <Post
             key={post.postId}
             post={post}
-
           />
         ))}
       </div>

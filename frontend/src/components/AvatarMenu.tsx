@@ -15,7 +15,7 @@ import { signOut, useSession } from "next-auth/react";
 
 export default async function AvatarMenu() {
 
-    const currentUser = useSession().data?.user
+    const currentUser = useSession()?.data?.user
 
     if (currentUser)
         var user: User = await fetch(`http://localhost:8080/api/v1/users/${currentUser?.userId}`).then(res => res.json())

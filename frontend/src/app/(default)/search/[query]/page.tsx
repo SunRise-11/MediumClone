@@ -7,6 +7,7 @@ import { useSearch } from '@/hook/useSearch';
 import { useState } from "react"
 import Post from '@/components/Post';
 import PostDTO from '@/types/Post/Post';
+import UserList from '../../users/UserList';
 
 
 type Params = {
@@ -49,7 +50,7 @@ const SearchResultPage = async ({ params: { query } }: Params) => {
                     </div>
                     <div className='flex flex-col'>
                         <h1 className='text-base font-medium leading-5'>Who To Follow</h1>
-                        <UserFollowers />
+                        <UserList />
                     </div>
                 </div>
             </div>

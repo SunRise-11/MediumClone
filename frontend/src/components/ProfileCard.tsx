@@ -43,7 +43,7 @@ async function ProfileCard({ visibilityEditModal, handleCloseModal }: Props) {
     const currentUser = useSession().data?.user;
     const [validationErrors, setValidationErrors] = useState<ValidationError>({ username: null, bio: null });
 
-    const userFromApi: User = await fetch(`http://localhost:8080/api/v1/users/${currentUser.userId}`)
+    const userFromApi: User = await fetch(`http://localhost:8080/api/v1/users/${currentUser?.userId}`)
         .then((response) => response.json());
 
     const handleChangeForm = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -63,11 +63,11 @@ async function ProfileCard({ visibilityEditModal, handleCloseModal }: Props) {
         };
 
         try {
-            const res = await fetch(`http://localhost:8080/api/v1/users/${currentUser.userId}`, {
+            const res = await fetch(`http://localhost:8080/api/v1/users/${currentUser?.userId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer " + currentUser.accessToken
+                    "Authorization": "Bearer " + currentUser?.accessToken
                 },
                 body: JSON.stringify(body)
             });
@@ -101,13 +101,13 @@ async function ProfileCard({ visibilityEditModal, handleCloseModal }: Props) {
                     </span>
                 </div>
                 <div className="my-5 flex flex-col">
-                    <ProfileImage image={userFromApi.image} />
+                    <ProfileImage image={userFromApi?.image} />
                     <Input
                         id="profilename"
                         name="name"
                         errorMessage={nameError}
                         error={nameError ? true : false}
-                        label={userFromApi.username || "Name"}
+                        label={userFromApi?.username || "Name"}
                         required={true}
                         description={"Appears on your Profile page, as your byline, and in your responses.  0/50"} />
                     <Input
@@ -115,7 +115,7 @@ async function ProfileCard({ visibilityEditModal, handleCloseModal }: Props) {
                         name="bio"
                         errorMessage={bioError}
                         error={bioError ? true : false}
-                        label={userFromApi.bio || "Bio"}
+                        label={userFromApi?.bio || "Bio"}
                         description={"Appears on your Profile and next to your stories.  0/160"} />
                 </div>
 

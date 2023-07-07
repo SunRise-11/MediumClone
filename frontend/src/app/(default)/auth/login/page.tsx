@@ -100,7 +100,7 @@ const Login = (): JSX.Element => {
             onClick={(e) => handleSumbit(e)}
             className="xl:text-lg lg:text-base text-sm  bg-black  text-white py-2 px-4 rounded-full hover:bg-green-700 transition ease-in cursor-pointer"
           >
-            SIGN UP
+            SIGN IN
           </button>
 
           <div className="flex justify-center">

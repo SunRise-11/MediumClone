@@ -5,15 +5,18 @@ import UserBio from '@/components/UserBio'
 import User from '@/types/user/User'
 import { useSession } from 'next-auth/react'
 
+type Props = {
+    userId: string
+}
 
-const UserFollowers = async () => {
+const UserFollowers = async ({ userId }: Props) => {
 
     const currentUser = useSession().data?.user;
-    const users: User[] = await fetch(`http://localhost:8080/api/v1/users`).then((res) => res.json());
+    const followed: User[] = await fetch(`http://localhost:8080/api/v1/following/${userId}`).then((res) => res.json());
 
     return (
         <div>
-            {users?.map((user: User) => (
+            {followed?.map((user: User) => (
                 <>
                     {/* @ts-expect-error Server Component */}
                     <UserBio key={user.userId} user={user} />

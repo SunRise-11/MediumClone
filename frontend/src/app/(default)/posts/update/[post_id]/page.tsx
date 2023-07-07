@@ -147,12 +147,18 @@ const UpdatePost = ({ params: { post_id } }: Params) => {
                 name="tag"
               >
                 <Select style={{ width: 120 }}>
-                  <Select.Option value={10}>Tech</Select.Option>
-                  <Select.Option value={9}>Lifestyle</Select.Option>
-                  <Select.Option value={8}>Travel</Select.Option>
-                  <Select.Option value={7}>Health</Select.Option>
-                  <Select.Option value={12}>Finance</Select.Option>
-                  <Select.Option value={13}>Self-improvement</Select.Option>
+                  <Select.Option value={2}>AI</Select.Option>
+                  <Select.Option value={5}>Javascript</Select.Option>
+                  <Select.Option value={6}>Java</Select.Option>
+                  <Select.Option value={7}>Books</Select.Option>
+                  <Select.Option value={8}>News</Select.Option>
+                  <Select.Option value={9}>Startups</Select.Option>
+                  <Select.Option value={10}>Ukraine</Select.Option>
+                  <Select.Option value={11}>Lorem</Select.Option>
+                  <Select.Option value={12}>Spring</Select.Option>
+                  <Select.Option value={13}>Nextjs</Select.Option>
+                  <Select.Option value={14}>Game</Select.Option>
+                  <Select.Option value={15}>Following</Select.Option>
                 </Select>
               </Form.Item>
 

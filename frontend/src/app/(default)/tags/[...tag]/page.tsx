@@ -1,15 +1,9 @@
 "use client"
 import TagHeader from '../TagHeader';
-import TopWriters from '../TopWriters';
 import SortPosts from '../SortPosts';
 import Tags from '@/components/Tags';
 import Link from 'next/link';
 import Button from "@mui/material/Button"
-import FollowUserButton from '@/components/FollowUserButton';
-import TagWriters from '@/components/TagWriters';
-import { useEffect, useState } from 'react';
-import User from '@/types/user/User';
-import PostDTO from '@/types/Post/Post';
 import Container from '../container';
 import TagFollowButton from '@/components/TagFollowButton';
 
@@ -26,50 +20,12 @@ const capitalize = (str: string) => {
 };
 
 
-
-
 const TagsPage = async ({ params }: Params) => {
-  // const posts = storePosts.filter((post) =>
-  //   post.tags?.some((tag) => tag.name === capitalize(params.tag))
-  // );
   console.log("I am from Params", params.tag[1])
 
 
-  const posts = await fetch(`http://localhost:8080/api/v1/tags/${params.tag[1].toString()}/posts?page=0&size=1&sort=asc`, { cache: "no-cache" }).then(res => res.json())
-  // const content = [{
-  //   postId: 1,
-  //   title: '5 Javascript Clean Coding Patterns To Enhance Your Code',
-  //   content: `
-  //   Introduction
-
-
-  //   Well-documented code is essential for clean coding practices. Comments help explain the intent, purpose, and functionality of code blocks. Use comments to clarify complex algorithms, provide insights into decision-making processes, or document any assumptions or limitations. However, it's important to strike a balance with comments. Avoid excessive or redundant comments that merely restate the code. Focus on adding value by providing context and explaining the reasoning behind the implementation choices.
-  //   `,
-
-  //   image: '/images/5-Javascript-Clean-Coding-Patterns-To-Enhance-Your-Code.png',
-  //   readingTime: 2,
-  //   pinned: true,
-  //   createdAt: '2023-08-20T13:20:10.633Z',
-  //   user: {
-  //     userId: 2,
-  //     username: 'Abbas Abdelila',
-  //     email: 'email.com1',
-  //     bio: 'SDU',
-  //     image: 'Abbas-Abdelila.jpg',
-  //   },
-  //   likes: [
-  //     {
-  //       userId: 2,
-  //       postId: 1,
-  //     },
-  //   ],
-  //   tags: [
-  //     {
-  //       tagId: 1,
-  //       name: 'Programming',
-  //     },
-  //   ],
-  // },]
+  const posts = await fetch(`http://localhost:8080/api/v1/tags/${params.tag[1].toString()}/posts?page=0&size=1&sort=asc`,
+    { cache: "no-cache" }).then(res => res.json())
 
 
 
@@ -88,7 +44,7 @@ const TagsPage = async ({ params }: Params) => {
                 </Button>
               </Link>
             </div>
-            <SortPosts content={posts?.content} />
+            <SortPosts tagId={params.tag[1]} />
           </div>
 
           {/* Sorting posts according to latest, popular, time should be inside SortPosts */}

@@ -1,9 +1,6 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { trendingIcon } from '../../public/icons/icons';
-import { trendUsers } from '../store/index';
 import Avatar from './Avatar';
-import { titleToUrl } from '@/util/titleToUrl';
 import PostDTO from '@/types/Post/Post';
 import { formatDate } from '@/util/DateFormat';
 
@@ -15,7 +12,9 @@ type User = {
 };
 
 async function Trending() {
-  const { content }: { content: PostDTO[] } = await fetch(`http://localhost:8080/api/v1/posts/query?orderBy=like`).then(res => res.json());
+  const { content }: { content: PostDTO[] } = await fetch(`http://localhost:8080/api/v1/posts/filter?orderBy=like`, {
+    cache: "no-cache"
+  }).then(res => res.json());
 
   return (
     <div className={'w-full h-auto pt-[2.5rem] pb-[1rem]'}>

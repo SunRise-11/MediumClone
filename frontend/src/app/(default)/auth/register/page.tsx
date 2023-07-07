@@ -58,7 +58,6 @@ const Register = (): JSX.Element => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + currentUser.accessToken
         },
         body: JSON.stringify(body)
       })
@@ -74,7 +73,7 @@ const Register = (): JSX.Element => {
         }
       }
     } catch (error) {
-      console.log(error); s
+      console.log(error);
 
     }
     setForm({
