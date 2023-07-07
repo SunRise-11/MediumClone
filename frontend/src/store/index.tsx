@@ -227,6 +227,49 @@ export const topics = [
 ]
 
 export const posts: PostDTO[] = [
+
+  {
+    "postId": 21,
+    "title": "Sarvar is a Happy person",
+    "content": "Server is a happy man",
+    "image": "https://images.unsplash.com/photo-1489710437720-ebb67ec84dd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFwcHklMjBtb21lbnR8ZW58MHx8MHx8fDA%3D&w=1000&q=80",
+    "readingTime": 1,
+    "pinned": false,
+    "createdAt": "2023-07-06T13:25:22.259+00:00",
+    "user": {
+      "userId": 7,
+      "username": "Sarvar Musazade ",
+      "email": "sarvarmusazde@gmail.com",
+      "bio": "Süleyman Demirel Unversitesi Bilgisayar Mühendisiği",
+      "image": "https://res.cloudinary.com/dhshekhf56hsh91baltali/image/upload/v1688577448/7d7d3a40-d7cd-44fc-9643-75b141cf9fde.png",
+    },
+    "likes": [
+      {
+        "userId": 6,
+        "postId": 21
+      },
+      {
+        "userId": 11,
+        "postId": 21
+      },
+      {
+        "userId": 7,
+        "postId": 21
+      },
+      {
+        "userId": 10,
+        "postId": 21
+      }
+    ],
+    "tags": [
+      {
+        "tagId": 10,
+        "name": "Ukraine"
+      }
+    ]
+  }
+
+  ,
   {
     "postId": 20,
     "title": "Mazahir kimdir",

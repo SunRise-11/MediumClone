@@ -9,6 +9,7 @@ import { formatDate } from '../util/DateFormat';
 import PostDTO from '@/types/Post/Post';
 import Avatar from './Avatar';
 import { titleToUrl } from '@/util/titleToUrl';
+import { useSession } from 'next-auth/react';
 
 type Props = {
   post: PostDTO;
@@ -16,6 +17,7 @@ type Props = {
 };
 
 const Post = ({ post, }: Props) => {
+  const { data } = useSession();
   const {
     title,
     content,
@@ -30,7 +32,6 @@ const Post = ({ post, }: Props) => {
   const { username, image: userImage, userId } = user;
   const postUrl = titleToUrl(title);
   const usernameUrl = titleToUrl(user.username);
-
   // const [showMenu, setShowMenu] = useState<boolean>(false)
   let pin = pinned;
   // const url = usePathname();
@@ -89,7 +90,7 @@ const Post = ({ post, }: Props) => {
             {/* Bookmark Icon */}
             <div className="flex space-x-1">
               {savePost}
-              {user.username == 'Abbas' && (
+              {user.userId == data?.user.userId && (
                 <PostMenu
                   postId={postId}
                   username={user.username}
