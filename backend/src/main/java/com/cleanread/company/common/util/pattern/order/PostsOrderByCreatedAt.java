@@ -16,10 +16,11 @@ public class PostsOrderByCreatedAt implements OrderService {
     private final PostService postService;
     private final Pageable pageable;
     private final ObjectMapper objectMapper;
+    private final Long tagId;
 
     @Override
     public Page<PostDTO> getAllPosts() {
-        return postService.getAllPostsOrderByCreatedAt(pageable)
+        return postService.getAllPostsOrderByCreatedAt(pageable, tagId)
                 .map(post -> objectMapper.mapForResponse(post, PostDTO.class));
     }
 }

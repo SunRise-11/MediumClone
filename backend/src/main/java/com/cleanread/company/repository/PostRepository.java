@@ -31,6 +31,8 @@ public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificat
     @Query("SELECT p FROM Post p LEFT JOIN p.likedUsers pl GROUP BY p.id ORDER BY COUNT(pl.user) DESC")
     Page<Post> findPostsOrderByLikeCount(Pageable pageable);
 
+    Page<Post> findAllByTags(Tag tag);
+
     Page<Post> findAllByUserOrderByPinnedDesc(Pageable pageable, User user);
 
     @Query("select p from Post p where p.title like concat('%', ?1, '%')")

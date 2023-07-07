@@ -30,9 +30,9 @@ public interface PostService {
 
     Post updatePinOfPost(Long postId, PinRequest request);
 
-    Page<PostDTO> getAllPostOrderByLikes(Pageable pageable);
+    Page<PostDTO> getAllPostOrderByLikes(Pageable pageable, Long tagId);
 
-    Page<PostDTO> getAllPostsOrderByCreatedAt(Pageable pageable);
+    Page<PostDTO> getAllPostsOrderByCreatedAt(Pageable pageable, Long tagId);
 
     Page<PostDTO> getAllPostsOrderByPinned(Pageable pageable, Long userId);
 
@@ -44,7 +44,7 @@ public interface PostService {
 
     Page<PostDTO> searchPosts(String title, Pageable pageable);
 
-    Page<PostDTO> getLatestPosts(Pageable pageable, Long tagId);
+    Page<PostDTO> getLatestPosts(Pageable pageable);
 
     Page<PostDTO> getPostByDateBetween(Date start, Date end, Pageable pageable);
 }

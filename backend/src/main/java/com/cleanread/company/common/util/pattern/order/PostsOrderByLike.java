@@ -16,10 +16,11 @@ public class PostsOrderByLike implements OrderService {
     private final PostService postService;
     private final ObjectMapper objectMapper;
     private final Pageable pageable;
+    private final Long tagId;
 
     @Override
     public Page<PostDTO> getAllPosts() {
-        return postService.getAllPostOrderByLikes(pageable)
+        return postService.getAllPostOrderByLikes(pageable, tagId)
                 .map(post -> objectMapper.mapForResponse(post, PostDTO.class));
     }
 }

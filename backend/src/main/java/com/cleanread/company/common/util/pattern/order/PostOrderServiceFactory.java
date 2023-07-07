@@ -14,14 +14,15 @@ public class PostOrderServiceFactory implements OrderServiceFactory {
     private final PostService postService;
     private final Pageable pageable;
     private final ObjectMapper objectMapper;
+    private final Long tagId;
 
     @Override
-    public OrderService createOrderService(String type) {
+    public OrderService createOrderService(String type, Long tagId) {
         if (type.equals("like")) {
-            return new PostsOrderByLike(postService, objectMapper, pageable);
+            return new PostsOrderByLike(postService, objectMapper, pageable, tagId);
         } else if (type.equals("createdAt")) {
-            return new PostsOrderByCreatedAt(postService, pageable, objectMapper);
+            return new PostsOrderByCreatedAt(postService, pageable, objectMapper, tagId);
         } else
-            return new PostsOrderByCreatedAt(postService, pageable, objectMapper);
+            return new PostsOrderByCreatedAt(postService, pageable, objectMapper, tagId);
     }
 }

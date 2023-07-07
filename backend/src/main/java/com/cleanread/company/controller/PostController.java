@@ -203,14 +203,13 @@ public class PostController {
             @ApiResponse(responseCode = "200", description = "Latest posts retrieved successfully",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = PostDTO.class))))})
 
-    @GetMapping({"/posts/latest", "/tags/{tagId}/posts/latest"})
+    @GetMapping({"/posts/latest",})
     public ResponseEntity<Page<PostDTO>> getLatestPosts(
             @Parameter(description = "Pageable request parameters")
-            @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 6) Pageable pageable,
-            @PathVariable(required = false) Long tagId
+            @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 6) Pageable pageable
     ) {
 
-        return ResponseEntity.ok(postService.getLatestPosts(pageable, tagId));
+        return ResponseEntity.ok(postService.getLatestPosts(pageable));
     }
 
     @Operation(summary = "Get all posts")
@@ -219,19 +218,20 @@ public class PostController {
                     content = {@Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = PostDTO.class)))})})
 
-    @GetMapping({"/posts/query", "/posts/{userId}/pin"})
+    @GetMapping({"/tags/{tagId}/posts/query", "/posts/{userId}/pin"})
     public ResponseEntity<Page<PostDTO>> getAllPosts(
             @Parameter(description = "orderBy posts by this field") @RequestParam(name = "orderBy", required = false) String orderBy,
             @PageableDefault(size = 5) Pageable pageable,
+            @PathVariable Long tagId,
             @Parameter(description = "id of user to filter posts") @PathVariable(required = false) Long userId) {
 
         if (orderBy == null && userId != null) {
             return ResponseEntity.ok(postService.getAllPostsOrderByPinned(pageable, userId));
         }
 
-        OrderServiceFactory factory = new PostOrderServiceFactory(postService, pageable, objectMapper);
+        OrderServiceFactory factory = new PostOrderServiceFactory(postService, pageable, objectMapper, tagId);
 
-        OrderService service = factory.createOrderService(orderBy);
+        OrderService service = factory.createOrderService(orderBy, tagId);
 
         return ResponseEntity.ok(service.getAllPosts());
     }

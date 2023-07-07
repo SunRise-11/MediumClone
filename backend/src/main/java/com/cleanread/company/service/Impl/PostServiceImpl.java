@@ -133,13 +133,15 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Page<PostDTO> getAllPostOrderByLikes(Pageable pageable) {
-        return mapPostToPostDTO(postRepository.findPostsOrderByLikeCount(pageable), pageable);
+    public Page<PostDTO> getAllPostOrderByLikes(Pageable pageable, Long tagId) {
+        Tag tag = tagService.getTagById(tagId);
+        return mapPostToPostDTO(findPostsOrderByLikeCountForTag(tag, pageable), pageable);
     }
 
     @Override
-    public Page<PostDTO> getAllPostsOrderByCreatedAt(Pageable pageable) {
-        return mapPostToPostDTO(postRepository.findAllByOrderByCreatedAtDesc(pageable), pageable);
+    public Page<PostDTO> getAllPostsOrderByCreatedAt(Pageable pageable, Long tagId) {
+        Specification<Post> spec = Specification.where(hasTag(tagId));
+        return mapPostToPostDTO(postRepository.findAllByOrderByCreatedAtDesc(pageable, spec), pageable);
     }
 
     @Override
@@ -175,11 +177,7 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public Page<PostDTO> getLatestPosts(Pageable pageable, Long tagId) {
-        if (tagId != null) {
-            Specification<Post> spec = Specification.where(hasTag(tagId));
-            return mapPostToPostDTO(postRepository.findAllByOrderByCreatedAtDesc(pageable, spec), pageable);
-        }
+    public Page<PostDTO> getLatestPosts(Pageable pageable) {
         return mapPostToPostDTO(postRepository.findAllByOrderByCreatedAtDesc(pageable), pageable);
     }
 
@@ -221,6 +219,16 @@ public class PostServiceImpl implements PostService {
             Join<Tag, Post> join = root.join("tags", JoinType.INNER);
             return builder.equal(join.get("id"), tagId);
         };
+    }
+
+    public Page<Post> findPostsOrderByLikeCountForTag(Tag tag, Pageable pageable) {
+        Specification<Post> tagSpecification = (root, query, criteriaBuilder) -> {
+            Join<Post, Tag> tagJoin = root.join("tags");
+            return criteriaBuilder.equal(tagJoin.get("id"), tag.getId());
+        };
+
+        Page<Post> taggedPosts = postRepository.findAll(tagSpecification, pageable);
+        return postRepository.findPostsOrderByLikeCount(taggedPosts.getPageable());
     }
 
 }

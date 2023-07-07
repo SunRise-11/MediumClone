@@ -90,6 +90,7 @@ public class TagFollowController {
     public ResponseEntity<Page<UserDTO>> getUsersFollowedTag(
             @Parameter(description = "ID of the tag to get the users followed") @PathVariable Long tagId,
             @PageableDefault(size = 7) Pageable pageable) {
+
         Page<UserDTO> userDTOS = tagFollowUserService.
                 getUsersFollowedTag(tagId, pageable)
                 .map(tagFollowUser -> objectMapper.mapForResponse(tagFollowUser, UserDTO.class));
@@ -118,6 +119,7 @@ public class TagFollowController {
 
         return ResponseEntity.ok(contentPage);
     }
+
     @Operation(summary = "Check if a user has followed a tag")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User has followed the tag"),
