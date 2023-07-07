@@ -2,7 +2,11 @@ package com.cleanread.company.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
 
 import java.util.Objects;
 
@@ -18,7 +22,6 @@ import java.util.Objects;
 @AttributeOverride(name = "id", column = @Column(name = "comment_id",
         nullable = false, columnDefinition = "BIGINT UNSIGNED"))
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class Comment extends BaseEntityAudit {
     private String comment;
 
@@ -29,28 +32,19 @@ public class Comment extends BaseEntityAudit {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonManagedReference
     private User user;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Comment comment1 = (Comment) o;
-        return Objects.equals(comment, comment1.comment) && Objects.equals(post, comment1.post) && Objects.equals(user, comment1.user);
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Comment comment = (Comment) o;
+        return id != null && Objects.equals(id, comment.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), comment, post, user);
-    }
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "comment='" + comment + '\'' +
-                ", post=" + post +
-                ", user=" + user +
-                '}';
+        return getClass().hashCode();
     }
 }

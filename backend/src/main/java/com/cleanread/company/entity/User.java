@@ -37,6 +37,7 @@ public class User extends BaseEntity {
 
     private boolean isEmailVerified;
 
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),

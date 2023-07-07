@@ -29,9 +29,14 @@ public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificat
     Page<Post> findAllByUserIn(List<User> users, Pageable pageable);
 
     @Query("SELECT p FROM Post p LEFT JOIN p.likedUsers pl GROUP BY p.id ORDER BY COUNT(pl.user) DESC")
+    Page<Post> findPostsOrderByLikeCount(Pageable pageable, Specification<Post> specification);
+
+    @Query("SELECT p FROM Post p LEFT JOIN p.likedUsers pl GROUP BY p.id ORDER BY COUNT(pl.user) DESC")
     Page<Post> findPostsOrderByLikeCount(Pageable pageable);
 
-    Page<Post> findAllByTags(Tag tag);
+    @Query("SELECT p FROM Post p LEFT JOIN p.likedUsers lu WITH lu.post = p JOIN p.tags t WHERE t.id = :tagId GROUP BY p ORDER BY COUNT(lu) DESC")
+    Page<Post> findAllByTagIdAndOrderByLikeCount(@Param("tagId") Long tagId, Pageable pageable);
+
 
     Page<Post> findAllByUserOrderByPinnedDesc(Pageable pageable, User user);
 
@@ -41,7 +46,7 @@ public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificat
     //@Query("select p from Post p order by p.createdAt DESC")
     Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable);
 
-    Page<Post> findAllByOrderByCreatedAtDesc(Pageable pageable, Specification<Post> spec);
+    Page<Post> findAllByTagsOrderByCreatedAtDesc(Tag tag, Pageable pageable);
 
     //@Query("select p from Post p where p.createdAt between ?1 and ?2")
     Page<Post> findByCreatedAtBetween(Date start, Date end, Pageable pageable);

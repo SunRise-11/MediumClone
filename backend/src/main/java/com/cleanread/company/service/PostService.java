@@ -32,7 +32,8 @@ public interface PostService {
 
     Page<PostDTO> getAllPostOrderByLikes(Pageable pageable, Long tagId);
 
-    Page<PostDTO> getAllPostsOrderByCreatedAt(Pageable pageable, Long tagId);
+    Page<PostDTO> getAllPostsByTagOrderByCreatedAt(Pageable pageable, Long tagId);
+
 
     Page<PostDTO> getAllPostsOrderByPinned(Pageable pageable, Long userId);
 

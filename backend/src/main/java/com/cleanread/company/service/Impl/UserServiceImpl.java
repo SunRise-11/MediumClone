@@ -9,6 +9,7 @@ import com.cleanread.company.model.request.UserUpdateRequest;
 import com.cleanread.company.repository.RoleRepository;
 import com.cleanread.company.repository.UserRepository;
 import com.cleanread.company.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -69,6 +70,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(Long userId) {
         userRepository.findById(userId)
                 .ifPresentOrElse(

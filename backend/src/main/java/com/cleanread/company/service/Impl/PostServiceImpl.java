@@ -134,14 +134,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<PostDTO> getAllPostOrderByLikes(Pageable pageable, Long tagId) {
-        Tag tag = tagService.getTagById(tagId);
-        return mapPostToPostDTO(findPostsOrderByLikeCountForTag(tag, pageable), pageable);
+        return mapPostToPostDTO(postRepository.findAllByTagIdAndOrderByLikeCount(tagId, pageable), pageable);
     }
 
     @Override
-    public Page<PostDTO> getAllPostsOrderByCreatedAt(Pageable pageable, Long tagId) {
-        Specification<Post> spec = Specification.where(hasTag(tagId));
-        return mapPostToPostDTO(postRepository.findAllByOrderByCreatedAtDesc(pageable, spec), pageable);
+    public Page<PostDTO> getAllPostsByTagOrderByCreatedAt(Pageable pageable, Long tagId) {
+        Tag tag = tagService.getTagById(tagId);
+        return mapPostToPostDTO(postRepository.findAllByTagsOrderByCreatedAtDesc(tag, pageable), pageable);
     }
 
     @Override
@@ -216,19 +215,10 @@ public class PostServiceImpl implements PostService {
 
     private Specification<Post> hasTag(Long tagId) {
         return (root, query, builder) -> {
-            Join<Tag, Post> join = root.join("tags", JoinType.INNER);
+            Join<Tag, Post> join = root.join("posts", JoinType.INNER);
             return builder.equal(join.get("id"), tagId);
         };
     }
 
-    public Page<Post> findPostsOrderByLikeCountForTag(Tag tag, Pageable pageable) {
-        Specification<Post> tagSpecification = (root, query, criteriaBuilder) -> {
-            Join<Post, Tag> tagJoin = root.join("tags");
-            return criteriaBuilder.equal(tagJoin.get("id"), tag.getId());
-        };
-
-        Page<Post> taggedPosts = postRepository.findAll(tagSpecification, pageable);
-        return postRepository.findPostsOrderByLikeCount(taggedPosts.getPageable());
-    }
 
 }

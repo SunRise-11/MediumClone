@@ -20,7 +20,7 @@ public class PostsOrderByCreatedAt implements OrderService {
 
     @Override
     public Page<PostDTO> getAllPosts() {
-        return postService.getAllPostsOrderByCreatedAt(pageable, tagId)
+        return postService.getAllPostsByTagOrderByCreatedAt(pageable, tagId)
                 .map(post -> objectMapper.mapForResponse(post, PostDTO.class));
     }
 }

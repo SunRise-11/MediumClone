@@ -163,13 +163,14 @@ public class PostController {
             @ApiResponse(responseCode = "400", description = "Invalid date range format",
                     content = @Content)})
 
-    @GetMapping("/posts/filter")
+    @GetMapping({"/posts/filter", "/tags/{tagId}/posts/filter"})
     public ResponseEntity<Page<PostDTO>> getPostsByDate(
             @Parameter(description = "Pageable request parameters")
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 6) Pageable pageable,
             @Parameter(description = "Date range filter. Use 'all' to retrieve all posts",
                     example = "week, year, month or all")
-            @RequestParam(value = "date", required = false, defaultValue = "all") String range) {
+            @RequestParam(value = "date", required = false, defaultValue = "all") String range,
+            @PathVariable(required = false) Long tagId) {
 
         Range dateRange = DateRangeFactory.getDateRange(range);
 
@@ -218,14 +219,16 @@ public class PostController {
                     content = {@Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = PostDTO.class)))})})
 
-    @GetMapping({"/tags/{tagId}/posts/query", "/posts/{userId}/pin"})
+    @GetMapping({"/tags/{tagId}/posts/filter", "/posts/{userId}/pin"})
     public ResponseEntity<Page<PostDTO>> getAllPosts(
-            @Parameter(description = "orderBy posts by this field") @RequestParam(name = "orderBy", required = false) String orderBy,
+            @Parameter(description = "orderBy posts by this field")
+            @RequestParam(name = "orderBy", required = false) String orderBy,
             @PageableDefault(size = 5) Pageable pageable,
-            @PathVariable Long tagId,
-            @Parameter(description = "id of user to filter posts") @PathVariable(required = false) Long userId) {
+            @PathVariable(required = false) Long tagId,
+            @Parameter(description = "id of user to filter posts")
+            @PathVariable(required = false) Long userId) {
 
-        if (orderBy == null && userId != null) {
+        if (orderBy == null && userId != null && tagId == null) {
             return ResponseEntity.ok(postService.getAllPostsOrderByPinned(pageable, userId));
         }
 
