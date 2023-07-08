@@ -1,4 +1,5 @@
-##Medium Clone Full Stack Project
+## Medium Clone Full Stack Project
+
 Medium Clone project is a full stack web application project and it was created with Java Spring Boot and Next.js. Also, frontend design of project was designed with Tailwind CSS.
 
 ## Brief Description of the Project
