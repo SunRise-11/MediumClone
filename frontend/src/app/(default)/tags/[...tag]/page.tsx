@@ -6,6 +6,8 @@ import Link from 'next/link';
 import Button from "@mui/material/Button"
 import Container from '../container';
 import TagFollowButton from '@/components/TagFollowButton';
+import PostDTO from '@/types/Post/Post';
+import { useEffect, useState } from 'react';
 
 type Params = {
   params: {
@@ -15,17 +17,20 @@ type Params = {
 
 
 
-const capitalize = (str: string) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
-
-
 const TagsPage = async ({ params }: Params) => {
   console.log("I am from Params", params.tag[1])
+  const [posts, setPosts] = useState([])
 
 
-  const posts = await fetch(`http://localhost:8080/api/v1/tags/${params.tag[1].toString()}/posts?page=0&size=1&sort=asc`,
-    { cache: "no-cache" }).then(res => res.json())
+  const getPosts = async () => {
+    const posts = await fetch(`http://localhost:8080/api/v1/tags/${params.tag[1]}/posts?page=0&size=1&sort=asc`,
+      { cache: "no-cache" }).then(res => res.json())
+    setPosts(posts)
+  }
+
+  useEffect(() => {
+    getPosts()
+  }, [params.tag[1]])
 
 
 

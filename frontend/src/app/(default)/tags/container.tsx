@@ -17,7 +17,7 @@ export default function Container({ content, totalElements }: Props) {
         const uniqueUsersSet = new Set<number>();
         const uniqueUsersArray: User[] = []; // Değişiklik burada yapıldı
 
-        content.forEach((post: PostDTO) => {
+        content?.forEach((post: PostDTO) => {
             if (post.user && !uniqueUsersSet.has(post.user.userId)) {
                 uniqueUsersSet.add(post.user.userId);
                 uniqueUsersArray.push(post.user);

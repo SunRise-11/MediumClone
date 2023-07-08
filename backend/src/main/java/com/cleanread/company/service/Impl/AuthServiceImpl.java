@@ -78,7 +78,6 @@ public class AuthServiceImpl implements AuthService {
 
 
     private LoginResponse response(UserPrincipal userPrincipal, String accessToken, String refreshToken) {
-
         LoginResponse response = LoginResponse.builder()
                 .accessToken(accessToken)
                 .bio(userPrincipal.getUser().getBio())
@@ -88,8 +87,6 @@ public class AuthServiceImpl implements AuthService {
                 .refreshToken(refreshToken)
                 .isEmailVerified(userPrincipal.getUser().isEmailVerified())
                 .username(userPrincipal.getUsername()).build();
-
         return response;
-
     }
 }

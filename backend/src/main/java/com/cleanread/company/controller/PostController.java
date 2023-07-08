@@ -163,14 +163,13 @@ public class PostController {
             @ApiResponse(responseCode = "400", description = "Invalid date range format",
                     content = @Content)})
 
-    @GetMapping({"/posts/filter", "/tags/{tagId}/posts/filter"})
+    @GetMapping({"/posts/filter"})
     public ResponseEntity<Page<PostDTO>> getPostsByDate(
             @Parameter(description = "Pageable request parameters")
             @PageableDefault(sort = "createdAt", direction = Sort.Direction.DESC, size = 6) Pageable pageable,
             @Parameter(description = "Date range filter. Use 'all' to retrieve all posts",
                     example = "week, year, month or all")
-            @RequestParam(value = "date", required = false, defaultValue = "all") String range,
-            @PathVariable(required = false) Long tagId) {
+            @RequestParam(value = "date", required = false, defaultValue = "all") String range) {
 
         Range dateRange = DateRangeFactory.getDateRange(range);
 

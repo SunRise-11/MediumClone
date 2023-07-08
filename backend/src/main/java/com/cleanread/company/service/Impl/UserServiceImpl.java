@@ -108,11 +108,9 @@ public class UserServiceImpl implements UserService {
             throw new ImageUploadException("Geçersiz resim türü. Sadece JPEG ve PNG desteklenir.");
         }
         User user = getUserById(userId);
-        String oldImage = user.getImage();
 
         String imageName = uploadImage(file);
         user.setImage(imageName);
-
         userRepository.save(user);
     }
 

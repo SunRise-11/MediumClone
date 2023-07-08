@@ -210,7 +210,6 @@ public class PostServiceImpl implements PostService {
                 }).collect(Collectors.toList());
 
         return objectMapper.convertListToPage(postDTOs, pageable);
-
     }
 
     private Specification<Post> hasTag(Long tagId) {

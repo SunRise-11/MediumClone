@@ -4,5 +4,5 @@ export interface CommentDTO {
   id: number;
   comment: string;
   createdAt: string;
-  user: User;
+  user: User; 
 }

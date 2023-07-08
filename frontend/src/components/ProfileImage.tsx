@@ -43,8 +43,6 @@ function ProfileImage({ image }: Props) {
         updatedButton?.click();
     };
 
-
-
     imageSource = image || newImage || defaultImage.src.toString();
 
     return (

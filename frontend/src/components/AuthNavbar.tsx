@@ -17,7 +17,7 @@ export default function Navbar({ }: Props) {
                     <span className="text-gray-500">{writeBlogIcon}</span>
                     <p className="text-sm">Write</p>
                 </Link>
-                <AvatarMenu key={""} />
+                <AvatarMenu  />
             </div>
         </div>
     )

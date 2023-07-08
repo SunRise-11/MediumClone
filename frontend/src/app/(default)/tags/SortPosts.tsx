@@ -105,7 +105,7 @@ const SortPosts = ({ tagId }: Props) => {
         )}
       </div>
       <div>
-        {posts.map((post: PostDTO) => (
+        {posts?.map((post: PostDTO) => (
           <Post
             key={post.postId}
             post={post}
